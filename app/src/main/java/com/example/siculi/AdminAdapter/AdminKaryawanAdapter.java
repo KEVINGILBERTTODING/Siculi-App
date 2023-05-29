@@ -1,14 +1,18 @@
 package com.example.siculi.AdminAdapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.siculi.AdminFragment.DetailKaryawanFragment;
 import com.example.siculi.Model.KaryawanModel;
 import com.example.siculi.R;
 
@@ -61,7 +65,7 @@ public class AdminKaryawanAdapter extends RecyclerView.Adapter<AdminKaryawanAdap
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvNama, tvJabatan,tvStatus;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,6 +73,22 @@ public class AdminKaryawanAdapter extends RecyclerView.Adapter<AdminKaryawanAdap
             tvJabatan = itemView.findViewById(R.id.tvJabatan);
             tvStatus = itemView.findViewById(R.id.tvStatus);
 
+            itemView.setOnClickListener(this);
+
+
+
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            Fragment fragment = new DetailKaryawanFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("karyawan_id", karyawanModelList.get(getAdapterPosition()).getId());
+            fragment.setArguments(bundle);
+            ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frameAdmin, fragment).addToBackStack(null)
+                    .commit();
 
         }
     }

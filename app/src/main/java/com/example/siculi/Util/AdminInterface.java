@@ -48,5 +48,20 @@ public interface AdminInterface {
             @PartMap Map<String, RequestBody> textData
             );
 
+    @Multipart
+    @POST("admin/updateKaryawan")
+    Call<ResponseModel> updateKaryawan(
+            @PartMap Map<String, RequestBody> textData
+            );
+
+
+    @GET("admin/getKaryawanById")
+    Call<KaryawanModel> getKaryawanById(
+            @Query("user_id") String userId
+    );
+
+
+
+
 
 }

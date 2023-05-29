@@ -30,12 +30,13 @@
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginTop="@dimen/_14sdp"
                         android:src="@color/main"
-                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="@dimen/_14sdp"
                         android:layout_marginRight="@dimen/_14sdp"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/ivProfile"
                         android:orientation="vertical">
                         <TextView
                             android:id="@+id/tvName"
@@ -44,7 +45,6 @@
                             android:layout_height="match_parent"
                             android:fontFamily="@font/popmed"
                             android:textSize="@dimen/_9ssp"
-                            android:layout_marginLeft="@dimen/_14sdp"
                             android:layout_marginRight="@dimen/_14sdp"
                             android:textColor="@color/black2"
                             android:text="Hi, Anggita" />
@@ -55,7 +55,6 @@
                             android:layout_height="match_parent"
                             android:fontFamily="@font/popsem"
                             android:textSize="@dimen/_10ssp"
-                            android:layout_marginLeft="@dimen/_14sdp"
                             android:layout_marginRight="@dimen/_14sdp"
                             android:textColor="@color/black2"
                             android:text="anggita@gmail.com" />

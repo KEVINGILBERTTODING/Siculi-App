@@ -31,7 +31,7 @@
             app:queryHint="Cari karyawan"
             style="@style/AppSearchView"
             android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/container_edittext"
+            android:background="@color/white"
             />
 
         <TextView
