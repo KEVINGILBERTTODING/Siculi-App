@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class AdminHomeFragment extends Fragment {
     ImageView ivProfile;
     SharedPreferences sharedPreferences;
     AdminInterface adminInterface;
+    ImageButton btnKaryawan;
     String userId;
     TextView tvTotalCutiSetuju, tvTotalCutiDiTolak, tvTotalCutiTangguhkan;
 
@@ -52,6 +54,7 @@ public class AdminHomeFragment extends Fragment {
        tvTotalCutiSetuju = view.findViewById(R.id.tvCutiSetuju);
        tvTotalCutiDiTolak = view.findViewById(R.id.tvCutiTolak);
        tvTotalCutiTangguhkan = view.findViewById(R.id.tvDitangguhkan);
+       btnKaryawan = view.findViewById(R.id.btnKaryawan);
        userId = sharedPreferences.getString("user_id", null);
 
        getTotalAlCuti("Disetujui", tvTotalCutiSetuju);
@@ -59,6 +62,12 @@ public class AdminHomeFragment extends Fragment {
        getTotalAlCuti("Ditolak", tvTotalCutiDiTolak);
 
        getMyProfile();
+       btnKaryawan.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               replace(new AdminKaryawanFragment());
+           }
+       });
 
        return view;
     }
@@ -133,5 +142,10 @@ public class AdminHomeFragment extends Fragment {
         });
 
 
+    }
+
+    private void replace(Fragment fragment) {
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameAdmin, fragment)
+                .addToBackStack(null).commit();
     }
 }

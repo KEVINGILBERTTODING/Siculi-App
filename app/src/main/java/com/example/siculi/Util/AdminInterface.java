@@ -1,7 +1,9 @@
 package com.example.siculi.Util;
 
+import com.airbnb.lottie.L;
 import com.example.siculi.Model.AdminModel;
 import com.example.siculi.Model.CutiModel;
+import com.example.siculi.Model.KaryawanModel;
 
 import java.util.List;
 
@@ -19,6 +21,9 @@ public interface AdminInterface {
     Call<AdminModel> getMyProfile(
             @Query("user_id") String userId
     );
+
+    @GET("admin/getAllKaryawan")
+    Call<List<KaryawanModel>> getAllKaryawan();
 
 
 }

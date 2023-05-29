@@ -2,8 +2,16 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Siculi" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+         <item name="colorPrimary">@color/main</item>
     </style>
 
     <style name="Theme.Siculi" parent="Base.Theme.Siculi" />
+
+    <!-- Style for searchview   -->
+
+    <style name="AppSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:textSize">@dimen/_11sdp</item>
+        <item name="android:fontFamily">@font/popmed</item>
+    </style>
+
 </resources>
