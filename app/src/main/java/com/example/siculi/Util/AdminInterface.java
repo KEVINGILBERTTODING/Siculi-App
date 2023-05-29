@@ -1,14 +1,22 @@
 package com.example.siculi.Util;
 
-import com.airbnb.lottie.L;
 import com.example.siculi.Model.AdminModel;
+import com.example.siculi.Model.AtasanModel;
 import com.example.siculi.Model.CutiModel;
+import com.example.siculi.Model.JabatanModel;
 import com.example.siculi.Model.KaryawanModel;
+import com.example.siculi.Model.ResponseModel;
+import com.example.siculi.Model.UnitKerjaModel;
 
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 
 public interface AdminInterface {
@@ -24,6 +32,21 @@ public interface AdminInterface {
 
     @GET("admin/getAllKaryawan")
     Call<List<KaryawanModel>> getAllKaryawan();
+
+    @GET("admin/getAllAtasan")
+    Call<List<AtasanModel>> getAllAtasan();
+
+    @GET("admin/getAllJabatan")
+    Call<List<JabatanModel>> getAllJabatan();
+
+    @GET("admin/getAllUnitKerja")
+    Call<List<UnitKerjaModel>> getAllUnitKerja();
+
+    @Multipart
+    @POST("admin/insertKaryawan")
+    Call<ResponseModel> insertKaryawan(
+            @PartMap Map<String, RequestBody> textData
+            );
 
 
 }

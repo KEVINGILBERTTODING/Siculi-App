@@ -18,6 +18,7 @@ import com.example.siculi.Model.KaryawanModel;
 import com.example.siculi.R;
 import com.example.siculi.Util.AdminInterface;
 import com.example.siculi.Util.DataApi;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class AdminKaryawanFragment extends Fragment {
     AdminInterface adminInterface;
     TextView tvEmpty;
     SearchView searchBar;
+    FloatingActionButton btnInsert;
 
 
 
@@ -47,6 +49,7 @@ public class AdminKaryawanFragment extends Fragment {
         tvEmpty = view.findViewById(R.id.tvEmpty);
         rvKaryawan = view.findViewById(R.id.rvKaryawan);
         searchBar = view.findViewById(R.id.searchBar);
+        btnInsert = view.findViewById(R.id.btnKaryawan);
         getDataKaryawan();
 
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -62,6 +65,15 @@ public class AdminKaryawanFragment extends Fragment {
             }
         });
 
+
+        btnInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameAdmin, new AdminInsertPegawaiFragment())
+                        .addToBackStack(null).commit();
+            }
+        });
 
         return view;
     }
