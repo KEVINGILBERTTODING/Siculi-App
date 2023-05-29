@@ -57,15 +57,7 @@ public class DetailKaryawanFragment extends Fragment {
         adminInterface = DataApi.getClient().create(AdminInterface.class);
         btnKembali = view.findViewById(R.id.btnKembali);
 
-        Glide.with(getContext())
-                .load(getArguments().getString("image"))
-                .override(250, 250)
-                .skipMemoryCache(true)
-                .dontAnimate()
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .centerCrop()
-                .fitCenter()
-                .into(ivProfile);
+
 
         karyawanId = getArguments().getString("karyawan_id");
 
@@ -121,6 +113,16 @@ public class DetailKaryawanFragment extends Fragment {
                     etUnitKerja.setText(response.body().getGolongan());
                     etStatus.setText(response.body().getStatus());
                     etAlamat.setText(response.body().getAlamat());
+
+                    Glide.with(getContext())
+                            .load(response.body().getFoto())
+                            .override(250, 250)
+                            .skipMemoryCache(true)
+                            .dontAnimate()
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .centerCrop()
+                            .fitCenter()
+                            .into(ivProfile);
                     pd.dismiss();
 
                 }else {

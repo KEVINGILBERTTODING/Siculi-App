@@ -61,6 +61,13 @@ public interface AdminInterface {
     );
 
 
+    @GET("admin/getAllAtasanExceptKetua")
+    Call<List<AtasanModel>> getAllAtasanExceptKetua();
+
+
+
+
+
 
 
 

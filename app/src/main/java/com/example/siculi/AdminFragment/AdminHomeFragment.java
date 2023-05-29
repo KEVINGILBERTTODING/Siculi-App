@@ -34,7 +34,7 @@ public class AdminHomeFragment extends Fragment {
     ImageView ivProfile;
     SharedPreferences sharedPreferences;
     AdminInterface adminInterface;
-    ImageButton btnKaryawan;
+    ImageButton btnKaryawan, btnAtasan;
     String userId;
     TextView tvTotalCutiSetuju, tvTotalCutiDiTolak, tvTotalCutiTangguhkan;
 
@@ -55,6 +55,7 @@ public class AdminHomeFragment extends Fragment {
        tvTotalCutiDiTolak = view.findViewById(R.id.tvCutiTolak);
        tvTotalCutiTangguhkan = view.findViewById(R.id.tvDitangguhkan);
        btnKaryawan = view.findViewById(R.id.btnKaryawan);
+       btnAtasan = view.findViewById(R.id.btnAtasan);
        userId = sharedPreferences.getString("user_id", null);
 
        getTotalAlCuti("Disetujui", tvTotalCutiSetuju);
@@ -68,6 +69,13 @@ public class AdminHomeFragment extends Fragment {
                replace(new AdminKaryawanFragment());
            }
        });
+
+        btnAtasan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replace(new AdminAtasanFragment());
+            }
+        });
 
        return view;
     }
