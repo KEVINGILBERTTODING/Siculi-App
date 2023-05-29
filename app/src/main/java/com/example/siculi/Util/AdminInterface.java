@@ -1,5 +1,6 @@
 package com.example.siculi.Util;
 
+import com.example.siculi.Model.AdminModel;
 import com.example.siculi.Model.CutiModel;
 
 import java.util.List;
@@ -13,4 +14,11 @@ public interface AdminInterface {
     Call<List<CutiModel>> getAllCuti(
             @Query("status") String status
     );
+
+    @GET("admin/getMyProfile")
+    Call<AdminModel> getMyProfile(
+            @Query("user_id") String userId
+    );
+
+
 }

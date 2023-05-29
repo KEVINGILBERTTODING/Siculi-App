@@ -25,15 +25,13 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/profile_image"
+                        android:id="@+id/ivProfile"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginTop="@dimen/_14sdp"
                         android:src="@color/main"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_14sdp"
-                        app:civ_border_width="2dp"
-                        app:civ_border_color="#FF000000"/>
+                        android:layout_marginRight="@dimen/_14sdp"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -10,8 +10,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.siculi.Model.AdminModel;
 import com.example.siculi.Model.CutiModel;
 import com.example.siculi.R;
 import com.example.siculi.Util.AdminInterface;
@@ -25,9 +29,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AdminHomeFragment extends Fragment {
-    TextView tvName;
+    TextView tvName, tvEmail;
+    ImageView ivProfile;
     SharedPreferences sharedPreferences;
     AdminInterface adminInterface;
+    String userId;
     TextView tvTotalCutiSetuju, tvTotalCutiDiTolak, tvTotalCutiTangguhkan;
 
 
@@ -38,16 +44,21 @@ public class AdminHomeFragment extends Fragment {
        View view = inflater.inflate(R.layout.fragment_admin_home, container, false);
        sharedPreferences = getContext().getSharedPreferences("data_user", Context.MODE_PRIVATE);
 
+       tvEmail = view.findViewById(R.id.tvEmail);
+       ivProfile = view.findViewById(R.id.ivProfile);
        tvName = view.findViewById(R.id.tvName);
        tvName.setText("Hi, " +sharedPreferences.getString("nama", null));
        adminInterface = DataApi.getClient().create(AdminInterface.class);
        tvTotalCutiSetuju = view.findViewById(R.id.tvCutiSetuju);
        tvTotalCutiDiTolak = view.findViewById(R.id.tvCutiTolak);
        tvTotalCutiTangguhkan = view.findViewById(R.id.tvDitangguhkan);
+       userId = sharedPreferences.getString("user_id", null);
+
        getTotalAlCuti("Disetujui", tvTotalCutiSetuju);
        getTotalAlCuti("Ditangguhkan", tvTotalCutiTangguhkan);
        getTotalAlCuti("Ditolak", tvTotalCutiDiTolak);
 
+       getMyProfile();
 
        return view;
     }
@@ -76,6 +87,47 @@ public class AdminHomeFragment extends Fragment {
                 pd.dismiss();
                 System.err.println(Toasty.error(getContext(), "Gagal memuat data total cuti", Toasty.LENGTH_SHORT));
                 tvTotal.setText("0 Cuti");
+
+            }
+        });
+
+
+    }
+    private void getMyProfile() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        alert.setTitle("Loading").setMessage("Memuat data...").setCancelable(false);
+        AlertDialog pd = alert.create();
+        pd.show();
+
+        adminInterface.getMyProfile(userId).enqueue(new Callback<AdminModel>() {
+            @Override
+            public void onResponse(Call<AdminModel> call, Response<AdminModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    pd.dismiss();
+                    tvEmail.setText(response.body().getEmail());
+                    Glide.with(getContext())
+                            .load(response.body().getFoto())
+                            .dontAnimate()
+                            .skipMemoryCache(true)
+                            .fitCenter()
+                            .centerCrop()
+                            .override(200, 200)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .into(ivProfile);
+
+
+
+                }else {
+                    pd.dismiss();
+                    System.err.println(Toasty.error(getContext(), "Gagal memuat data", Toasty.LENGTH_SHORT));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AdminModel> call, Throwable t) {
+                pd.dismiss();
+                System.err.println(Toasty.error(getContext(), "Gagal memuat data total cuti", Toasty.LENGTH_SHORT));
+
 
             }
         });
