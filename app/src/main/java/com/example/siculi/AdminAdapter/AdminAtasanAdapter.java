@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.siculi.AdminFragment.AdminDetailAtasanFragment;
 import com.example.siculi.AdminFragment.DetailKaryawanFragment;
 import com.example.siculi.Model.AtasanModel;
 import com.example.siculi.R;
@@ -82,7 +83,7 @@ public class AdminAtasanAdapter extends RecyclerView.Adapter<AdminAtasanAdapter.
 
         @Override
         public void onClick(View v) {
-            Fragment fragment = new DetailKaryawanFragment();
+            Fragment fragment = new AdminDetailAtasanFragment();
             Bundle bundle = new Bundle();
             bundle.putString("atasan_id", atasanModelList.get(getAdapterPosition()).getKd_atasan());
             fragment.setArguments(bundle);

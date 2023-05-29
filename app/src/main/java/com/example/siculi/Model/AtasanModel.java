@@ -1,5 +1,6 @@
 package com.example.siculi.Model;
 
+import com.example.siculi.Util.DataApi;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -177,7 +178,7 @@ public class AtasanModel implements Serializable {
     }
 
     public String getFoto() {
-        return foto;
+        return DataApi.URL_IMAGE_PROFILE_ATASAN + foto;
     }
 
     public void setFoto(String foto) {

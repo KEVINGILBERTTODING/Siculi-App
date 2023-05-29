@@ -64,6 +64,18 @@ public interface AdminInterface {
     @GET("admin/getAllAtasanExceptKetua")
     Call<List<AtasanModel>> getAllAtasanExceptKetua();
 
+    @GET("admin/getAtasanById")
+    Call<AtasanModel> getAtasanById(
+            @Query("id") String id
+    );
+
+    @Multipart
+    @POST("admin/insertAtasan")
+    Call<ResponseModel> insertAtasan(
+            @PartMap Map<String, RequestBody> textData
+    );
+
+
 
 
 

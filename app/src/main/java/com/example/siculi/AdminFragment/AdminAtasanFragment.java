@@ -71,7 +71,7 @@ public class AdminAtasanFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frameAdmin, new AdminInsertPegawaiFragment())
+                        .replace(R.id.frameAdmin, new AdminInsertAtasanFragment())
                         .addToBackStack(null).commit();
             }
         });

@@ -5,115 +5,42 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".AdminFragment.DetailKaryawanFragment">
+    android:padding="@dimen/_14sdp"
+    tools:context=".AdminFragment.AdminInsertAtasanFragment">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@drawable/header1"
-        android:layout_height="@dimen/_120sdp"/>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_14sdp"
-        android:layout_marginRight="@dimen/_14sdp"
-        app:cardCornerRadius="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_50sdp">
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:padding="@dimen/_10sdp"
-            android:layout_height="wrap_content">
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/ivProfile"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:src="@color/main"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:orientation="vertical"
-                android:layout_toRightOf="@id/ivProfile">
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Anggita"
-                    android:fontFamily="@font/popsem"
-                    android:textSize="@dimen/_13ssp"
-                    android:textColor="@color/main"/>
-
-                <TextView
-                    android:id="@+id/tvEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Anggita@gmail.com"
-                    android:fontFamily="@font/popmed"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10ssp"/>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:cardBackgroundColor="@color/main"
-                    app:contentPadding="@dimen/_10sdp"
-                    app:cardCornerRadius="@dimen/_10sdp"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Sisa Cuti"
-                            android:fontFamily="@font/popmed"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10ssp"/>
-
-                        <TextView
-                            android:id="@+id/tvSisaCuti"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="12"
-                            android:fontFamily="@font/popsem"
-                            android:textSize="@dimen/_15ssp"
-                            android:textColor="@color/white"/>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/_14sdp"
-        android:layout_below="@id/cv1"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Data Karyawan"
-            android:fontFamily="@font/popsem"
-            android:textSize="@dimen/_12ssp"
-            android:textColor="@color/black2"/>
+        android:layout_height="match_parent">
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/popsem"
+                    android:textSize="@dimen/_22ssp"
+                    android:textColor="@color/black"
+                    android:text="Tambah Data\nAtasan" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_13ssp"
+                    android:textColor="@color/black"
+                    android:text="Data Atasan" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_11ssp"
                     android:textColor="@color/black"
@@ -125,10 +52,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/container_edittext"
                     android:padding="@dimen/_10sdp"
-                    android:enabled="false"
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black2"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:hint="NIP"/>
 
@@ -140,20 +65,81 @@
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_11ssp"
                     android:textColor="@color/black"
-                    android:text="Masuk Kerja" />
+                    android:text="Nama" />
 
                 <EditText
-                    android:id="@+id/etMasukKerja"
+                    android:id="@+id/etNama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/container_edittext"
                     android:padding="@dimen/_10sdp"
-                    android:enabled="false"
+                    android:textSize="@dimen/_11sdp"
+                    android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="Nama"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black2"
+                    android:textColor="@color/black"
+                    android:text="Email" />
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:hint="NIP"/>
+                    android:hint="Email"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="Jenis Kelamin" />
+
+                <Spinner
+                    android:id="@+id/spJk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:textSize="@dimen/_11sdp"
+                    android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="Yyyy-Mm-Dd"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="Tanggal Masuk" />
+
+                <TextView
+                    android:id="@+id/tvTglMasuk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:textSize="@dimen/_11sdp"
+                    android:fontFamily="@font/popmed"
+                    android:inputType="number"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="Dddd/Mm/Yyyy"/>
+
 
                 <TextView
                     android:layout_width="match_parent"
@@ -170,12 +156,34 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/container_edittext"
                     android:padding="@dimen/_10sdp"
-                    android:enabled="false"
+                    android:textSize="@dimen/_11sdp"
+                    android:inputType="number"
+                    android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="Telepon"/>
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black2"
+                    android:textColor="@color/black"
+                    android:text="Atasan" />
+
+                <Spinner
+                    android:id="@+id/spAtasan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:textSize="@dimen/_11sdp"
+                    android:fontFamily="@font/popmed"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:hint="NIP"/>
+                    android:hint="Yyyy-Mm-Dd"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -186,41 +194,16 @@
                     android:textColor="@color/black"
                     android:text="Jabatan" />
 
-                <EditText
-                    android:id="@+id/etJabatan"
+                <Spinner
+                    android:id="@+id/spJabatan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/container_edittext"
                     android:padding="@dimen/_10sdp"
-                    android:enabled="false"
+                    android:textSize="@dimen/_11sdp"
                     android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black2"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:hint="NIP"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black"
-                    android:text="Nama Atasan" />
-
-                <EditText
-                    android:id="@+id/etNamaAtasan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/container_edittext"
-                    android:padding="@dimen/_10sdp"
-                    android:enabled="false"
-                    android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black2"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:hint="NIP"/>
-
+                    android:hint="Yyyy-Mm-Dd"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -231,39 +214,16 @@
                     android:textColor="@color/black"
                     android:text="Unit Kerja" />
 
-                <EditText
-                    android:id="@+id/etUnitKerja"
+                <Spinner
+                    android:id="@+id/spUnitKerja"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/container_edittext"
                     android:padding="@dimen/_10sdp"
-                    android:enabled="false"
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black2"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:hint="NIP"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black"
-                    android:text="Status" />
-
-                <EditText
-                    android:id="@+id/etStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/container_edittext"
-                    android:padding="@dimen/_10sdp"
-                    android:enabled="false"
-                    android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black2"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:hint="NIP"/>
+                    android:hint="Yyyy-Mm-Dd"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -272,46 +232,44 @@
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_11ssp"
                     android:textColor="@color/black"
-                    android:text="Alamat" />
+                    android:text="Sisa Cuti" />
 
                 <EditText
-                    android:id="@+id/etAlamat"
+                    android:id="@+id/etSisaCuti"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/container_edittext"
                     android:padding="@dimen/_10sdp"
-                    android:enabled="false"
-                    android:lines="4"
-                    android:gravity="start"
+                    android:textSize="@dimen/_11sdp"
                     android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black2"
+                    android:inputType="number"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:hint="NIP"/>
+                    android:hint="Telepon"/>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnUbah"
+                    android:id="@+id/btnSimpan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/popsem"
                     android:layout_marginTop="@dimen/_20sdp"
-                    android:text="Ubah"/>
+                    android:text="Simpan"/>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnKembali"
+                    android:id="@+id/btnBatal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/popsem"
-                    android:textColor="@color/black2"
+                    android:textColor="@color/black"
                     app:backgroundTint="@color/light_gray4"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Kembali"/>
+                    android:text="Batal"/>
+
+
 
             </LinearLayout>
+
+
         </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
 
-
+    </RelativeLayout>
 
 
 
