@@ -3,13 +3,261 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AdminFragment.AdminHomeFragment">
 
-
-    <TextView
-        android:id="@+id/tvName"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/profile_image"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_14sdp"
+                        android:src="@color/main"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_14sdp"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="#FF000000"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tvName"
+                            android:layout_marginTop="@dimen/_14sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/popmed"
+                            android:textSize="@dimen/_9ssp"
+                            android:layout_marginLeft="@dimen/_14sdp"
+                            android:layout_marginRight="@dimen/_14sdp"
+                            android:textColor="@color/black2"
+                            android:text="Hi, Anggita" />
+
+                        <TextView
+                            android:id="@+id/tvEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/popsem"
+                            android:textSize="@dimen/_10ssp"
+                            android:layout_marginLeft="@dimen/_14sdp"
+                            android:layout_marginRight="@dimen/_14sdp"
+                            android:textColor="@color/black2"
+                            android:text="anggita@gmail.com" />
+
+
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/popsem"
+                    android:layout_marginRight="@dimen/_14sdp"
+                    android:layout_marginLeft="@dimen/_14sdp"
+                    android:textSize="@dimen/_22ssp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:textColor="@color/black"
+                    android:text="Kelola Data Apa\nHari Ini?" />
+
+                <TextView
+                    android:layout_marginTop="@dimen/_14sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:layout_marginLeft="@dimen/_14sdp"
+                    android:layout_marginRight="@dimen/_14sdp"
+                    android:textColor="@color/main"
+                    android:text="Overview" />
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:scrollbars="none"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_14sdp"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="@dimen/_110sdp"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="@dimen/_10sdp"
+                            >
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_140sdp"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_10sdp"
+                                android:background="@drawable/wave_green">
+                                <ImageView
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:alpha="0.5"
+                                    android:src="@drawable/baseline_check_circle_24"/>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:orientation="vertical">
+
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/_10ssp"
+                                        android:text="Total Disetujui"
+                                        android:fontFamily="@font/popmed"
+                                        android:textColor="@color/white"/>
+
+                                    <TextView
+                                        android:id="@+id/tvCutiSetuju"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/_14ssp"
+                                        android:text="5 Cuti"
+                                        android:fontFamily="@font/popsem"
+                                        android:textColor="@color/white"/>
+
+                                </LinearLayout>
+
+
+
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="@dimen/_110sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_20sdp"
+                            app:cardCornerRadius="@dimen/_10sdp"
+                            >
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_140sdp"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_10sdp"
+                                android:background="@drawable/wave_red">
+                                <ImageView
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:alpha="0.5"
+                                    android:src="@drawable/baseline_error_24"/>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:orientation="vertical">
+
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/_10ssp"
+                                        android:text="Total Ditolak"
+                                        android:fontFamily="@font/popmed"
+                                        android:textColor="@color/white"/>
+
+                                    <TextView
+                                        android:id="@+id/tvCutiTolak"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/_14ssp"
+                                        android:text="5 Cuti"
+                                        android:fontFamily="@font/popsem"
+                                        android:textColor="@color/white"/>
+
+                                </LinearLayout>
+
+
+
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="@dimen/_110sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_14sdp"
+                            android:layout_marginLeft="@dimen/_20sdp"
+                            app:cardCornerRadius="@dimen/_10sdp"
+                            >
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_140sdp"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_10sdp"
+                                android:background="@drawable/wave_yellow">
+                                <ImageView
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:alpha="0.5"
+                                    android:src="@drawable/baseline_refresh_24"/>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:orientation="vertical">
+
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/_10ssp"
+                                        android:text="Total Ditangguhkan"
+                                        android:fontFamily="@font/popmed"
+                                        android:textColor="@color/white"/>
+
+                                    <TextView
+                                        android:id="@+id/tvDitangguhkan"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/_14ssp"
+                                        android:text="5 Cuti"
+                                        android:fontFamily="@font/popsem"
+                                        android:textColor="@color/white"/>
+
+                                </LinearLayout>
+
+
+
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+
+    </LinearLayout>
+
+
+
 
 </RelativeLayout>
