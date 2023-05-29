@@ -1,6 +1,5 @@
 package com.example.siculi.AdminFragment;
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -38,7 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AdminEditPegawaiFragment extends Fragment {
+public class AdminEditAtasanFragment extends Fragment {
     EditText etSisaCuti;
     Spinner spAtasan, spJabatan, spUnitKerja, spStatus;
     Button btnSimpan, btnBatal;
@@ -47,7 +45,7 @@ public class AdminEditPegawaiFragment extends Fragment {
     List<JabatanModel> jabatanModelList;
     SpinnerJabatanAdapter spinnerJabatanAdapter;
     String [] opsiStatus = {"Aktif", "Cuti", "Tidak Aktif"};
-    String status, atasanId, jabatan, unitKerja, karyawanId;
+    String status, atasanId, jabatan, unitKerja, karyawanId, kdAtasan;
     List<AtasanModel> atasanModelList;
     SpinnerAtasanAdapter spinnerAtasanAdapter;
     List<UnitKerjaModel> unitKerjaModelList;
@@ -58,7 +56,7 @@ public class AdminEditPegawaiFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_admin_edit_pegawai, container, false);
+        View view = inflater.inflate(R.layout.fragment_admin_edit_atasan, container, false);
 
 
         spAtasan = view.findViewById(R.id.spAtasan);
@@ -68,7 +66,7 @@ public class AdminEditPegawaiFragment extends Fragment {
         btnSimpan = view.findViewById(R.id.btnSimpan);
         btnBatal = view.findViewById(R.id.btnBatal);
         spStatus = view.findViewById(R.id.spStatus);
-        karyawanId = getArguments().getString("karyawan_id");
+        kdAtasan = getArguments().getString("atasan_id");
         adminInterface = DataApi.getClient().create(AdminInterface.class);
 
         ArrayAdapter adapterStatus = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, opsiStatus);
@@ -91,7 +89,7 @@ public class AdminEditPegawaiFragment extends Fragment {
         getAllAtasan();
         getAllJabatan();
         getAllUnitKerja();
-        getKaryawanDetail();
+        getAtasanDetail();
 
 
         spAtasan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -144,11 +142,10 @@ public class AdminEditPegawaiFragment extends Fragment {
 
 
                     HashMap map = new HashMap();
-
-                    map.put("karyawan_id", RequestBody.create(MediaType.parse("text/plain"), karyawanId));
+                    map.put("atasan_id", RequestBody.create(MediaType.parse("text/plain"), kdAtasan));
                     map.put("atasan", RequestBody.create(MediaType.parse("text/plain"), atasanId));
-                    map.put("jabatan", RequestBody.create(MediaType.parse("text/plain"), jabatan));
                     map.put("status", RequestBody.create(MediaType.parse("text/plain"), status));
+                    map.put("jabatan", RequestBody.create(MediaType.parse("text/plain"), jabatan));
                     map.put("unit_kerja", RequestBody.create(MediaType.parse("text/plain"), unitKerja));
                     map.put("sisa_cuti", RequestBody.create(MediaType.parse("text/plain"), etSisaCuti.getText().toString()));
 
@@ -157,16 +154,16 @@ public class AdminEditPegawaiFragment extends Fragment {
                     AlertDialog pd = alert.create();
                     pd.show();
 
-                    adminInterface.updateKaryawan(map).enqueue(new Callback<ResponseModel>() {
+                    adminInterface.updateAtasan(map).enqueue(new Callback<ResponseModel>() {
                         @Override
                         public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                             if (response.isSuccessful() && response.body().getStatus() == 200) {
                                 pd.dismiss();
-                                Toasty.success(getContext(), "Berhasil mengubah data karyawan", Toasty.LENGTH_SHORT).show();
+                                Toasty.success(getContext(), "Berhasil mengubah data atasan", Toasty.LENGTH_SHORT).show();
                                 getActivity().onBackPressed();
                             }else {
                                 pd.dismiss();
-                                Toasty.error(getContext(), "Gagal mengubah data karyawan", Toasty.LENGTH_SHORT).show();
+                                Toasty.error(getContext(), "Gagal mengubah data atasan", Toasty.LENGTH_SHORT).show();
                             }
                         }
 
@@ -276,15 +273,15 @@ public class AdminEditPegawaiFragment extends Fragment {
         });
     }
 
-    private void getKaryawanDetail() {
+    private void getAtasanDetail() {
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
         alert.setTitle("Loading").setMessage("Memuat data...").setCancelable(false);
         AlertDialog pd = alert.create();
         pd.show();
 
-        adminInterface.getKaryawanById(karyawanId).enqueue(new Callback<KaryawanModel>() {
+        adminInterface.getAtasanById(kdAtasan).enqueue(new Callback<AtasanModel>() {
             @Override
-            public void onResponse(Call<KaryawanModel> call, Response<KaryawanModel> response) {
+            public void onResponse(Call<AtasanModel> call, Response<AtasanModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     etSisaCuti.setText(response.body().getSisa_cuti());
                     pd.dismiss();
@@ -296,7 +293,7 @@ public class AdminEditPegawaiFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<KaryawanModel> call, Throwable t) {
+            public void onFailure(Call<AtasanModel> call, Throwable t) {
                 pd.dismiss();
                 Toasty.error(getContext(), "Tidak ada koneksi internet", Toasty.LENGTH_SHORT).show();
 

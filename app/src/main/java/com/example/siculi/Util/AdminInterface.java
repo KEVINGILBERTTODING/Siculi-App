@@ -75,7 +75,11 @@ public interface AdminInterface {
             @PartMap Map<String, RequestBody> textData
     );
 
-
+    @Multipart
+    @POST("admin/updateAtasan")
+    Call<ResponseModel> updateAtasan(
+            @PartMap Map<String, RequestBody> textData
+    );
 
 
 

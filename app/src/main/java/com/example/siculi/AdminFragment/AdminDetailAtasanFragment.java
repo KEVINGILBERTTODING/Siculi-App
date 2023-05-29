@@ -65,7 +65,7 @@ public class AdminDetailAtasanFragment extends Fragment {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new AdminEditPegawaiFragment();
+                Fragment fragment = new AdminEditAtasanFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("atasan_id", atasanId);
                 fragment.setArguments(bundle);
