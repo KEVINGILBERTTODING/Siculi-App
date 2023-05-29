@@ -42,6 +42,9 @@ public class LoginActivty extends AppCompatActivity {
             if (sharedPreferences.getString("role", null).equals("3")) {
                 startActivity(new Intent(LoginActivty.this, KaryawanMainActivity.class));
                 finish();
+            }else  if (sharedPreferences.getString("role", null).equals("4")) {
+                startActivity(new Intent(LoginActivty.this, AdminMainActivity.class));
+                finish();
             }
         }
 
@@ -77,6 +80,14 @@ public class LoginActivty extends AppCompatActivity {
                                     editor.putInt("atasan", response.body().getAtasan());
                                     editor.apply();
                                     startActivity(new Intent(LoginActivty.this, KaryawanMainActivity.class));
+                                    finish();
+                                } else  if (response.body().getRole().equals("4")) { // admin
+                                    editor.putBoolean("logged_in", true);
+                                    editor.putString("user_id", response.body().getUserId());
+                                    editor.putString("role", response.body().getRole());
+                                    editor.putString("nama", response.body().getNama());
+                                    editor.apply();
+                                    startActivity(new Intent(LoginActivty.this, AdminMainActivity.class));
                                     finish();
                                 }
 
