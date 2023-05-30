@@ -100,6 +100,23 @@ public interface AdminInterface {
     );
 
 
+    @GET("admin/getAllCutiAtasan")
+    Call<List<CutiModel>> getAllCutiAtasan();
+
+    @FormUrlEncoded
+    @POST("admin/deleteCutiatasan")
+    Call<ResponseModel> deleteCutiatasan(
+            @Field("id_cuti") String idCuti,
+            @Field("user_id") String userId
+    );
+
+    @GET("admin/filterDataCutiatasan")
+    Call<List<CutiModel>> filterDataCutiatasan(
+            @Query("date_start") String dateStart,
+            @Query("date_end") String dateEn
+    );
+
+
 
 
 
