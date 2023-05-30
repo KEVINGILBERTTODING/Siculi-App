@@ -374,6 +374,28 @@
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:gravity="center_horizontal"/>
                         </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_20sdp"
+                            android:orientation="vertical">
+                            <ImageButton
+                                android:id="@+id/btnIzinKaryawan"
+                                android:layout_width="@dimen/_40sdp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_height="@dimen/_40sdp"
+                                android:background="@drawable/ic_atasan"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Izin\nKaryawan"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/popmed"
+                                android:textSize="@dimen/_9ssp"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:gravity="center_horizontal"/>
+                        </LinearLayout>
                     </LinearLayout>
                 </HorizontalScrollView>
 

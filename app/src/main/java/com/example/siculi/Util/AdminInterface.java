@@ -3,6 +3,7 @@ package com.example.siculi.Util;
 import com.example.siculi.Model.AdminModel;
 import com.example.siculi.Model.AtasanModel;
 import com.example.siculi.Model.CutiModel;
+import com.example.siculi.Model.IzinModel;
 import com.example.siculi.Model.JabatanModel;
 import com.example.siculi.Model.KaryawanModel;
 import com.example.siculi.Model.ResponseModel;
@@ -115,6 +116,18 @@ public interface AdminInterface {
             @Query("date_start") String dateStart,
             @Query("date_end") String dateEn
     );
+
+    @GET("admin/getAllIzinKaryawan")
+    Call<List<IzinModel>> getAllIzinKaryawan();
+
+    @GET("admin/filterDataIzinKaryawan")
+    Call<List<IzinModel>> filterDataIzinKaryawan(
+            @Query("date_start") String dateStart,
+            @Query("date_end") String dateEn
+    );
+
+
+
 
 
 
