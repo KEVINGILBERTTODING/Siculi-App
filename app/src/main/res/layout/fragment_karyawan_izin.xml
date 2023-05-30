@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:padding="@dimen/_14sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".KaryawanFragment.KaryawanCutiFragment">
+    tools:context=".KaryawanFragment.KaryawanIzinFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:fontFamily="@font/popsem"
             android:textSize="@dimen/_22ssp"
             android:textColor="@color/black"
-            android:text="Daftar Riwayat\nCuti Saya" />
+            android:text="Daftar Riwayat\nIzin Saya" />
 
 
         <androidx.appcompat.widget.SearchView
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             app:iconifiedByDefault="false"
             android:id="@+id/searchBar"
-            app:queryHint="Cari jenis cuti..."
+            app:queryHint="Cari tanggal izin..."
             style="@style/AppSearchView"
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@color/white"
@@ -40,10 +40,10 @@
             android:fontFamily="@font/popmed"
             android:textSize="@dimen/_13ssp"
             android:textColor="@color/black"
-            android:text="Daftar Cuti" />
+            android:text="Daftar Pengajuan Izin" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCuti"
+            android:id="@+id/rvIzin"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -63,7 +63,6 @@
         android:textColor="@color/black"
         android:text="Tidak ada data."/>
 
-
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/multiple_actions"
         android:layout_width="wrap_content"
@@ -75,7 +74,7 @@
         app:fab_addButtonColorNormal="@color/main">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnFilter2"
+            android:id="@+id/btnFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/green"

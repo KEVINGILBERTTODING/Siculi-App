@@ -35,6 +35,20 @@ public interface KaryawanInterface {
             @Query("date_end") String dateEn
     );
 
+    @GET("karyawan/getAllIzin")
+    Call<List<IzinModel>> getAllIzin(
+            @Query("user_id") String userId
+    );
+
+
+    @GET("karyawan/filterMyIzin")
+    Call<List<IzinModel>> filterMyIzin(
+            @Query("user_id") String userId,
+            @Query("date_start") String dateStart,
+            @Query("date_end") String dateEn
+    );
+
+
 
 
 }
