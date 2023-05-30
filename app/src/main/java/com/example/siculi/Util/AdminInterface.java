@@ -132,6 +132,16 @@ public interface AdminInterface {
             @Field("id") String id
     );
 
+    @GET("admin/getAllIzinatasan")
+    Call<List<IzinModel>> getAllIzinAtasan();
+
+    @GET("admin/filterDataIzinAtasan")
+    Call<List<IzinModel>> filterDataIzinAtasan(
+            @Query("date_start") String dateStart,
+            @Query("date_end") String dateEn
+    );
+
+
 
 
 
