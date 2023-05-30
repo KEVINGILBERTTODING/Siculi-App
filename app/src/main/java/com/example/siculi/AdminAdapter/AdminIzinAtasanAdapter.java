@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.siculi.AdminFragment.AdminDetailCutiKaryawan;
+import com.example.siculi.AdminFragment.AdminDetailIzinFragment;
 import com.example.siculi.Model.IzinModel;
 import com.example.siculi.Model.ResponseModel;
 import com.example.siculi.R;
@@ -149,15 +150,18 @@ public class AdminIzinAtasanAdapter extends RecyclerView.Adapter<AdminIzinAtasan
 
         @Override
         public void onClick(View v) {
-            Fragment fragment = new AdminDetailCutiKaryawan();
+            Fragment fragment = new AdminDetailIzinFragment();
             Bundle bundle = new Bundle();
             bundle.putString("status", izinModelList.get(getAdapterPosition()).getStatus());
             bundle.putString("nip", izinModelList.get(getAdapterPosition()).getNik());
             bundle.putString("nama", izinModelList.get(getAdapterPosition()).getNama());
-//            bundle.putString("tanggal_mulai", izinModelList.get(getAdapterPosition()).get);
-//            bundle.putString("tanggal_masuk", izinModelList.get(getAdapterPosition()).getTglMasuk());
-//            bundle.putString("jenis", izinModelList.get(getAdapterPosition()).getJenisCuti());
             bundle.putString("keperluan", izinModelList.get(getAdapterPosition()).getKeperluan());
+            bundle.putString("jenis", izinModelList.get(getAdapterPosition()).getJenis());
+            bundle.putString("tgl_izin", izinModelList.get(getAdapterPosition()).getTanggalIzin());
+            bundle.putString("jam_mulai", izinModelList.get(getAdapterPosition()).getWaktuPergi());
+            bundle.putString("jam_selesai", izinModelList.get(getAdapterPosition()).getWaktuPulang());
+            bundle.putString("id", izinModelList.get(getAdapterPosition()).getId());
+
             fragment.setArguments(bundle);
             ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frameAdmin, fragment).addToBackStack(null)
