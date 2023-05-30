@@ -13,6 +13,8 @@ import java.util.Map;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -79,6 +81,16 @@ public interface AdminInterface {
     @POST("admin/updateAtasan")
     Call<ResponseModel> updateAtasan(
             @PartMap Map<String, RequestBody> textData
+    );
+
+    @GET("admin/getAllCutiKaryawan")
+    Call<List<CutiModel>> getAllCutiKaryawan();
+
+    @FormUrlEncoded
+    @POST("admin/deleteCutiKaryawan")
+    Call<ResponseModel> deleteCutiKaryawan(
+            @Field("id_cuti") String idCuti,
+            @Field("user_id") String userId
     );
 
 

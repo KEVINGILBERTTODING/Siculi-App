@@ -46,8 +46,12 @@ public class CutiModel implements Serializable {
 
     @SerializedName("keterangan_sisa")
     String keteranganSisa;
+    @SerializedName("nama")
+    String nama;
+    @SerializedName("nik")
+    String nik;
 
-    public CutiModel(String id, String idKaryawan, String atasan, String tglCuti, String jenisCuti, String jumlahCuti, String keperluan, String alamat, String status, String tglMasuk, String surat, String tglUpload, String sisaCuti, String keteranganSisa) {
+    public CutiModel(String id, String nama, String nik, String idKaryawan, String atasan, String tglCuti, String jenisCuti, String jumlahCuti, String keperluan, String alamat, String status, String tglMasuk, String surat, String tglUpload, String sisaCuti, String keteranganSisa) {
         this.id = id;
         this.idKaryawan = idKaryawan;
         this.atasan = atasan;
@@ -62,6 +66,8 @@ public class CutiModel implements Serializable {
         this.tglUpload = tglUpload;
         this.sisaCuti = sisaCuti;
         this.keteranganSisa = keteranganSisa;
+        this.nama = nama;
+        this.nik = nik;
     }
 
     public String getId() {
@@ -174,5 +180,21 @@ public class CutiModel implements Serializable {
 
     public void setKeteranganSisa(String keteranganSisa) {
         this.keteranganSisa = keteranganSisa;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public String getNik() {
+        return nik;
+    }
+
+    public void setNik(String nik) {
+        this.nik = nik;
     }
 }

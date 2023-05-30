@@ -33,35 +33,45 @@
                     android:id="@+id/tvStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="end"
                     android:fontFamily="@font/popsem"
+                    android:gravity="end"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_11ssp"
                     android:text="status"/>
+
+
                 <TextView
                     android:id="@+id/tvNama"
                     android:layout_width="match_parent"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/popsem"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_13ssp"
                     android:textColor="@color/main"
                     android:text="Dedet"/>
 
 
 
                 <TextView
-                    android:id="@+id/tvJabatan"
+                    android:id="@+id/tvJenisCuti"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/popmed"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_10ssp"
-                    android:text="adasddddddd"/>
+                    android:textSize="@dimen/_11ssp"
+                    android:text="Cuti Tahunan"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hapus"
+                    android:id="@+id/btnDelete"
+                    android:layout_gravity="end"
+                    app:backgroundTint="@color/red"
+                    android:layout_marginTop="@dimen/_10sdp"/>
 
 
 
