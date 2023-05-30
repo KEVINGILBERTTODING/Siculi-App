@@ -340,7 +340,7 @@
                                 android:layout_width="@dimen/_40sdp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_height="@dimen/_40sdp"
-                                android:background="@drawable/ic_karyawan"/>
+                                android:background="@drawable/ic_karyawan_cuti"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -362,7 +362,7 @@
                                 android:layout_width="@dimen/_40sdp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_height="@dimen/_40sdp"
-                                android:background="@drawable/ic_atasan"/>
+                                android:background="@drawable/ic_atasan_cuti"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -384,7 +384,7 @@
                                 android:layout_width="@dimen/_40sdp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_height="@dimen/_40sdp"
-                                android:background="@drawable/ic_atasan"/>
+                                android:background="@drawable/ic_karyawan_izin"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -406,7 +406,7 @@
                                 android:layout_width="@dimen/_40sdp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_height="@dimen/_40sdp"
-                                android:background="@drawable/ic_atasan"/>
+                                android:background="@drawable/ic_atasan_izin"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
