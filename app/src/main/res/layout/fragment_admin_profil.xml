@@ -86,6 +86,16 @@
                             android:layout_marginTop="@dimen/_5sdp"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSimpanProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Simpan"
+                    android:visibility="gone"
+                    app:backgroundTint="@color/yellow"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/_10sdp"/>
             </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
@@ -249,15 +259,7 @@
                     android:text="Simpan"/>
 
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnKembali"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/popsem"
-                    android:textColor="@color/black2"
-                    app:backgroundTint="@color/light_gray4"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Kembali"/>
+
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

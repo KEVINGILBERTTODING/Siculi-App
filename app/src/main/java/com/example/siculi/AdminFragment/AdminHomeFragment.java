@@ -109,6 +109,13 @@ public class AdminHomeFragment extends Fragment {
                 replace(new AdminIzinAtasanFragment());
             }
         });
+
+        ivProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replace(new AdminProfileFragment());
+            }
+        });
        return view;
     }
 

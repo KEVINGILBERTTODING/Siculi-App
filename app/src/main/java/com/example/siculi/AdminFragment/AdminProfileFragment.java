@@ -1,8 +1,15 @@
 package com.example.siculi.AdminFragment;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
@@ -22,10 +30,16 @@ import com.example.siculi.R;
 import com.example.siculi.Util.AdminInterface;
 import com.example.siculi.Util.DataApi;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 
 import es.dmoral.toasty.Toasty;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,10 +50,11 @@ public class AdminProfileFragment extends Fragment {
     EditText etEmail;
     TextView tvNama, tvEmail, etStatus;
     EditText etNip, etJabatan, etNama, etPassword;
-    Button btnEdit, btnSimpan;
+    Button btnEdit, btnSimpan, btnSimpanProfile;
     String userId;
     SharedPreferences sharedPreferences;
     AdminInterface adminInterface;
+    private File file;
 
 
 
@@ -50,6 +65,7 @@ public class AdminProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_admin_profil, container, false);
         ivProfile = view.findViewById(R.id.ivProfile);
         tvNama = view.findViewById(R.id.tvName);
+        btnSimpanProfile = view.findViewById(R.id.btnSimpanProfile);
         tvEmail = view.findViewById(R.id.tvEmail);
         etPassword = view.findViewById(R.id.etPassword);
         etNama = view.findViewById(R.id.etNama);
@@ -62,6 +78,15 @@ public class AdminProfileFragment extends Fragment {
         adminInterface = DataApi.getClient().create(AdminInterface.class);
         sharedPreferences = getContext().getSharedPreferences("data_user", Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("user_id", null);
+
+        ivProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 1);
+                btnSimpanProfile.setVisibility(View.VISIBLE);
+            }
+        });
 
 
 
@@ -83,6 +108,13 @@ public class AdminProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editMyProfile();
+            }
+        });
+
+        btnSimpanProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editPhotoProfile();
             }
         });
 
@@ -201,4 +233,111 @@ public class AdminProfileFragment extends Fragment {
             });
         }
     }
+
+    private void editPhotoProfile() {
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+            alert.setTitle("Loading").setMessage("Menyimpan perubahan...").setCancelable(false);
+            AlertDialog pd = alert.create();
+            pd.show();
+
+            HashMap map = new HashMap();
+            map.put("user_id", RequestBody.create(MediaType.parse("text/plain"), userId));
+            RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+            MultipartBody.Part image = MultipartBody.Part.createFormData("foto", file.getName(), requestBody);
+
+            adminInterface.editPhotoProfile(map, image).enqueue(new Callback<ResponseModel>() {
+                @Override
+                public void onResponse(Call <ResponseModel>call, Response<ResponseModel> response) {
+                    if (response.isSuccessful() && response.body().getStatus() == 200) {
+                       btnSimpanProfile.setVisibility(View.GONE);
+                        Toasty.success(getContext(), "Berhasil mengubah foto profil", Toasty.LENGTH_SHORT).show();
+                        getMyProfile();
+                        pd.dismiss();
+                    }else {
+                        Toasty.error(getContext(), response.body().getMessage(), Toasty.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseModel> call, Throwable t) {
+                    Toasty.error(getContext(), "Tidak ada koneksi internet", Toasty.LENGTH_SHORT).show();
+                    pd.dismiss();
+
+                }
+            });
+
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && data != null) {
+            if (requestCode == 1) {
+                Uri uri = data.getData();
+                String pdfPath = getRealPathFromUri(uri);
+                file = new File(pdfPath);
+                ivProfile.setImageURI(uri);
+            }
+        }
+    }
+
+
+    public String getRealPathFromUri(Uri uri) {
+        String filePath = "";
+        if (getContext().getContentResolver() != null) {
+            try {
+                InputStream inputStream = getContext().getContentResolver().openInputStream(uri);
+                File file = new File(getContext().getCacheDir(), getFileName(uri));
+                writeFile(inputStream, file);
+                filePath = file.getAbsolutePath();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return filePath;
+    }
+
+    private String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContext().getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    int displayNameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                    if (displayNameIndex != -1) {
+                        result = cursor.getString(displayNameIndex);
+                    }
+                }
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+
+    private void writeFile(InputStream inputStream, File file) throws IOException {
+        OutputStream outputStream = new FileOutputStream(file);
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = inputStream.read(buffer)) > 0) {
+            outputStream.write(buffer, 0, length);
+        }
+        outputStream.flush();
+        outputStream.close();
+        inputStream.close();
+    }
+
 }
