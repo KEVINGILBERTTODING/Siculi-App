@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import com.example.siculi.AdminFragment.AdminCutiKaryawanFragment;
 import com.example.siculi.AdminFragment.AdminHomeFragment;
 import com.example.siculi.AdminFragment.AdminIzinKaryawanFragment;
+import com.example.siculi.AdminFragment.AdminProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -34,7 +35,7 @@ public class AdminMainActivity extends AppCompatActivity {
                     replace(new AdminIzinKaryawanFragment());
                     return true;
                 }else if (item.getItemId() == R.id.menuProfile) {
-                    replace(new AdminCutiKaryawanFragment());
+                    replace(new AdminProfileFragment());
                     return true;
                 }
                 return false;

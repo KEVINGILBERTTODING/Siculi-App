@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".AdminFragment.AdminDetailAtasanFragment">
+    tools:context=".AdminFragment.AdminProfileFragment">
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="@drawable/header1"
@@ -112,28 +112,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black"
-                    android:text="NIP" />
-
-                <EditText
-                    android:id="@+id/etNip"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/container_edittext"
-                    android:padding="@dimen/_10sdp"
-                    android:enabled="false"
-                    android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black2"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:hint="NIP"/>
-
-
 
 
 
@@ -162,14 +140,14 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_11ssp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:textColor="@color/black"
-                    android:text="Unit Kerja" />
+                    android:text="NIP" />
 
                 <EditText
-                    android:id="@+id/etUnitKerja"
+                    android:id="@+id/etNip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/container_edittext"
@@ -181,6 +159,76 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:hint="NIP"/>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="Nama Lengkap" />
+
+                <EditText
+                    android:id="@+id/etNama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:enabled="false"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black2"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="email"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="Email" />
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:enabled="false"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black2"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="email"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="Password" />
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:enabled="false"
+                    android:inputType="textPassword"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black2"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="email"/>
+
+
+
+
 
 
                 <com.google.android.material.button.MaterialButton
@@ -191,7 +239,25 @@
                     android:layout_marginTop="@dimen/_20sdp"
                     android:text="Ubah"/>
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSimpan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/popsem"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:text="Simpan"/>
 
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnKembali"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/popsem"
+                    android:textColor="@color/black2"
+                    app:backgroundTint="@color/light_gray4"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Kembali"/>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

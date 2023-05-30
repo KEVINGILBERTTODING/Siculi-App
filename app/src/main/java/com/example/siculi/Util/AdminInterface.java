@@ -141,6 +141,14 @@ public interface AdminInterface {
             @Query("date_end") String dateEn
     );
 
+    @Multipart
+    @POST("admin/editMyProfile")
+    Call<ResponseModel> updateMyProfile(
+            @PartMap Map<String, RequestBody> textData
+    );
+
+
+
 
 
 
