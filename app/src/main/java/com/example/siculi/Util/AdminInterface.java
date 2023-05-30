@@ -126,6 +126,12 @@ public interface AdminInterface {
             @Query("date_end") String dateEn
     );
 
+    @FormUrlEncoded
+    @POST("admin/deleteIzin")
+    Call<ResponseModel> deleteIzin(
+            @Field("id") String id
+    );
+
 
 
 

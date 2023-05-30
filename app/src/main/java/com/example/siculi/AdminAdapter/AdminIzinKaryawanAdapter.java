@@ -105,9 +105,8 @@ public class AdminIzinKaryawanAdapter extends RecyclerView.Adapter<AdminIzinKary
                                     AlertDialog pd = alert2.create();
                                     pd.show();
 
-                                    adminInterface.deleteCutiKaryawan(
-                                            izinModelList.get(getAdapterPosition()).getId(),
-                                            izinModelList.get(getAdapterPosition()).getIdKaryawan()
+                                    adminInterface.deleteIzin(
+                                            izinModelList.get(getAdapterPosition()).getId()
                                     ).enqueue(new Callback<ResponseModel>() {
                                         @Override
                                         public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
