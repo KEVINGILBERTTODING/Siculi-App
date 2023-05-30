@@ -93,6 +93,15 @@ public interface AdminInterface {
             @Field("user_id") String userId
     );
 
+    @GET("admin/filterDataCutiKaryawan")
+    Call<List<CutiModel>> filterDataCutiKaryawan(
+            @Query("date_start") String dateStart,
+            @Query("date_end") String dateEn
+    );
+
+
+
+
 
 
 

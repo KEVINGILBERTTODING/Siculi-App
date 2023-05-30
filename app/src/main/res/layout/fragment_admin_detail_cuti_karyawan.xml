@@ -197,13 +197,6 @@
                 android:fontFamily="@font/popmed"
                 android:layout_marginTop="@dimen/_5sdp"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnCetak"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cetak"
-                android:layout_marginTop="@dimen/_20sdp"
-                app:backgroundTint="@color/green"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnKembali"

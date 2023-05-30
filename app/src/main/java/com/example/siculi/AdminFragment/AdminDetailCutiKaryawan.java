@@ -19,7 +19,7 @@ public class AdminDetailCutiKaryawan extends Fragment {
     TextView tvStatus;
     EditText etNip, etNama, etTglMulai, etTglSelesai, etJenisCuti,
     etKeperluan;
-    Button btnCetak, btnKembali;
+    Button btnKembali;
 
 
     @Override
@@ -36,7 +36,6 @@ public class AdminDetailCutiKaryawan extends Fragment {
         etTglSelesai = view.findViewById(R.id.etTglSelesai);
         etJenisCuti = view.findViewById(R.id.etJenisCuti);
         etKeperluan = view.findViewById(R.id.etKeperluan);
-        btnCetak = view.findViewById(R.id.btnCetak);
         btnKembali = view.findViewById(R.id.btnKembali);
 
         etNama.setText(getArguments().getString("nama"));

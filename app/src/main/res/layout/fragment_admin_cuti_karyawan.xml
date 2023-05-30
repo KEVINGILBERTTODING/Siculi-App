@@ -61,6 +61,16 @@
         android:textSize="@dimen/_11ssp"
         android:visibility="gone"
         android:textColor="@color/black"
-        android:text="Tidak ada data." />
+        android:text="Tidak ada data."/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/main"
+        app:tint="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/baseline_filter_alt_24"/>
 
 </RelativeLayout>
