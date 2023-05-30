@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvMain"
+        android:layout_width="match_parent"
+        app:contentPadding="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardUseCompatPadding="true"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/popsem"
+                    android:gravity="end"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11ssp"
+                    android:text="status"/>
+
+
+                <TextView
+                    android:id="@+id/tvJenisCuti"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/popsem"
+                    android:textSize="@dimen/_13ssp"
+                    android:textColor="@color/main"
+                    android:text="Dedet"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ivIcCalendar"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:tint="@color/main"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/baseline_calendar_month_24"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_toRightOf="@id/ivIcCalendar"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/tvTanggalCuti"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/popmed"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11ssp"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="Cuti Tahunan"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/popmed"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:textColor="@color/main"
+                            android:textSize="@dimen/_11ssp"
+                            android:text="s/d"/>
+
+                        <TextView
+                            android:id="@+id/tvTanggalSelesai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/popmed"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11ssp"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="Cuti Tahunan"/>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+

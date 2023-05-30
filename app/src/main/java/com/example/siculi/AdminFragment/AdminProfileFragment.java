@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.siculi.LoginActivty;
 import com.example.siculi.Model.AdminModel;
 import com.example.siculi.Model.ResponseModel;
 import com.example.siculi.R;
@@ -50,11 +51,12 @@ public class AdminProfileFragment extends Fragment {
     EditText etEmail;
     TextView tvNama, tvEmail, etStatus;
     EditText etNip, etJabatan, etNama, etPassword;
-    Button btnEdit, btnSimpan, btnSimpanProfile;
+    Button btnEdit, btnSimpan, btnSimpanProfile, btnLogOut;
     String userId;
     SharedPreferences sharedPreferences;
     AdminInterface adminInterface;
     private File file;
+    SharedPreferences.Editor editor;
 
 
 
@@ -67,6 +69,7 @@ public class AdminProfileFragment extends Fragment {
         tvNama = view.findViewById(R.id.tvName);
         btnSimpanProfile = view.findViewById(R.id.btnSimpanProfile);
         tvEmail = view.findViewById(R.id.tvEmail);
+        btnLogOut = view.findViewById(R.id.btnLogOut);
         etPassword = view.findViewById(R.id.etPassword);
         etNama = view.findViewById(R.id.etNama);
         etNip = view.findViewById(R.id.etNip);
@@ -78,6 +81,7 @@ public class AdminProfileFragment extends Fragment {
         adminInterface = DataApi.getClient().create(AdminInterface.class);
         sharedPreferences = getContext().getSharedPreferences("data_user", Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("user_id", null);
+        editor = sharedPreferences.edit();
 
         ivProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +89,16 @@ public class AdminProfileFragment extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, 1);
                 btnSimpanProfile.setVisibility(View.VISIBLE);
+            }
+        });
+
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.clear();
+                editor.apply();
+                startActivity(new Intent(getContext(), LoginActivty.class));
+                getActivity().finish();
             }
         });
 

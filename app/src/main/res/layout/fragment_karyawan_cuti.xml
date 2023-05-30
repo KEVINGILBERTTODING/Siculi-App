@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="@dimen/_14sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".KaryawanFragment.KaryawanCutiFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/popsem"
+            android:textSize="@dimen/_22ssp"
+            android:textColor="@color/black"
+            android:text="Daftar Riwayat\nCuti Saya" />
+
+
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:iconifiedByDefault="false"
+            android:id="@+id/searchBar"
+            app:queryHint="Cari jenis cuti..."
+            style="@style/AppSearchView"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@color/white"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/popmed"
+            android:textSize="@dimen/_13ssp"
+            android:textColor="@color/black"
+            android:text="Daftar Cuti" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCuti"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/popmed"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/_11ssp"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:text="Tidak ada data."/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/main"
+        app:tint="@color/white"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/baseline_filter_alt_24"/>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        app:fab_addButtonColorPressed="@color/main"
+        app:fab_addButtonColorNormal="@color/main">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnFilter2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/green"
+            app:fab_colorPressed="@color/green"
+            app:fab_icon="@drawable/baseline_filter_alt_24"
+            />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/yellow"
+            app:fab_colorPressed="@color/yellow"
+            app:fab_icon="@drawable/baseline_add_24"
+
+            />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+</RelativeLayout>
