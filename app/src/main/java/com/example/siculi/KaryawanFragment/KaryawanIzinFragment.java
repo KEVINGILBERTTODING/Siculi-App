@@ -2,6 +2,7 @@ package com.example.siculi.KaryawanFragment;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -18,20 +20,22 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.siculi.AdminAdapter.AdminIzinKaryawanAdapter;
 import com.example.siculi.KaryawanAdapter.KaryawanIzinAdapter;
 import com.example.siculi.Model.IzinModel;
+import com.example.siculi.Model.KaryawanModel;
+import com.example.siculi.Model.ResponseModel;
 import com.example.siculi.R;
-import com.example.siculi.Util.AdminInterface;
 import com.example.siculi.Util.DataApi;
 import com.example.siculi.Util.KaryawanInterface;
 import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,8 +50,8 @@ public class KaryawanIzinFragment extends Fragment {
     LinearLayoutManager linearLayoutManager;
     SharedPreferences sharedPreferences;
     TextView tvEmpty;
-    FloatingActionButton fabFilter;
-    String userId;
+    FloatingActionButton fabFilter, fabInsert;
+    String userId, atasanId;
 
 
 
@@ -63,9 +67,12 @@ public class KaryawanIzinFragment extends Fragment {
         searchView = view.findViewById(R.id.searchBar);
         rvIzin = view.findViewById(R.id.rvIzin);
         fabFilter = view.findViewById(R.id.btnFilter);
+        fabInsert = view.findViewById(R.id.btnInsertIzin);
         karyawanInterface = DataApi.getClient().create(KaryawanInterface.class);
 
         getDataIzinKaryawan();
+        getMyProfile();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -160,6 +167,28 @@ public class KaryawanIzinFragment extends Fragment {
             }
         });
 
+        fabInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog dialogJenisIzin = new Dialog(getContext());
+                dialogJenisIzin.setContentView(R.layout.layout_jenis_izin);
+                dialogJenisIzin.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                Button btnIzinKeluarKantor, btnIzinKeluarCepat;
+                btnIzinKeluarCepat = dialogJenisIzin.findViewById(R.id.btnIzinKeluarCepat);
+                btnIzinKeluarKantor = dialogJenisIzin.findViewById(R.id.btnIzinKeluarKantor);
+                btnIzinKeluarKantor.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogJenisIzin.dismiss();
+                        izinKeluarKantor();
+                    }
+                });
+                dialogJenisIzin.show();
+            }
+        });
+
+
+
         return view;
     }
 
@@ -235,4 +264,151 @@ public class KaryawanIzinFragment extends Fragment {
         });
         datePickerDialog.show();
     }
+
+    private void izinKeluarKantor() {
+        Dialog dialogIzinKeluarKantor = new Dialog(getContext());
+        dialogIzinKeluarKantor.setContentView(R.layout.layout_izin_keluar_kantor);
+        dialogIzinKeluarKantor.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        Button btnSubmit, btnBatal;
+        TextView tvWaktuPergi, tvWaktuPulang;
+        EditText etKeperluan;
+        tvWaktuPulang = dialogIzinKeluarKantor.findViewById(R.id.tvWaktuPulang);
+        tvWaktuPergi = dialogIzinKeluarKantor.findViewById(R.id.tvWaktuPergi);
+        etKeperluan = dialogIzinKeluarKantor.findViewById(R.id.etKeperluan);
+        btnBatal = dialogIzinKeluarKantor.findViewById(R.id.btnBatal);
+        btnSubmit = dialogIzinKeluarKantor.findViewById(R.id.btnSubmit);
+
+        dialogIzinKeluarKantor.show();
+
+        tvWaktuPergi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timePicker(tvWaktuPergi);
+            }
+        });
+
+        tvWaktuPulang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timePicker(tvWaktuPulang);
+            }
+        });
+
+
+        btnBatal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogIzinKeluarKantor.dismiss();
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvWaktuPergi.getText().toString().isEmpty()) {
+                    tvWaktuPergi.setError("Waktu pergi tidak boleh kosong");
+                    tvWaktuPergi.requestFocus();
+                    return;
+                }else if (tvWaktuPulang.getText().toString().isEmpty()) {
+                    tvWaktuPulang.setError("Waktu pulang tidak boleh kosong");
+                    tvWaktuPulang.requestFocus();
+                    return;
+                }else  if (etKeperluan.getText().toString().isEmpty()) {
+                    etKeperluan.setError("Keperluan tidak boleh kosong");
+                    etKeperluan.requestFocus();
+                    return;
+                }else {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                    alert.setTitle("Loading").setMessage("Menyimpan data...").setCancelable(false);
+                    AlertDialog pd = alert.create();
+                    pd.show();
+
+                    HashMap map = new HashMap();
+                    map.put("waktu_pergi", RequestBody.create(MediaType.parse("text/plain"), tvWaktuPergi.getText().toString()));
+                    map.put("waktu_pulang", RequestBody.create(MediaType.parse("text/plain"), tvWaktuPulang.getText().toString()));
+                    map.put("jenis", RequestBody.create(MediaType.parse("text/plain"), "Normal"));
+                    map.put("user_id", RequestBody.create(MediaType.parse("text/plain"), userId));
+                    map.put("atasan_id", RequestBody.create(MediaType.parse("text/plain"), atasanId));
+                    map.put("keperluan", RequestBody.create(MediaType.parse("text/plain"), etKeperluan.getText().toString()));
+
+                    karyawanInterface.insertIzin(map).enqueue(new Callback<ResponseModel>() {
+                        @Override
+                        public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                            if (response.isSuccessful() && response.body().getStatus() == 200) {
+                                Toasty.success(getContext(), "Berhasil mengajukan izin", Toasty.LENGTH_SHORT).show();
+                                getDataIzinKaryawan();
+                                pd.dismiss();
+                                dialogIzinKeluarKantor.dismiss();
+                            }else {
+                                Toasty.error(getContext(), "Gagal mengajukan izin", Toasty.LENGTH_SHORT).show();
+                                pd.dismiss();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseModel> call, Throwable t) {
+                            Toasty.error(getContext(), "Tidak ada koneksi internet", Toasty.LENGTH_SHORT).show();
+                            pd.dismiss();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private void timePicker(TextView tvTime) {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), (view, hourOfDay, minute) -> {
+            String timeFormatted, minuteFormatted;
+            if (hourOfDay < 10) {
+                timeFormatted = String.format("%02d", hourOfDay);
+            }else {
+                timeFormatted = String.valueOf(hourOfDay);
+            }
+
+            if (minute < 10) {
+                minuteFormatted = String.format("%02d", minute);
+            }else {
+                minuteFormatted = String.valueOf(minute);
+            }
+
+            tvTime.setText(timeFormatted + ":" + minuteFormatted);
+        }, 0, 0, true);
+
+        timePickerDialog.show();
+
+    }
+
+    private void getMyProfile() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        alert.setTitle("Loading").setMessage("Memuat data...").setCancelable(false);
+        AlertDialog pd = alert.create();
+        pd.show();
+
+        karyawanInterface.getMyProfile(userId).enqueue(new Callback<KaryawanModel>() {
+            @Override
+            public void onResponse(Call<KaryawanModel> call, Response<KaryawanModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    pd.dismiss();
+                   atasanId = response.body().getAtasan();
+
+
+
+                }else {
+                    pd.dismiss();
+                    System.err.println(Toasty.error(getContext(), "Gagal memuat data", Toasty.LENGTH_SHORT));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<KaryawanModel> call, Throwable t) {
+                pd.dismiss();
+                System.err.println(Toasty.error(getContext(), "Gagal memuat data total cuti", Toasty.LENGTH_SHORT));
+
+
+            }
+        });
+
+
+    }
+
 }

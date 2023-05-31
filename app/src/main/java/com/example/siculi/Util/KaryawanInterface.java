@@ -3,11 +3,17 @@ package com.example.siculi.Util;
 import com.example.siculi.Model.CutiModel;
 import com.example.siculi.Model.IzinModel;
 import com.example.siculi.Model.KaryawanModel;
+import com.example.siculi.Model.ResponseModel;
 
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 
 public interface KaryawanInterface {
@@ -48,6 +54,12 @@ public interface KaryawanInterface {
             @Query("date_end") String dateEn
     );
 
+
+    @Multipart
+    @POST("karyawan/insertIzin")
+    Call<ResponseModel> insertIzin(
+            @PartMap Map<String, RequestBody> textData
+            );
 
 
 
