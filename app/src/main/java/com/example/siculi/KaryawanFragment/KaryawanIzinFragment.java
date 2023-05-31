@@ -183,6 +183,13 @@ public class KaryawanIzinFragment extends Fragment {
                         izinKeluarKantor();
                     }
                 });
+                btnIzinKeluarCepat.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogJenisIzin.dismiss();
+                        izinKeluarCepat();
+                    }
+                });
                 dialogJenisIzin.show();
             }
         });
@@ -327,6 +334,86 @@ public class KaryawanIzinFragment extends Fragment {
                     map.put("waktu_pergi", RequestBody.create(MediaType.parse("text/plain"), tvWaktuPergi.getText().toString()));
                     map.put("waktu_pulang", RequestBody.create(MediaType.parse("text/plain"), tvWaktuPulang.getText().toString()));
                     map.put("jenis", RequestBody.create(MediaType.parse("text/plain"), "Normal"));
+                    map.put("user_id", RequestBody.create(MediaType.parse("text/plain"), userId));
+                    map.put("atasan_id", RequestBody.create(MediaType.parse("text/plain"), atasanId));
+                    map.put("keperluan", RequestBody.create(MediaType.parse("text/plain"), etKeperluan.getText().toString()));
+
+                    karyawanInterface.insertIzin(map).enqueue(new Callback<ResponseModel>() {
+                        @Override
+                        public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                            if (response.isSuccessful() && response.body().getStatus() == 200) {
+                                Toasty.success(getContext(), "Berhasil mengajukan izin", Toasty.LENGTH_SHORT).show();
+                                getDataIzinKaryawan();
+                                pd.dismiss();
+                                dialogIzinKeluarKantor.dismiss();
+                            }else {
+                                Toasty.error(getContext(), "Gagal mengajukan izin", Toasty.LENGTH_SHORT).show();
+                                pd.dismiss();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseModel> call, Throwable t) {
+                            Toasty.error(getContext(), "Tidak ada koneksi internet", Toasty.LENGTH_SHORT).show();
+                            pd.dismiss();
+                        }
+                    });
+                }
+            }
+        });
+    }
+    private void izinKeluarCepat() {
+        Dialog dialogIzinKeluarKantor = new Dialog(getContext());
+        dialogIzinKeluarKantor.setContentView(R.layout.layout_izin_keluar_cepat);
+        dialogIzinKeluarKantor.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        Button btnSubmit, btnBatal;
+        TextView tvWaktuPergi;
+        EditText etKeperluan;
+        tvWaktuPergi = dialogIzinKeluarKantor.findViewById(R.id.tvWaktuPergi);
+        etKeperluan = dialogIzinKeluarKantor.findViewById(R.id.etKeperluan);
+        btnBatal = dialogIzinKeluarKantor.findViewById(R.id.btnBatal);
+        btnSubmit = dialogIzinKeluarKantor.findViewById(R.id.btnSubmit);
+
+        dialogIzinKeluarKantor.show();
+
+        tvWaktuPergi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timePicker(tvWaktuPergi);
+            }
+        });
+
+
+
+
+        btnBatal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogIzinKeluarKantor.dismiss();
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvWaktuPergi.getText().toString().isEmpty()) {
+                    tvWaktuPergi.setError("Waktu pergi tidak boleh kosong");
+                    tvWaktuPergi.requestFocus();
+                    return;
+                }else  if (etKeperluan.getText().toString().isEmpty()) {
+                    etKeperluan.setError("Keperluan tidak boleh kosong");
+                    etKeperluan.requestFocus();
+                    return;
+                }else {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                    alert.setTitle("Loading").setMessage("Menyimpan data...").setCancelable(false);
+                    AlertDialog pd = alert.create();
+                    pd.show();
+
+                    HashMap map = new HashMap();
+                    map.put("waktu_pergi", RequestBody.create(MediaType.parse("text/plain"), tvWaktuPergi.getText().toString()));
+                    map.put("waktu_pulang", RequestBody.create(MediaType.parse("text/plain"), ""));
+                    map.put("jenis", RequestBody.create(MediaType.parse("text/plain"), "Cepat"));
                     map.put("user_id", RequestBody.create(MediaType.parse("text/plain"), userId));
                     map.put("atasan_id", RequestBody.create(MediaType.parse("text/plain"), atasanId));
                     map.put("keperluan", RequestBody.create(MediaType.parse("text/plain"), etKeperluan.getText().toString()));
