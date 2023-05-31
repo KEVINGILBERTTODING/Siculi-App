@@ -3,6 +3,7 @@ package com.example.siculi.KaryawanFragment;
 import static android.app.Activity.RESULT_OK;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -146,7 +147,22 @@ public class KaryawanInsertCuti extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertCuti();
+                if (jumlahCuti == 0) {
+                    Dialog dialogProses = new Dialog(getContext());
+                    dialogProses.setContentView(R.layout.layout_kuota_cuti);
+                    dialogProses.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                    Button btnOke = dialogProses.findViewById(R.id.btnOke);
+                    btnOke.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogProses.dismiss();
+                        }
+                    });
+                    dialogProses.show();
+                }else {
+                    insertCuti();
+                }
+
             }
         });
 
