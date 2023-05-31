@@ -28,6 +28,8 @@
                 android:layout_centerVertical="true"
                 android:orientation="vertical">
 
+
+
                 <TextView
                     android:id="@+id/tvStatus"
                     android:layout_width="match_parent"

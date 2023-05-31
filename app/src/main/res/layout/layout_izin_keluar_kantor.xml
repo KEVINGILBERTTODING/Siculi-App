@@ -15,6 +15,16 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/_20sdp"
             android:orientation="vertical">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/sad_animation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/calendar_anim" />
             <TextView
                 android:layout_width="match_parent"
                 android:text="Form Izin Keluar Kantor"
@@ -22,7 +32,7 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_minus10sdp"
                 android:textSize="@dimen/_13sdp"
                 android:layout_height="wrap_content"/>
 

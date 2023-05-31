@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.siculi.AdminFragment.AdminProfileFragment;
+import com.example.siculi.KaryawanFragment.KaryawanCutiFragment;
 import com.example.siculi.KaryawanFragment.KaryawanHomeFragment;
+import com.example.siculi.KaryawanFragment.KaryawanIzinFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -29,8 +31,11 @@ public class KaryawanMainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.menuHome) {
                     replace(new KaryawanHomeFragment());
                     return true;
-                }else if (item.getItemId() == R.id.menuProfile) {
-//                    replace(new AdminProfileFragment());
+                }else if (item.getItemId() == R.id.menuIzin) {
+                    replace(new KaryawanIzinFragment());
+                    return true;
+                }else if (item.getItemId() == R.id.menuCuti) {
+                    replace(new KaryawanCutiFragment());
                     return true;
                 }
                 return false;

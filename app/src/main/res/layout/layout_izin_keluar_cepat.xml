@@ -15,6 +15,18 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/_20sdp"
             android:orientation="vertical">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/sad_animation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/time_anim" />
+
+
             <TextView
                 android:layout_width="match_parent"
                 android:text="Form Izin Keluar Cepat"
