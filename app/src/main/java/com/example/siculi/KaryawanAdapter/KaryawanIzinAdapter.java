@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.siculi.AdminFragment.AdminDetailIzinFragment;
+import com.example.siculi.KaryawanFragment.KaryawanDetailIzinFragment;
 import com.example.siculi.Model.IzinModel;
 import com.example.siculi.Model.ResponseModel;
 import com.example.siculi.R;
@@ -106,7 +107,7 @@ public class KaryawanIzinAdapter extends RecyclerView.Adapter<KaryawanIzinAdapte
 
         @Override
         public void onClick(View v) {
-            Fragment fragment = new AdminDetailIzinFragment();
+            Fragment fragment = new KaryawanDetailIzinFragment();
             Bundle bundle = new Bundle();
             bundle.putString("status", izinModelList.get(getAdapterPosition()).getStatus());
             bundle.putString("nip", izinModelList.get(getAdapterPosition()).getNik());
@@ -119,7 +120,7 @@ public class KaryawanIzinAdapter extends RecyclerView.Adapter<KaryawanIzinAdapte
             bundle.putString("id", izinModelList.get(getAdapterPosition()).getId());
             fragment.setArguments(bundle);
             ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frameAdmin, fragment).addToBackStack(null)
+                    .replace(R.id.frameKaryawan, fragment).addToBackStack(null)
                     .commit();
 
         }

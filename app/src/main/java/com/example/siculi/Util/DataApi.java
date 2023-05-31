@@ -9,6 +9,8 @@ public class DataApi {
     public static final String URL_IMAGE_PROFILE_ADMIN = "http://" + IP_ADDRESS + "/siculi/assets/data/admin/profil/";
     public static final String URL_IMAGE_PROFILE_KARYAWAN = "http://" + IP_ADDRESS + "/siculi/assets/data/karyawan/profil/";
     public static final String URL_IMAGE_PROFILE_ATASAN = "http://" + IP_ADDRESS + "/siculi/assets/data/atasan/profil/";
+
+    public static final String URL_DOWNLOAD_SURAT_IZIN_KARYAWAN = "http://" + IP_ADDRESS + "/siculi/api/karyawan/downloadSuratIzin/";
     public static Retrofit retrofit = null;
     public static Retrofit getClient() {
         if (retrofit == null) {
