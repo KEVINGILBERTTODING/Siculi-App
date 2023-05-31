@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.siculi.AdminFragment.AdminProfileFragment;
 import com.example.siculi.KaryawanFragment.KaryawanHomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -27,6 +28,9 @@ public class KaryawanMainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menuHome) {
                     replace(new KaryawanHomeFragment());
+                    return true;
+                }else if (item.getItemId() == R.id.menuProfile) {
+//                    replace(new AdminProfileFragment());
                     return true;
                 }
                 return false;

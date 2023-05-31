@@ -1,8 +1,10 @@
 package com.example.siculi.KaryawanFragment;
 
+import android.Manifest;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.siculi.R;
@@ -70,6 +74,7 @@ public class KaryawanDetailCuti extends Fragment {
                 cvStatus.setCardBackgroundColor(getContext().getColor(R.color.yellow));
 
         }
+
 
 
         btnDownload.setOnClickListener(new View.OnClickListener() {

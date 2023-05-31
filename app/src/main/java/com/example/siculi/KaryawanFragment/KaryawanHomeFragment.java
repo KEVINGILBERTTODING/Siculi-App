@@ -1,7 +1,9 @@
 package com.example.siculi.KaryawanFragment;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -58,6 +62,7 @@ public class KaryawanHomeFragment extends Fragment {
        ivProfile = view.findViewById(R.id.ivProfile);
        tvName = view.findViewById(R.id.tvName);
        tvSisaCuti = view.findViewById(R.id.tvSisaCuti);
+       tvSisaCuti = view.findViewById(R.id.tvSisaCuti);
 
        tvTotalCutiSetuju = view.findViewById(R.id.tvCutiSetuju);
        tvTotalCutiDiTolak = view.findViewById(R.id.tvCutiTolak);
@@ -67,7 +72,15 @@ public class KaryawanHomeFragment extends Fragment {
        userId = sharedPreferences.getString("user_id", null);
        karyawanInterface = DataApi.getClient().create(KaryawanInterface.class);
 
-       getTotalAlCuti("Disetujui", tvTotalCutiSetuju);
+        // cek izin mengakses file external
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
+        } else if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 200);
+        }
+
+
+        getTotalAlCuti("Disetujui", tvTotalCutiSetuju);
        getTotalAlCuti("Ditangguhkan", tvTotalCutiTangguhkan);
        getTotalAlCuti("Ditolak", tvTotalCutiDiTolak);
 
