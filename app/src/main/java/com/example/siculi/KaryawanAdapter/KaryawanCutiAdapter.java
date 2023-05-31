@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.siculi.AdminFragment.AdminDetailCutiKaryawan;
+import com.example.siculi.KaryawanFragment.KaryawanDetailCuti;
 import com.example.siculi.Model.CutiModel;
 import com.example.siculi.R;
 import com.example.siculi.Util.AdminInterface;
@@ -95,8 +96,9 @@ public class KaryawanCutiAdapter extends RecyclerView.Adapter<KaryawanCutiAdapte
 
         @Override
         public void onClick(View v) {
-            Fragment fragment = new AdminDetailCutiKaryawan();
+            Fragment fragment = new KaryawanDetailCuti();
             Bundle bundle = new Bundle();
+            bundle.putString("id", cutiModelList.get(getAdapterPosition()).getId());
             bundle.putString("status", cutiModelList.get(getAdapterPosition()).getStatus());
             bundle.putString("nip", cutiModelList.get(getAdapterPosition()).getNik());
             bundle.putString("nama", cutiModelList.get(getAdapterPosition()).getNama());
@@ -106,7 +108,7 @@ public class KaryawanCutiAdapter extends RecyclerView.Adapter<KaryawanCutiAdapte
             bundle.putString("keperluan", cutiModelList.get(getAdapterPosition()).getKeperluan());
             fragment.setArguments(bundle);
             ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frameAdmin, fragment).addToBackStack(null)
+                    .replace(R.id.frameKaryawan, fragment).addToBackStack(null)
                     .commit();
 
         }
