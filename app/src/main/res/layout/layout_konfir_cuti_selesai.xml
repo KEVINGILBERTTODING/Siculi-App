@@ -24,10 +24,10 @@
                 android:layout_gravity="center"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/error_anim" />
+                app:lottie_rawRes="@raw/success_anim" />
             <TextView
                 android:layout_width="match_parent"
-                android:text="Peringatan!"
+                android:text="Pemberitahuan"
                 android:fontFamily="@font/popsem"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
@@ -38,7 +38,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:text="Sisa cuti anda tidak mencukupi, Silahkan menghubungi admin"
+                android:text="Silahkan klik tombol dibawah ini untuk konfirmasi cuti anda telah berakhir"
                 android:fontFamily="@font/popmed"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 app:backgroundTint="@color/main"
-                android:text="Oke"/>
+                android:text="Konfirmasi"/>
 
 
         </LinearLayout>

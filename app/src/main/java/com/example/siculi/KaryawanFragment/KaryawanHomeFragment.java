@@ -1,6 +1,7 @@
 package com.example.siculi.KaryawanFragment;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,12 +31,16 @@ import com.example.siculi.AdminFragment.AdminProfileFragment;
 import com.example.siculi.Model.AdminModel;
 import com.example.siculi.Model.CutiModel;
 import com.example.siculi.Model.KaryawanModel;
+import com.example.siculi.Model.ResponseModel;
 import com.example.siculi.R;
 import com.example.siculi.Util.AdminInterface;
 import com.example.siculi.Util.DataApi;
 import com.example.siculi.Util.KaryawanInterface;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
@@ -47,7 +53,7 @@ public class KaryawanHomeFragment extends Fragment {
     SharedPreferences sharedPreferences;
     KaryawanInterface karyawanInterface;
     ImageButton btnCutiKaryawan, btnIzinKaryawan;
-    String userId;
+    String userId, status, tanggalMasukCuti;
     TextView tvTotalCutiSetuju, tvTotalCutiDiTolak, tvTotalCutiTangguhkan;
 
 
@@ -72,6 +78,11 @@ public class KaryawanHomeFragment extends Fragment {
        userId = sharedPreferences.getString("user_id", null);
        karyawanInterface = DataApi.getClient().create(KaryawanInterface.class);
 
+        getTotalAlCuti("Disetujui", tvTotalCutiSetuju);
+        getTotalAlCuti("Ditangguhkan", tvTotalCutiTangguhkan);
+        getTotalAlCuti("Ditolak", tvTotalCutiDiTolak);
+        getMyProfile();
+
         // cek izin mengakses file external
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
@@ -80,11 +91,10 @@ public class KaryawanHomeFragment extends Fragment {
         }
 
 
-        getTotalAlCuti("Disetujui", tvTotalCutiSetuju);
-       getTotalAlCuti("Ditangguhkan", tvTotalCutiTangguhkan);
-       getTotalAlCuti("Ditolak", tvTotalCutiDiTolak);
 
-       getMyProfile();
+
+
+
 
 
         btnIzinKaryawan.setOnClickListener(new View.OnClickListener() {
@@ -163,8 +173,62 @@ public class KaryawanHomeFragment extends Fragment {
                             .override(200, 200)
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                             .into(ivProfile);
-
+                    status = response.body().getStatus();
+                    tanggalMasukCuti = response.body().getTgl_masuk();
                     tvSisaCuti.setText(response.body().getSisa_cuti());
+
+                    // get tanggal sekarang indonesia jakarta
+                    Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"));
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    String tanggalSekarang = simpleDateFormat.format(calendar.getTime());
+
+
+
+                    // cek apakah status cuti user telah selesai
+                    // apakah tanggal sekarang lebih besar dari tanggal masuk cuti
+
+                    if (status.equals("Cuti") && tanggalSekarang.compareTo(tanggalMasukCuti) >= 0) {
+
+                        Dialog dialogProses = new Dialog(getContext());
+                        dialogProses.setContentView(R.layout.layout_konfir_cuti_selesai);
+                        dialogProses.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                        Button btnOke = dialogProses.findViewById(R.id.btnOke);
+                        btnOke.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                                alert.setTitle("Loading").setMessage("Konfirmasi Karyawan...").setCancelable(false);
+                                AlertDialog pd = alert.create();
+                                pd.show();
+
+                                karyawanInterface.confirmCutiSelesai(userId).enqueue(new Callback<ResponseModel>() {
+                                    @Override
+                                    public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                                        if (response.isSuccessful() && response.body().getStatus() == 200) {
+                                            pd.dismiss();
+                                            dialogProses.dismiss();
+                                            Toasty.success(getContext(), "Berhasil konfirmasi cuti", Toasty.LENGTH_SHORT).show();
+                                        }else {
+                                            pd.dismiss();
+                                            dialogProses.dismiss();
+                                            Toasty.success(getContext(), "Gagal konfirmasi cuti", Toasty.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ResponseModel> call, Throwable t) {
+                                        pd.dismiss();
+                                        dialogProses.dismiss();
+                                        Toasty.success(getContext(), "Tidak ada koneksi internet", Toasty.LENGTH_SHORT).show();
+                                    }
+                                });
+                                dialogProses.dismiss();
+                            }
+                        });
+                        dialogProses.show();
+                    }else {
+                        Toasty.error(getContext(), "Tidak sesuai", Toasty.LENGTH_SHORT).show();
+                    }
 
 
 
