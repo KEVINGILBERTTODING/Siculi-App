@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.siculi.AdminAdapter.AdminCutiKaryawanAdapter;
 import com.example.siculi.KaryawanAdapter.KaryawanCutiAdapter;
 import com.example.siculi.Model.CutiModel;
+import com.example.siculi.Model.KaryawanModel;
 import com.example.siculi.R;
 import com.example.siculi.Util.AdminInterface;
 import com.example.siculi.Util.DataApi;
@@ -47,6 +48,7 @@ public class KaryawanCutiFragment extends Fragment {
     KaryawanInterface karyawanInterface;
     LinearLayoutManager linearLayoutManager;
     TextView tvEmpty;
+    String status;
     com.getbase.floatingactionbutton.FloatingActionButton  fabFilter, fabInsertCuti;
     String userId;
 
@@ -67,6 +69,9 @@ public class KaryawanCutiFragment extends Fragment {
         fabInsertCuti = view.findViewById(R.id.fabInsertCuti);
         karyawanInterface = DataApi.getClient().create(KaryawanInterface.class);
         getDataCutiKaryawan();
+        getMyProfile();
+
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -161,8 +166,36 @@ public class KaryawanCutiFragment extends Fragment {
         fabInsertCuti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frameKaryawan, new KaryawanInsertCuti()).addToBackStack(null).commit();
+                if (status.equals("Proses")) {
+                    Dialog dialogProses = new Dialog(getContext());
+                    dialogProses.setContentView(R.layout.layout_cuti_proccess);
+                    dialogProses.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                    Button btnOke = dialogProses.findViewById(R.id.btnOke);
+                    btnOke.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogProses.dismiss();
+                        }
+                    });
+                    dialogProses.show();
+                }else if (status.equals("Cuti")) {
+                    Dialog dialogProses = new Dialog(getContext());
+                    dialogProses.setContentView(R.layout.layout_cuti_disetujui);
+                    dialogProses.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                    Button btnOke = dialogProses.findViewById(R.id.btnOke);
+                    btnOke.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogProses.dismiss();
+                        }
+                    });
+                    dialogProses.show();
+
+                }else if (status.equals("Aktif")) {
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.frameKaryawan, new KaryawanInsertCuti()).addToBackStack(null).commit();
+                }
+
             }
         });
 
@@ -243,4 +276,43 @@ public class KaryawanCutiFragment extends Fragment {
         });
         datePickerDialog.show();
     }
+
+    private void getMyProfile() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        alert.setTitle("Loading").setMessage("Memuat data...").setCancelable(false);
+        AlertDialog pd = alert.create();
+        pd.show();
+
+        karyawanInterface.getMyProfile(userId).enqueue(new Callback<KaryawanModel>() {
+            @Override
+            public void onResponse(Call<KaryawanModel> call, Response<KaryawanModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    pd.dismiss();
+                    status = response.body().getStatus();
+                    fabInsertCuti.setEnabled(true);
+
+
+
+
+                }else {
+                    pd.dismiss();
+                    System.err.println(Toasty.error(getContext(), "Gagal memuat data", Toasty.LENGTH_SHORT));
+                    fabInsertCuti.setEnabled(false);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<KaryawanModel> call, Throwable t) {
+                pd.dismiss();
+                fabInsertCuti.setEnabled(false);
+                System.err.println(Toasty.error(getContext(), "Gagal memuat data total cuti", Toasty.LENGTH_SHORT));
+
+
+            }
+        });
+
+
+    }
+
 }
