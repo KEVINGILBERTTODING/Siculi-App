@@ -90,6 +90,20 @@ public interface KaryawanInterface {
             @Field("user_id") String userId
     );
 
+    @Multipart
+    @POST("karyawan/editMyProfile")
+    Call<ResponseModel> updateMyProfile(
+            @PartMap Map<String, RequestBody> textData
+    );
+
+    @Multipart
+    @POST("karyawan/editPhotoProfile")
+    Call<ResponseModel> editPhotoProfile(
+            @PartMap Map<String, RequestBody> textData,
+            @Part MultipartBody.Part image
+    );
+
+
 
 
 

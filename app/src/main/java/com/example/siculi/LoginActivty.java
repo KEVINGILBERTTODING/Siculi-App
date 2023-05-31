@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.siculi.AtasanFragment.AtasanHomeFragment;
 import com.example.siculi.Model.AuthModel;
 import com.example.siculi.Util.AuthInterface;
 import com.example.siculi.Util.DataApi;
@@ -44,6 +45,9 @@ public class LoginActivty extends AppCompatActivity {
                 finish();
             }else  if (sharedPreferences.getString("role", null).equals("4")) {
                 startActivity(new Intent(LoginActivty.this, AdminMainActivity.class));
+                finish();
+            }else  if (sharedPreferences.getString("role", null).equals("5")) {
+                startActivity(new Intent(LoginActivty.this, AtasanMainActivity.class));
                 finish();
             }
         }
@@ -81,13 +85,21 @@ public class LoginActivty extends AppCompatActivity {
                                     editor.apply();
                                     startActivity(new Intent(LoginActivty.this, KaryawanMainActivity.class));
                                     finish();
-                                } else  if (response.body().getRole().equals("4")) { // admin
+                                } else if (response.body().getRole().equals("4")) { // admin
                                     editor.putBoolean("logged_in", true);
                                     editor.putString("user_id", response.body().getUserId());
                                     editor.putString("role", response.body().getRole());
                                     editor.putString("nama", response.body().getNama());
                                     editor.apply();
                                     startActivity(new Intent(LoginActivty.this, AdminMainActivity.class));
+                                    finish();
+                                }else if (response.body().getRole().equals("5")) { // ATASAN
+                                    editor.putBoolean("logged_in", true);
+                                    editor.putString("user_id", response.body().getUserId());
+                                    editor.putString("role", response.body().getRole());
+                                    editor.putInt("atasan", response.body().getAtasan());
+                                    editor.apply();
+                                    startActivity(new Intent(LoginActivty.this, AtasanMainActivity.class));
                                     finish();
                                 }
 
@@ -103,13 +115,11 @@ public class LoginActivty extends AppCompatActivity {
                         public void onFailure(Call<AuthModel> call, Throwable t) {
                             pd.dismiss();
                             Toasty.error(LoginActivty.this, "Tidak ada koneksi internet", Toasty.LENGTH_SHORT).show();
+                            Log.e("Error ini", "onFailure: ", t );
 
                         }
                     });
                 }
-
-
-
 
 
             }
