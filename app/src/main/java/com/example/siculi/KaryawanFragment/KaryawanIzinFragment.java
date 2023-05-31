@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TimeZone;
 
 import es.dmoral.toasty.Toasty;
 import okhttp3.MediaType;
@@ -286,8 +287,10 @@ public class KaryawanIzinFragment extends Fragment {
         etKeperluan = dialogIzinKeluarKantor.findViewById(R.id.etKeperluan);
         btnBatal = dialogIzinKeluarKantor.findViewById(R.id.btnBatal);
         btnSubmit = dialogIzinKeluarKantor.findViewById(R.id.btnSubmit);
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+        // get time jakarta indonesia
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+        simpleDateFormat.setTimeZone(calendar.getTimeZone());
         String waktuSekarang = simpleDateFormat.format(calendar.getTime());
 
 
@@ -395,6 +398,11 @@ public class KaryawanIzinFragment extends Fragment {
         etKeperluan = dialogIzinKeluarKantor.findViewById(R.id.etKeperluan);
         btnBatal = dialogIzinKeluarKantor.findViewById(R.id.btnBatal);
         btnSubmit = dialogIzinKeluarKantor.findViewById(R.id.btnSubmit);
+        // get time jakarta indonesia
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+        simpleDateFormat.setTimeZone(calendar.getTimeZone());
+        String waktuSekarang = simpleDateFormat.format(calendar.getTime());
 
         dialogIzinKeluarKantor.show();
 
@@ -426,7 +434,13 @@ public class KaryawanIzinFragment extends Fragment {
                     etKeperluan.setError("Keperluan tidak boleh kosong");
                     etKeperluan.requestFocus();
                     return;
-                }else {
+                }// jika waktu pergi lebih kecil dari waktu sekarang
+                else if (tvWaktuPergi.getText().toString().compareTo(waktuSekarang) < 0) {
+                    tvWaktuPergi.setError("Waktu pergi tidak boleh lebih kecil dari waktu sekarang");
+                    Toasty.error(getContext(), "Waktu pergi tidak boleh lebih kecil dari waktu sekarang", Toasty.LENGTH_SHORT).show();
+                    tvWaktuPergi.requestFocus();
+                    return;
+                } else {
                     AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
                     alert.setTitle("Loading").setMessage("Menyimpan data...").setCancelable(false);
                     AlertDialog pd = alert.create();
