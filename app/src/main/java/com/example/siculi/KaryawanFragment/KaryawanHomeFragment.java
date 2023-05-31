@@ -38,7 +38,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class KaryawanHomeFragment extends Fragment {
-    TextView tvName, tvEmail;
+    TextView tvName, tvEmail, tvSisaCuti;
     ImageView ivProfile;
     SharedPreferences sharedPreferences;
     KaryawanInterface karyawanInterface;
@@ -57,6 +57,7 @@ public class KaryawanHomeFragment extends Fragment {
        tvEmail = view.findViewById(R.id.tvEmail);
        ivProfile = view.findViewById(R.id.ivProfile);
        tvName = view.findViewById(R.id.tvName);
+       tvSisaCuti = view.findViewById(R.id.tvSisaCuti);
 
        tvTotalCutiSetuju = view.findViewById(R.id.tvCutiSetuju);
        tvTotalCutiDiTolak = view.findViewById(R.id.tvCutiTolak);
@@ -149,6 +150,8 @@ public class KaryawanHomeFragment extends Fragment {
                             .override(200, 200)
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                             .into(ivProfile);
+
+                    tvSisaCuti.setText(response.body().getSisa_cuti());
 
 
 
