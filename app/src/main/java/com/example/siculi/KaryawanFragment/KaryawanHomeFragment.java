@@ -227,7 +227,7 @@ public class KaryawanHomeFragment extends Fragment {
                         });
                         dialogProses.show();
                     }else {
-                        Toasty.error(getContext(), "Tidak sesuai", Toasty.LENGTH_SHORT).show();
+
                     }
 
 

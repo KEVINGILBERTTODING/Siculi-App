@@ -72,18 +72,7 @@ public class KaryawanCutiFragment extends Fragment {
         getMyProfile();
 
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filter(newText);
-                return false;
-            }
-        });
 
         fabFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,7 +190,25 @@ public class KaryawanCutiFragment extends Fragment {
 
 
 
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return false;
+            }
+        });
     }
 
     private void getDataCutiKaryawan(){
