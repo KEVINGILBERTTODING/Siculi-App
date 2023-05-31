@@ -2,17 +2,20 @@ package com.example.siculi.Util;
 
 import com.example.siculi.Model.CutiModel;
 import com.example.siculi.Model.IzinModel;
+import com.example.siculi.Model.JenisCutiModel;
 import com.example.siculi.Model.KaryawanModel;
 import com.example.siculi.Model.ResponseModel;
 
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 
@@ -60,6 +63,26 @@ public interface KaryawanInterface {
     Call<ResponseModel> insertIzin(
             @PartMap Map<String, RequestBody> textData
             );
+
+    // insert cuti non surat
+    @Multipart
+    @POST("karyawan/insertCutiKaryawan")
+    Call<ResponseModel> insertCutiNonSurat(
+            @PartMap Map<String, RequestBody> textData
+    );
+
+    // insert Cuti surat
+    @Multipart
+    @POST("karyawan/insertCutiKaryawan")
+    Call<ResponseModel> insertCutiSurat(
+            @PartMap Map<String, RequestBody> textData,
+            @Part MultipartBody.Part surat
+            );
+
+    @GET("karyawan/getAllJenisCuti")
+    Call<List<JenisCutiModel>> getAllJenisCuti();
+
+
 
 
 

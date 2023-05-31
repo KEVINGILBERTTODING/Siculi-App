@@ -47,7 +47,7 @@ public class KaryawanCutiFragment extends Fragment {
     KaryawanInterface karyawanInterface;
     LinearLayoutManager linearLayoutManager;
     TextView tvEmpty;
-    com.getbase.floatingactionbutton.FloatingActionButton  fabFilter;
+    com.getbase.floatingactionbutton.FloatingActionButton  fabFilter, fabInsertCuti;
     String userId;
 
 
@@ -64,6 +64,7 @@ public class KaryawanCutiFragment extends Fragment {
         fabFilter = view.findViewById(R.id.btnFilter2);
         sharedPreferences = getContext().getSharedPreferences("data_user", Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("user_id", null);
+        fabInsertCuti = view.findViewById(R.id.fabInsertCuti);
         karyawanInterface = DataApi.getClient().create(KaryawanInterface.class);
         getDataCutiKaryawan();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -155,6 +156,13 @@ public class KaryawanCutiFragment extends Fragment {
                 });
 
                 dialogFilter.show();
+            }
+        });
+        fabInsertCuti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameKaryawan, new KaryawanInsertCuti()).addToBackStack(null).commit();
             }
         });
 
