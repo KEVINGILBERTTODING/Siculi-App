@@ -1,6 +1,11 @@
 package com.example.siculi.KaryawanFragment;
 
+import android.app.DownloadManager;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +17,16 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.siculi.R;
+import com.example.siculi.Util.DataApi;
 
 public class KaryawanDetailCuti extends Fragment {
     CardView cvStatus;
     TextView tvStatus;
     EditText etNip, etNama, etTglMulai, etTglSelesai, etJenisCuti,
     etKeperluan;
-    Button btnKembali;
+    Button btnKembali, btnDownload;
+    String idCuti, userId;
+    SharedPreferences sharedPreferences;
 
 
     @Override
@@ -36,8 +44,12 @@ public class KaryawanDetailCuti extends Fragment {
         etJenisCuti = view.findViewById(R.id.etJenisCuti);
         etKeperluan = view.findViewById(R.id.etKeperluan);
         btnKembali = view.findViewById(R.id.btnKembali);
+        btnDownload = view.findViewById(R.id.btnDownload);
+        sharedPreferences = getContext().getSharedPreferences("data_user", Context.MODE_PRIVATE);
+        userId = sharedPreferences.getString("user_id", null);
 
         etNama.setText(getArguments().getString("nama"));
+        idCuti = getArguments().getString("id");
         etNip.setText(getArguments().getString("nip"));
         etTglMulai.setText(getArguments().getString("tanggal_mulai"));
         etTglSelesai.setText(getArguments().getString("tanggal_masuk"));
@@ -58,6 +70,29 @@ public class KaryawanDetailCuti extends Fragment {
                 cvStatus.setCardBackgroundColor(getContext().getColor(R.color.yellow));
 
         }
+
+
+        btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String url = DataApi.URL_DOWNLOAD_SURAT_CUTI_KARYAWAN + idCuti + "/" + userId;
+                String title = "Surat Cuti";
+                String description = "Downloading PDF file";
+                String fileName = "Surat izin.pdf";
+
+
+                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+                request.setTitle(title);
+                request.setDescription(description);
+                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                request.allowScanningByMediaScanner();
+
+                DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+                downloadManager.enqueue(request);
+            }
+        });
 
         btnKembali.setOnClickListener(new View.OnClickListener() {
             @Override
