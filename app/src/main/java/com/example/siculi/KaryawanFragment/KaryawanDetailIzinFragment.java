@@ -76,7 +76,10 @@ public class KaryawanDetailIzinFragment extends Fragment {
         // sembunyikan button download jika izin masih di proses
         if (getArguments().getString("status").equals("Proses")) {
             btnDownload.setVisibility(View.GONE);
-        }else {
+        }else  if (getArguments().getString("status").equals("Ditolak")) {
+            btnDownload.setVisibility(View.GONE);
+        }
+        else {
             btnDownload.setVisibility(View.VISIBLE);
         }
 
