@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -24,28 +23,21 @@ import com.example.siculi.AtasanAdapter.AtasanIzinAdapter;
 import com.example.siculi.AtasanAdapter.AtasanPengajuanIzinKaryawanAdapter;
 import com.example.siculi.Model.AtasanModel;
 import com.example.siculi.Model.IzinModel;
-import com.example.siculi.Model.ResponseModel;
 import com.example.siculi.R;
 import com.example.siculi.Util.AtasanInterface;
 import com.example.siculi.Util.DataApi;
 import com.example.siculi.Util.KaryawanInterface;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.TimeZone;
 
 import es.dmoral.toasty.Toasty;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AtasanPengajuanIzinFragment extends Fragment {
+public class AtasanPengajuanIzinKaryawanFragment extends Fragment {
 
     RecyclerView rvIzin;
     SearchView searchView;
@@ -66,7 +58,7 @@ public class AtasanPengajuanIzinFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_atasan_pengajuan_izin, container, false);
+        View view = inflater.inflate(R.layout.fragment_atasan_pengajuan_izin_karyawan, container, false);
         sharedPreferences = getContext().getSharedPreferences("data_user", Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("user_id", null);
 
@@ -178,6 +170,9 @@ public class AtasanPengajuanIzinFragment extends Fragment {
         fabRiwayat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameAtasan, new AtasanHistoryPengajuanIzinKaryawanFragment())
+                        .addToBackStack(null).commit();
 
             }
         });

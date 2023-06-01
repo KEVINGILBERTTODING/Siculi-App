@@ -117,12 +117,6 @@ public interface AtasanInterface {
             @Query("user_id") String userId
     );
 
-    // GET PENGAJUAN IZIN yang telah di validasi
-    @GET("atasan/getAllPengajuanIzinKaryawanByatasanId")
-    Call<List<IzinModel>> getAllPengajuanIzinKaryawanByatasanId(
-            @Query("user_id") String userId
-    );
-
     @FormUrlEncoded
     @POST("atasan/validateIzinKaryawan")
     Call<ResponseModel> validateIzinKaryawan(
@@ -134,6 +128,13 @@ public interface AtasanInterface {
             @Query("user_id") String userid,
             @Query("date_start") String dateStart,
             @Query("date_end") String dateEnd
+    );
+
+
+    // GET PENGAJUAN IZIN yang telah di validasi
+    @GET("atasan/getAllPengajuanIzinKaryawanByatasanId")
+    Call<List<IzinModel>> getAllPengajuanIzinKaryawanByatasanId(
+            @Query("user_id") String userId
     );
 
 

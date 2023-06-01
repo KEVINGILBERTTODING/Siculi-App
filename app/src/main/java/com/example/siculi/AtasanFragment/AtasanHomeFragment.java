@@ -21,12 +21,8 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.siculi.AdminFragment.AdminProfileFragment;
-import com.example.siculi.KaryawanFragment.KaryawanCutiFragment;
-import com.example.siculi.KaryawanFragment.KaryawanIzinFragment;
 import com.example.siculi.Model.AtasanModel;
 import com.example.siculi.Model.CutiModel;
-import com.example.siculi.Model.KaryawanModel;
 import com.example.siculi.Model.ResponseModel;
 import com.example.siculi.R;
 import com.example.siculi.Util.AtasanInterface;
@@ -122,7 +118,7 @@ public class AtasanHomeFragment extends Fragment {
         btnIzinKaryawan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replace(new AtasanPengajuanIzinFragment());
+                replace(new AtasanPengajuanIzinKaryawanFragment());
             }
         });
 

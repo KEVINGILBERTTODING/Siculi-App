@@ -17,8 +17,16 @@ public class DataApi {
 
     // URL DOWNLOAD FILE ROLE ATASAN
 
+    // URL DOWNLOAD SURAT IZIN DAN CUTI SAYA
     public static final String URL_DOWNLOAD_SURAT_CUTI_ATASAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratcuti/";
     public static final String URL_DOWNLOAD_SURAT_IZIN_ATASAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratIzin/";
+
+
+    // URLL DOWNLOAD SURAT PENGAJUAN IZIN DAN CUTI KARYAWAN DAN ATASAN
+    public static final String URL_DOWNLOAD_SURAT_IZIN_KARYAWAN_CEPAT = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratIzinKaryawanCepat/";
+    public static final String URL_DOWNLOAD_SURAT_IZIN_KARYAWAN_NORMAL = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratIzinKaryawanNormal/";
+
+
     public static Retrofit retrofit = null;
     public static Retrofit getClient() {
         if (retrofit == null) {
