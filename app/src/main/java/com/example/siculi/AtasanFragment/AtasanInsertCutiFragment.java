@@ -1,4 +1,4 @@
-package com.example.siculi.KaryawanFragment;
+package com.example.siculi.AtasanFragment;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -27,10 +27,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.siculi.Adapter.SpinnerJenisCutiAdapter;
+import com.example.siculi.Model.AtasanModel;
 import com.example.siculi.Model.JenisCutiModel;
 import com.example.siculi.Model.KaryawanModel;
 import com.example.siculi.Model.ResponseModel;
 import com.example.siculi.R;
+import com.example.siculi.Util.AtasanInterface;
 import com.example.siculi.Util.DataApi;
 import com.example.siculi.Util.KaryawanInterface;
 
@@ -53,7 +55,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class KaryawanInsertCuti extends Fragment {
+public class AtasanInsertCutiFragment extends Fragment {
 
     EditText etSisaCuti, etKeterangan, etAlamat, etKeperluan, etFilePath;
     LinearLayout lrPicker;
@@ -64,6 +66,7 @@ public class KaryawanInsertCuti extends Fragment {
     SpinnerJenisCutiAdapter spinnerJenisCutiAdapter;
     List<JenisCutiModel> jenisCutiModelList;
     KaryawanInterface karyawanInterface;
+    AtasanInterface atasanInterface;
     String jenisCuti, userId, atasanId;
     SharedPreferences sharedPreferences;
     Button btnSubmit, btnFilePicker;
@@ -73,12 +76,13 @@ public class KaryawanInsertCuti extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_karyawan_insert_cuti, container, false);
+        View view = inflater.inflate(R.layout.fragment_atasan_insert_cuti, container, false);
 
         etKeperluan = view.findViewById(R.id.etKeperluan);
         btnKembali = view.findViewById(R.id.btnKembali);
         sharedPreferences = getContext().getSharedPreferences("data_user", Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("user_id", null);
+        atasanInterface = DataApi.getClient().create(AtasanInterface.class);
         karyawanInterface = DataApi.getClient().create(KaryawanInterface.class);
         etSisaCuti = view.findViewById(R.id.etSisaCuti);
         etFilePath = view.findViewById(R.id.etFilePath);
@@ -208,9 +212,9 @@ public class KaryawanInsertCuti extends Fragment {
         AlertDialog pd = alert.create();
         pd.show();
 
-        karyawanInterface.getMyProfile(userId).enqueue(new Callback<KaryawanModel>() {
+        atasanInterface.getMyProfile(userId).enqueue(new Callback<AtasanModel>() {
             @Override
-            public void onResponse(Call<KaryawanModel> call, Response<KaryawanModel> response) {
+            public void onResponse(Call<AtasanModel> call, Response<AtasanModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     pd.dismiss();
                     btnSubmit.setEnabled(true);
@@ -227,7 +231,7 @@ public class KaryawanInsertCuti extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<KaryawanModel> call, Throwable t) {
+            public void onFailure(Call<AtasanModel> call, Throwable t) {
                 pd.dismiss();
                 btnSubmit.setEnabled(true);
 
@@ -336,7 +340,7 @@ public class KaryawanInsertCuti extends Fragment {
                     AlertDialog pd = alert.create();
                     pd.show();
 
-                    karyawanInterface.insertCutiSurat(map, surat).enqueue(new Callback<ResponseModel>() {
+                    atasanInterface.insertCutiSurat(map, surat).enqueue(new Callback<ResponseModel>() {
                         @Override
                         public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                             if (response.isSuccessful() && response.body().getStatus() == 200) {
@@ -376,7 +380,7 @@ public class KaryawanInsertCuti extends Fragment {
                 AlertDialog pd = alert.create();
                 pd.show();
 
-                karyawanInterface.insertCutiNonSurat(map).enqueue(new Callback<ResponseModel>() {
+                atasanInterface.insertCutiNonSurat(map).enqueue(new Callback<ResponseModel>() {
                     @Override
                     public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                         if (response.isSuccessful() && response.body().getStatus() == 200) {

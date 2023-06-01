@@ -82,7 +82,7 @@ public class KaryawanDetailCuti extends Fragment {
             public void onClick(View v) {
 
                 String url = DataApi.URL_DOWNLOAD_SURAT_CUTI_KARYAWAN + idCuti + "/" + userId;
-                String title = "Surat Cuti";
+                String title = "Surat Cuti.pdf";
                 String description = "Downloading PDF file";
                 String fileName = "Surat izin.pdf";
 

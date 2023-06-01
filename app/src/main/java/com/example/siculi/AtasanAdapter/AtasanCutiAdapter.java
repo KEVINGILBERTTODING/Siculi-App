@@ -1,4 +1,4 @@
-package com.example.siculi.AtasanFragment;
+package com.example.siculi.AtasanAdapter;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.siculi.KaryawanFragment.KaryawanDetailCuti;
+import com.example.siculi.AtasanFragment.AtasanDetailCuti;
 import com.example.siculi.Model.CutiModel;
 import com.example.siculi.R;
 import com.example.siculi.Util.AdminInterface;

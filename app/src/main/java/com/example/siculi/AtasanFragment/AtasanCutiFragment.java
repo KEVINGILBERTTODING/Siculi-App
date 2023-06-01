@@ -18,11 +18,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.siculi.KaryawanAdapter.KaryawanCutiAdapter;
+import com.example.siculi.AtasanAdapter.AtasanCutiAdapter;
 import com.example.siculi.KaryawanFragment.KaryawanInsertCuti;
 import com.example.siculi.Model.AtasanModel;
 import com.example.siculi.Model.CutiModel;
-import com.example.siculi.Model.KaryawanModel;
 import com.example.siculi.R;
 import com.example.siculi.Util.AtasanInterface;
 import com.example.siculi.Util.DataApi;
@@ -182,7 +181,7 @@ public class AtasanCutiFragment extends Fragment {
 
                 }else if (status.equals("Aktif")) {
                     getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.frameKaryawan, new KaryawanInsertCuti()).addToBackStack(null).commit();
+                            .replace(R.id.frameAtasan, new AtasanInsertCutiFragment()).addToBackStack(null).commit();
                 }
 
             }

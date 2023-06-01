@@ -69,21 +69,18 @@ public interface AtasanInterface {
 
     // insert cuti non surat
     @Multipart
-    @POST("karyawan/insertCutiKaryawan")
+    @POST("atasan/insertCutiAtasan")
     Call<ResponseModel> insertCutiNonSurat(
             @PartMap Map<String, RequestBody> textData
     );
 
     // insert Cuti surat
     @Multipart
-    @POST("karyawan/insertCutiKaryawan")
+    @POST("atasan/insertCutiAtasan")
     Call<ResponseModel> insertCutiSurat(
             @PartMap Map<String, RequestBody> textData,
             @Part MultipartBody.Part surat
             );
-
-    @GET("karyawan/getAllJenisCuti")
-    Call<List<JenisCutiModel>> getAllJenisCuti();
 
     @FormUrlEncoded
     @POST("atasan/confirmCutiSelesai")

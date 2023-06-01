@@ -88,9 +88,9 @@ public class KaryawanDetailIzinFragment extends Fragment {
             public void onClick(View v) {
 
                 String url = DataApi.URL_DOWNLOAD_SURAT_IZIN_KARYAWAN + idIzin + "/" + userId;
-                String title = "Surat Izin";
+                String title = "Surat Izin.pdf";
                 String description = "Downloading PDF file";
-                String fileName = "Surat izin.pdf";
+                String fileName = "Surat izin.pit df";
 
 
                 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));

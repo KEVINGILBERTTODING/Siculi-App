@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:padding="@dimen/_14sdp"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AtasanFragment.AtasanInsertCutiFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/popsem"
+                android:textSize="@dimen/_22ssp"
+                android:textColor="@color/black"
+                android:text="Ajukan\nCuti Baru!" />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/popsem"
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/black"
+                android:text="Formulir Pengajuan Cuti" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/popmed"
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/black"
+                android:text="Jenis Cuti" />
+
+            <Spinner
+                android:id="@+id/spJenisCuti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/container_edittext"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/black2"
+                android:textSize="@dimen/_11sdp"
+                android:fontFamily="@font/popmed"
+                android:layout_marginTop="@dimen/_5sdp"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/popmed"
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/black"
+                android:text="Sisa Cuti Tahun Ini" />
+
+            <EditText
+                android:id="@+id/etSisaCuti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/container_edittext"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/black2"
+                android:textSize="@dimen/_11sdp"
+                android:inputType="number"
+                android:fontFamily="@font/popmed"
+                android:layout_marginTop="@dimen/_5sdp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/popmed"
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/black"
+                android:text="Keterangan Sisa Cuti" />
+
+            <EditText
+                android:id="@+id/etKeterangan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/container_edittext"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/black2"
+                android:textSize="@dimen/_11sdp"
+                android:lines="3"
+                android:gravity="start"
+                android:hint="Keterangan..."
+                android:fontFamily="@font/popmed"
+                android:layout_marginTop="@dimen/_5sdp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/popmed"
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/black"
+                android:text="Tanggal Cuti" />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/etTglCuti"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/black2"
+                    android:textSize="@dimen/_11sdp"
+                    android:hint="Tanggal Cuti"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_5sdp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/popmed"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="S/d" />
+
+                <TextView
+                    android:id="@+id/etTglMasuk"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:hint="Tanggal Masuk"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/black2"
+                    android:textSize="@dimen/_11sdp"
+                    android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_5sdp"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/popmed"
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/black"
+                android:text="Alamat Selama Menjalankan Cuti" />
+
+            <EditText
+                android:id="@+id/etAlamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/container_edittext"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/black2"
+                android:textSize="@dimen/_11sdp"
+                android:lines="3"
+                android:gravity="start"
+                android:hint="Alamat anda..."
+                android:fontFamily="@font/popmed"
+                android:layout_marginTop="@dimen/_5sdp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/popmed"
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/black"
+                android:text="Keperluan" />
+
+            <EditText
+                android:id="@+id/etKeperluan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/container_edittext"
+                android:padding="@dimen/_10sdp"
+                android:lines="4"
+                android:hint="Keperluan..."
+                android:gravity="start"
+                android:textColor="@color/black2"
+                android:textSize="@dimen/_11sdp"
+                android:fontFamily="@font/popmed"
+                android:layout_marginTop="@dimen/_5sdp"/>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/layourPicker"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="Surat Lampiran Cuti" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="horizontal">
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFilePicker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pilih"
+                        app:cornerRadius="@dimen/_6sdp"
+                        app:backgroundTint="@color/green"/>
+
+                    <EditText
+                        android:id="@+id/etFilePath"
+                        android:layout_width="match_parent"
+                        android:enabled="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_gravity="center_vertical"/>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ajukan Cuti"
+                android:fontFamily="@font/popmed"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:backgroundTint="@color/main"/>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnKembali"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kembali"
+                android:fontFamily="@font/popmed"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:backgroundTint="@color/light_gray4"/>
+
+
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>
