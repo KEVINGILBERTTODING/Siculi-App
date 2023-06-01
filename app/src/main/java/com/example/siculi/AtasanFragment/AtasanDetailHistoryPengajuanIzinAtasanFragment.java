@@ -20,7 +20,7 @@ import com.example.siculi.R;
 import com.example.siculi.Util.AtasanInterface;
 import com.example.siculi.Util.DataApi;
 
-public class AtasanDetailHistoryPengajuanIzinKaryawanFragment extends Fragment {
+public class AtasanDetailHistoryPengajuanIzinAtasanFragment extends Fragment {
     CardView cvStatus;
     TextView tvStatus;
     EditText etNip, etNama, etJamMulai, etJamSelesai, etJenisLIzin,
@@ -35,7 +35,7 @@ public class AtasanDetailHistoryPengajuanIzinKaryawanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_atasan_detail_history_pengajuan_izin_karyawan_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_atasan_detail_history_pengajuan_izin_atasan_fragment, container, false);
 
         cvStatus = view.findViewById(R.id.cvStatus);
         tvStatus = view.findViewById(R.id.tvStatus);

@@ -28,6 +28,9 @@ public class DataApi {
 
     // URL DOWNLOAD LAPORAN REKAP IZIN KARYAWAN DAN ATASAN
     public static final String URL_DOWNLOAD_REKAP_LAPORAN_IZIN_KARYAWAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadRekapLaporanIzinKaryawan/";
+    public static final String URL_DOWNLOAD_REKAP_LAPORAN_IZIN_ATASAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadRekapLaporanIzinAtasan/";
+
+
 
 
     public static Retrofit retrofit = null;

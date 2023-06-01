@@ -161,7 +161,7 @@ public class AtasanHistoryPengajuanIzinKaryawanFragment extends Fragment {
                             AlertDialog pd = alert.create();
                             pd.show();
 
-                            atasanInterface.getFilterPengajuanIzinKaryawanProses(
+                            atasanInterface.getFilterPengajuanIzinKaryawan(
                                     userId,
                                     tvTglMulai.getText().toString(),
                                     tvTglSelesai.getText().toString()

@@ -1,11 +1,16 @@
 package com.example.siculi.AtasanFragment;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.DownloadManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,20 +20,20 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.siculi.AtasanAdapter.AtasanIzinAdapter;
-import com.example.siculi.AtasanAdapter.AtasanPengajuanIzinAtasanAdapter;
-import com.example.siculi.AtasanAdapter.AtasanPengajuanIzinKaryawanAdapter;
+import com.example.siculi.AtasanAdapter.AtasanHistoryPengajuanIzinAtasanAdapter;
+import com.example.siculi.AtasanAdapter.AtasanHistoryPengajuanIzinAtasanAdapter;
 import com.example.siculi.Model.AtasanModel;
 import com.example.siculi.Model.IzinModel;
 import com.example.siculi.R;
 import com.example.siculi.Util.AtasanInterface;
 import com.example.siculi.Util.DataApi;
-import com.example.siculi.Util.KaryawanInterface;
-import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,17 +43,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AtasanPengajuanIzinAtasanFragment extends Fragment {
+public class AtasanHistoryPengajuanIzinAtasanFragment extends Fragment {
 
     RecyclerView rvIzin;
     SearchView searchView;
+
     List<IzinModel> izinModelList;
-    KaryawanInterface karyawanInterface;
     LinearLayoutManager linearLayoutManager;
     SharedPreferences sharedPreferences;
     TextView tvEmpty;
-    FloatingActionButton fabFilter, fabRiwayat;
-    AtasanPengajuanIzinAtasanAdapter atasanPengajuanIzinAtasanAdapter;
+    FloatingActionButton fabFilter;
+
+    AtasanHistoryPengajuanIzinAtasanAdapter atasanHistoryPengajuanIzinAtasanAdapter;
     String userId, atasanId;
     AtasanInterface atasanInterface;
 
@@ -58,7 +64,7 @@ public class AtasanPengajuanIzinAtasanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_atasan_pengajuan_izin_atasan, container, false);
+        View view = inflater.inflate(R.layout.fragment_atasan_history_pengajuan_izin_atasan, container, false);
         sharedPreferences = getContext().getSharedPreferences("data_user", Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("user_id", null);
 
@@ -66,11 +72,8 @@ public class AtasanPengajuanIzinAtasanFragment extends Fragment {
         searchView = view.findViewById(R.id.searchBar);
         rvIzin = view.findViewById(R.id.rvIzin);
         fabFilter = view.findViewById(R.id.btnFilter);
-        fabRiwayat = view.findViewById(R.id.btnRiwayat);
-        karyawanInterface = DataApi.getClient().create(KaryawanInterface.class);
-
         atasanInterface = DataApi.getClient().create(AtasanInterface.class);
-        getDataIzinAtasan();
+        getDataIzinKaryawan();
         getMyProfile();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -90,11 +93,12 @@ public class AtasanPengajuanIzinAtasanFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Dialog dialogFilter = new Dialog(getContext());
-                dialogFilter.setContentView(R.layout.layout_filter);
+                dialogFilter.setContentView(R.layout.layout_filter_download);
                 dialogFilter.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 TextView tvTglMulai, tvTglSelesai;
                 tvTglMulai = dialogFilter.findViewById(R.id.tvDateStart);
                 tvTglSelesai = dialogFilter.findViewById(R.id.tvDateEnd);
+                Button btnDownload = dialogFilter.findViewById(R.id.btnDownload);
 
                 tvTglSelesai.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -110,6 +114,49 @@ public class AtasanPengajuanIzinAtasanFragment extends Fragment {
                     }
                 });
                 Button btnFilter = dialogFilter.findViewById(R.id.btnFilter);
+
+                // download rekap laporan
+                // download data
+                btnDownload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // cek izin mengakses file external
+                        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
+                        } else if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 200);
+                        }
+
+
+                        if (tvTglMulai.getText().toString().isEmpty()) {
+                            tvTglMulai.setError("Tanggal mulai tidak boleh kosong");
+                            tvTglMulai.requestFocus();
+                        }else if (tvTglSelesai.getText().toString().isEmpty()) {
+                            tvTglSelesai.setError("Tanggal selesai tidak boleh kosong");
+                            tvTglSelesai.requestFocus();
+                        }else {
+                            String url = DataApi.URL_DOWNLOAD_REKAP_LAPORAN_IZIN_ATASAN  + userId + "/" + tvTglMulai.getText().toString() + "/" + tvTglSelesai.getText().toString();
+                            String title = "Rekap Pengajuan Izin Atasan " + tvTglMulai.getText().toString() + "-" + tvTglSelesai.getText().toString() + ".pdf";
+                            String description = "Downloading PDF file";
+                            String fileName = "Rekap Pengajuan Izin Atasan.pdf";
+
+
+                            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+                            request.setTitle(title);
+                            request.setDescription(description);
+                            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+                            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                            request.allowScanningByMediaScanner();
+
+                            DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+                            downloadManager.enqueue(request);
+                        }
+
+                    }
+                });
+
+
+                // filter data
                 btnFilter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -126,7 +173,7 @@ public class AtasanPengajuanIzinAtasanFragment extends Fragment {
                             AlertDialog pd = alert.create();
                             pd.show();
 
-                            atasanInterface.filterPengajuanIzinAtasan(
+                            atasanInterface.filterHistoryPengajuanIzinAtasan(
                                     userId,
                                     tvTglMulai.getText().toString(),
                                     tvTglSelesai.getText().toString()
@@ -135,10 +182,10 @@ public class AtasanPengajuanIzinAtasanFragment extends Fragment {
                                 public void onResponse(Call<List<IzinModel>> call, Response<List<IzinModel>> response) {
                                     if (response.isSuccessful() && response.body().size() > 0) {
                                         izinModelList = response.body();
-                                        atasanPengajuanIzinAtasanAdapter = new AtasanPengajuanIzinAtasanAdapter(getContext(), izinModelList);
+                                        atasanHistoryPengajuanIzinAtasanAdapter = new AtasanHistoryPengajuanIzinAtasanAdapter(getContext(), izinModelList);
                                         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                                         rvIzin.setLayoutManager(linearLayoutManager);
-                                        rvIzin.setAdapter(atasanPengajuanIzinAtasanAdapter);
+                                        rvIzin.setAdapter(atasanHistoryPengajuanIzinAtasanAdapter);
                                         dialogFilter.dismiss();
                                         rvIzin.setHasFixedSize(true);
                                         tvEmpty.setVisibility(View.GONE);
@@ -167,36 +214,28 @@ public class AtasanPengajuanIzinAtasanFragment extends Fragment {
             }
         });
 
-        fabRiwayat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frameAtasan, new AtasanHistoryPengajuanIzinAtasanFragment())
-                        .addToBackStack(null).commit();
 
-            }
-        });
 
 
 
         return view;
     }
 
-    private void getDataIzinAtasan(){
+    private void getDataIzinKaryawan(){
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
         alert.setTitle("Loading").setMessage("Memuat data...").setCancelable(false);
         AlertDialog pd = alert.create();
         pd.show();
 
-        atasanInterface.getAllPengajuanIzinAtasanProses(userId).enqueue(new Callback<List<IzinModel>>() {
+        atasanInterface.getAllPengajuanIzinAtasanByatasanId(userId).enqueue(new Callback<List<IzinModel>>() {
             @Override
             public void onResponse(Call<List<IzinModel>> call, Response<List<IzinModel>> response) {
                 if (response.isSuccessful() && response.body().size() > 0) {
                     izinModelList = response.body();
-                    atasanPengajuanIzinAtasanAdapter = new AtasanPengajuanIzinAtasanAdapter(getContext(), izinModelList);
+                    atasanHistoryPengajuanIzinAtasanAdapter = new AtasanHistoryPengajuanIzinAtasanAdapter(getContext(), izinModelList);
                     linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
                     rvIzin.setLayoutManager(linearLayoutManager);
-                    rvIzin.setAdapter(atasanPengajuanIzinAtasanAdapter);
+                    rvIzin.setAdapter(atasanHistoryPengajuanIzinAtasanAdapter );
                     rvIzin.setHasFixedSize(true);
                     tvEmpty.setVisibility(View.GONE);
                     pd.dismiss();
@@ -224,10 +263,10 @@ public class AtasanPengajuanIzinAtasanFragment extends Fragment {
             }
         }
 
-        atasanPengajuanIzinAtasanAdapter.filter(filteredList);
+        atasanHistoryPengajuanIzinAtasanAdapter.filter(filteredList);
         if (filteredList.isEmpty()) {
         }else {
-            atasanPengajuanIzinAtasanAdapter.filter(filteredList);
+            atasanHistoryPengajuanIzinAtasanAdapter.filter(filteredList);
         }
     }
 

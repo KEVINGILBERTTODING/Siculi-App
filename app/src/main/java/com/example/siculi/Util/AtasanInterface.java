@@ -123,12 +123,24 @@ public interface AtasanInterface {
             @Field("izin_id") String izinId,
             @Field("status") String status
     );
+
+    // filter pengajuan izin karyawan
     @GET("atasan/getFilterPengajuanIzinKaryawanProses")
     Call<List<IzinModel>> getFilterPengajuanIzinKaryawanProses(
             @Query("user_id") String userid,
             @Query("date_start") String dateStart,
             @Query("date_end") String dateEnd
     );
+
+
+    // filter history pengajuan izin karyawan
+    @GET("atasan/getFilterPengajuanIzinKaryawan")
+    Call<List<IzinModel>> getFilterPengajuanIzinKaryawan(
+            @Query("user_id") String userid,
+            @Query("date_start") String dateStart,
+            @Query("date_end") String dateEnd
+    );
+
 
 
     // GET PENGAJUAN IZIN KARYAWAN yang telah di validasi
@@ -142,6 +154,31 @@ public interface AtasanInterface {
     Call<List<IzinModel>> getAllPengajuanIzinAtasanProses(
             @Query("user_id") String userId
     );
+
+    // GET PENGAJUAN IZIN  ATASAN yang telah di validasi
+    @GET("atasan/getAllPengajuanIzinAtasanByatasanId")
+    Call<List<IzinModel>> getAllPengajuanIzinAtasanByatasanId(
+            @Query("user_id") String userId
+    );
+
+
+
+    // filter pengajuan izin atasan
+    @GET("atasan/filterPengajuanIzinAtasan")
+    Call<List<IzinModel>> filterPengajuanIzinAtasan(
+            @Query("user_id") String userid,
+            @Query("date_start") String dateStart,
+            @Query("date_end") String dateEnd
+    );
+
+    // filter history pengajuan izin atasan
+    @GET("atasan/filterHistoryPengajuanIzinAtasan")
+    Call<List<IzinModel>> filterHistoryPengajuanIzinAtasan(
+            @Query("user_id") String userid,
+            @Query("date_start") String dateStart,
+            @Query("date_end") String dateEnd
+    );
+
 
 
 

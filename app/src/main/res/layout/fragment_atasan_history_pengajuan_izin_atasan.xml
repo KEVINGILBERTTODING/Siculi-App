@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="@dimen/_14sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AtasanFragment.AtasanHistoryPengajuanIzinAtasanFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/popsem"
+            android:textSize="@dimen/_22ssp"
+            android:textColor="@color/black"
+            android:text="Riwayat Pengajuan \nIzin Atasan" />
+
+
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:iconifiedByDefault="false"
+            android:id="@+id/searchBar"
+            app:queryHint="Cari nama karyawan..."
+            style="@style/AppSearchView"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@color/white"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/popmed"
+            android:textSize="@dimen/_13ssp"
+            android:textColor="@color/black"
+            android:text="Daftar Riwayat" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvIzin"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/popmed"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/_11ssp"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:text="Tidak ada data."/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/main"
+        android:id="@+id/btnFilter"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/baseline_filter_alt_24"
+        app:tint="@color/white"/>
+
+
+
+
+</RelativeLayout>
