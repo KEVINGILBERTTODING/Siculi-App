@@ -106,6 +106,33 @@ public interface AtasanInterface {
             @Query("user_id") String userId
     );
 
+    @GET("atasan/getAllKaryawanByAtasanId")
+    Call<List<KaryawanModel>> getAllKaryawan(
+            @Query("user_id") String userId
+    );
+
+    // GET PENGAJUAN IZIN yang belum di validasi
+    @GET("atasan/getAllPengajuanIzinKaryawanProses")
+    Call<List<IzinModel>> getAllPengajuanIzinKaryawanProses(
+            @Query("user_id") String userId
+    );
+
+    // GET PENGAJUAN IZIN yang telah di validasi
+    @GET("atasan/getAllPengajuanIzinKaryawanByatasanId")
+    Call<List<IzinModel>> getAllPengajuanIzinKaryawanByatasanId(
+            @Query("user_id") String userId
+    );
+
+    @FormUrlEncoded
+    @POST("atasan/validateIzinKaryawan")
+    Call<ResponseModel> validateIzinKaryawan(
+            @Field("izin_id") String izinId,
+            @Field("status") String status
+    );
+
+
+
+
 
 
 
