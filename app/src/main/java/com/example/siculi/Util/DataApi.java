@@ -18,6 +18,7 @@ public class DataApi {
     // URL DOWNLOAD FILE ROLE ATASAN
 
     public static final String URL_DOWNLOAD_SURAT_CUTI_ATASAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratcuti/";
+    public static final String URL_DOWNLOAD_SURAT_IZIN_ATASAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratIzin/";
     public static Retrofit retrofit = null;
     public static Retrofit getClient() {
         if (retrofit == null) {
