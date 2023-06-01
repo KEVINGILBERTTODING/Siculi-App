@@ -129,6 +129,14 @@ public interface AtasanInterface {
             @Field("izin_id") String izinId,
             @Field("status") String status
     );
+    @GET("atasan/getFilterPengajuanIzinKaryawanProses")
+    Call<List<IzinModel>> getFilterPengajuanIzinKaryawanProses(
+            @Query("user_id") String userid,
+            @Query("date_start") String dateStart,
+            @Query("date_end") String dateEnd
+    );
+
+
 
 
 

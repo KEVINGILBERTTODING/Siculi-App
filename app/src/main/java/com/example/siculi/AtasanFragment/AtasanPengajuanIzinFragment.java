@@ -134,7 +134,7 @@ public class AtasanPengajuanIzinFragment extends Fragment {
                             AlertDialog pd = alert.create();
                             pd.show();
 
-                            atasanInterface.filterMyIzin(
+                            atasanInterface.getFilterPengajuanIzinKaryawanProses(
                                     userId,
                                     tvTglMulai.getText().toString(),
                                     tvTglSelesai.getText().toString()
@@ -143,10 +143,10 @@ public class AtasanPengajuanIzinFragment extends Fragment {
                                 public void onResponse(Call<List<IzinModel>> call, Response<List<IzinModel>> response) {
                                     if (response.isSuccessful() && response.body().size() > 0) {
                                         izinModelList = response.body();
-                                        atasanIzinAdapter = new AtasanIzinAdapter(getContext(), izinModelList);
+                                        atasanPengajuanIzinKaryawanAdapter = new AtasanPengajuanIzinKaryawanAdapter(getContext(), izinModelList);
                                         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                                         rvIzin.setLayoutManager(linearLayoutManager);
-                                        rvIzin.setAdapter(atasanIzinAdapter);
+                                        rvIzin.setAdapter(atasanPengajuanIzinKaryawanAdapter);
                                         dialogFilter.dismiss();
                                         rvIzin.setHasFixedSize(true);
                                         tvEmpty.setVisibility(View.GONE);
