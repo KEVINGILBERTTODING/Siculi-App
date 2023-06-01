@@ -24,10 +24,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.siculi.AdminFragment.AdminProfileFragment;
 import com.example.siculi.KaryawanFragment.KaryawanCutiFragment;
 import com.example.siculi.KaryawanFragment.KaryawanIzinFragment;
+import com.example.siculi.Model.AtasanModel;
 import com.example.siculi.Model.CutiModel;
 import com.example.siculi.Model.KaryawanModel;
 import com.example.siculi.Model.ResponseModel;
 import com.example.siculi.R;
+import com.example.siculi.Util.AtasanInterface;
 import com.example.siculi.Util.DataApi;
 import com.example.siculi.Util.KaryawanInterface;
 
@@ -46,7 +48,8 @@ public class AtasanHomeFragment extends Fragment {
     ImageView ivProfile;
     SharedPreferences sharedPreferences;
     KaryawanInterface karyawanInterface;
-    ImageButton btnCutiKaryawan, btnIzinKaryawan;
+    AtasanInterface atasanInterface;
+    ImageButton btnMyCuti, btnIzinKaryawan;
     String userId, status, tanggalMasukCuti;
     TextView tvTotalCutiSetuju, tvTotalCutiDiTolak, tvTotalCutiTangguhkan;
 
@@ -67,10 +70,11 @@ public class AtasanHomeFragment extends Fragment {
        tvTotalCutiSetuju = view.findViewById(R.id.tvCutiSetuju);
        tvTotalCutiDiTolak = view.findViewById(R.id.tvCutiTolak);
        btnIzinKaryawan = view.findViewById(R.id.btnIzinKaryawan);
-       btnCutiKaryawan = view.findViewById(R.id.btnCutiKaryawan);
+       btnMyCuti = view.findViewById(R.id.btnMyCuti);
        tvTotalCutiTangguhkan = view.findViewById(R.id.tvDitangguhkan);
        userId = sharedPreferences.getString("user_id", null);
        karyawanInterface = DataApi.getClient().create(KaryawanInterface.class);
+       atasanInterface = DataApi.getClient().create(AtasanInterface.class);
 
         getTotalAlCuti("Disetujui", tvTotalCutiSetuju);
         getTotalAlCuti("Ditangguhkan", tvTotalCutiTangguhkan);
@@ -86,11 +90,6 @@ public class AtasanHomeFragment extends Fragment {
 
 
 
-
-
-
-
-
         btnIzinKaryawan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,10 +97,10 @@ public class AtasanHomeFragment extends Fragment {
             }
         });
 
-        btnCutiKaryawan.setOnClickListener(new View.OnClickListener() {
+        btnMyCuti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replace(new KaryawanCutiFragment());
+                replace(new AtasanCutiFragment());
             }
         });
 
@@ -151,9 +150,9 @@ public class AtasanHomeFragment extends Fragment {
         AlertDialog pd = alert.create();
         pd.show();
 
-        karyawanInterface.getMyProfile(userId).enqueue(new Callback<KaryawanModel>() {
+        atasanInterface.getMyProfile(userId).enqueue(new Callback<AtasanModel>() {
             @Override
-            public void onResponse(Call<KaryawanModel> call, Response<KaryawanModel> response) {
+            public void onResponse(Call<AtasanModel> call, Response<AtasanModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     pd.dismiss();
                     tvEmail.setText(response.body().getEmail());
@@ -195,7 +194,7 @@ public class AtasanHomeFragment extends Fragment {
                                 AlertDialog pd = alert.create();
                                 pd.show();
 
-                                karyawanInterface.confirmCutiSelesai(userId).enqueue(new Callback<ResponseModel>() {
+                                atasanInterface.confirmCutiSelesai(userId).enqueue(new Callback<ResponseModel>() {
                                     @Override
                                     public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                                         if (response.isSuccessful() && response.body().getStatus() == 200) {
@@ -233,7 +232,7 @@ public class AtasanHomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<KaryawanModel> call, Throwable t) {
+            public void onFailure(Call<AtasanModel> call, Throwable t) {
                 pd.dismiss();
                 System.err.println(Toasty.error(getContext(), "Gagal memuat data total cuti", Toasty.LENGTH_SHORT));
 
@@ -245,7 +244,7 @@ public class AtasanHomeFragment extends Fragment {
     }
 
     private void replace(Fragment fragment) {
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameKaryawan, fragment)
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameAtasan, fragment)
                 .addToBackStack(null).commit();
     }
 }
