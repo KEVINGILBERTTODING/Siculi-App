@@ -21,25 +21,25 @@ import com.example.siculi.Util.DataApi;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AtasanPengajuanIzinKaryawanAdapter extends RecyclerView.Adapter<AtasanPengajuanIzinKaryawanAdapter.ViewHolder> {
+public class AtasanPengajuanIzinAtasanAdapter extends RecyclerView.Adapter<AtasanPengajuanIzinAtasanAdapter.ViewHolder> {
     Context context;
     List<IzinModel> izinModelList;
     AdminInterface adminInterface;
 
-    public AtasanPengajuanIzinKaryawanAdapter(Context context, List<IzinModel> izinModelList) {
+    public AtasanPengajuanIzinAtasanAdapter(Context context, List<IzinModel> izinModelList) {
         this.context = context;
         this.izinModelList = izinModelList;
     }
 
     @NonNull
     @Override
-    public AtasanPengajuanIzinKaryawanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AtasanPengajuanIzinAtasanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.list_pengajuan_izin, parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AtasanPengajuanIzinKaryawanAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AtasanPengajuanIzinAtasanAdapter.ViewHolder holder, int position) {
         holder.tvTanggalIzin.setText(izinModelList.get(holder.getAdapterPosition()).getTanggalIzin());
         holder.tvWaktuPulang.setText(izinModelList.get(holder.getAdapterPosition()).getWaktuPulang());
         holder.tvWaktuPergi.setText(izinModelList.get(holder.getAdapterPosition()).getWaktuPergi());

@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.siculi.AtasanFragment.AtasanDetailHistoryPengajuanIzinKaryawanFragment;
-import com.example.siculi.AtasanFragment.AtasanDetailPengajuanIzinKaryawanFragment;
 import com.example.siculi.Model.IzinModel;
 import com.example.siculi.R;
 import com.example.siculi.Util.AdminInterface;

@@ -1,12 +1,9 @@
 package com.example.siculi.AtasanFragment;
 
 import android.app.AlertDialog;
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AtasanDetailPengajuanIzinKaryawanFragment extends Fragment {
+public class AtasanDetailPengajuanIzinFragment extends Fragment {
     CardView cvStatus;
     TextView tvStatus;
     EditText etNip, etNama, etJamMulai, etJamSelesai, etJenisLIzin,

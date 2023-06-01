@@ -111,7 +111,7 @@ public interface AtasanInterface {
             @Query("user_id") String userId
     );
 
-    // GET PENGAJUAN IZIN yang belum di validasi
+    // GET PENGAJUAN IZIN  KARYAAWAN yang belum di validasi
     @GET("atasan/getAllPengajuanIzinKaryawanProses")
     Call<List<IzinModel>> getAllPengajuanIzinKaryawanProses(
             @Query("user_id") String userId
@@ -131,11 +131,18 @@ public interface AtasanInterface {
     );
 
 
-    // GET PENGAJUAN IZIN yang telah di validasi
+    // GET PENGAJUAN IZIN KARYAWAN yang telah di validasi
     @GET("atasan/getAllPengajuanIzinKaryawanByatasanId")
     Call<List<IzinModel>> getAllPengajuanIzinKaryawanByatasanId(
             @Query("user_id") String userId
     );
+
+    // GET PENGAJUAN IZIN  ATASAN yang belum di validasi
+    @GET("atasan/getAllPengajuanIzinAtasanProses")
+    Call<List<IzinModel>> getAllPengajuanIzinAtasanProses(
+            @Query("user_id") String userId
+    );
+
 
 
 
