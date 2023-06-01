@@ -2,10 +2,13 @@ package com.example.siculi.AtasanFragment;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.DownloadManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,11 +88,12 @@ public class AtasanHistoryPengajuanIzinKaryawanFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Dialog dialogFilter = new Dialog(getContext());
-                dialogFilter.setContentView(R.layout.layout_filter);
+                dialogFilter.setContentView(R.layout.layout_filter_download);
                 dialogFilter.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 TextView tvTglMulai, tvTglSelesai;
                 tvTglMulai = dialogFilter.findViewById(R.id.tvDateStart);
                 tvTglSelesai = dialogFilter.findViewById(R.id.tvDateEnd);
+                Button btnDownload = dialogFilter.findViewById(R.id.btnDownload);
 
                 tvTglSelesai.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -105,6 +109,42 @@ public class AtasanHistoryPengajuanIzinKaryawanFragment extends Fragment {
                     }
                 });
                 Button btnFilter = dialogFilter.findViewById(R.id.btnFilter);
+
+                // download rekap laporan
+                // download data
+                btnDownload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if (tvTglMulai.getText().toString().isEmpty()) {
+                            tvTglMulai.setError("Tanggal mulai tidak boleh kosong");
+                            tvTglMulai.requestFocus();
+                        }else if (tvTglSelesai.getText().toString().isEmpty()) {
+                            tvTglSelesai.setError("Tanggal selesai tidak boleh kosong");
+                            tvTglSelesai.requestFocus();
+                        }else {
+                            String url = DataApi.URL_DOWNLOAD_REKAP_LAPORAN_IZIN_KARYAWAN  + userId + "/" + tvTglMulai.getText().toString() + "/" + tvTglSelesai.getText().toString();
+                            String title = "Rekap Pengajuan Izin Karyawan " + tvTglMulai.getText().toString() + "-" + tvTglSelesai.getText().toString() + ".pdf";
+                            String description = "Downloading PDF file";
+                            String fileName = "Rekap Pengajuan Izin Karyawan.pdf";
+
+
+                            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+                            request.setTitle(title);
+                            request.setDescription(description);
+                            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+                            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                            request.allowScanningByMediaScanner();
+
+                            DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+                            downloadManager.enqueue(request);
+                        }
+
+                    }
+                });
+
+
+                // filter data
                 btnFilter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

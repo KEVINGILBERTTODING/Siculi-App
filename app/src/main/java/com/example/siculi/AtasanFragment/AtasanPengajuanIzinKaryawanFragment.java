@@ -110,6 +110,10 @@ public class AtasanPengajuanIzinKaryawanFragment extends Fragment {
                     }
                 });
                 Button btnFilter = dialogFilter.findViewById(R.id.btnFilter);
+
+
+
+                // filter data
                 btnFilter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
