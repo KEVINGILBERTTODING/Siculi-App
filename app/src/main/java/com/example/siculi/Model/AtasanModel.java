@@ -53,14 +53,17 @@ public class AtasanModel implements Serializable {
 
     @SerializedName("tgl_masuk")
     String tgl_masuk;
+    @SerializedName("nama_atasan")
+    String namaAtasan;
 
-    public AtasanModel(String kd_atasan, String nama, String nik, String masuk_kerja, String jabatan, String golongan, String atasan, String email, String password, String telp, String id_role, String jeniskel, String status, String foto, String sisa_cuti, String tgl_masuk) {
+    public AtasanModel(String kd_atasan, String namaAtasan, String nama, String nik, String masuk_kerja, String jabatan, String golongan, String atasan, String email, String password, String telp, String id_role, String jeniskel, String status, String foto, String sisa_cuti, String tgl_masuk) {
         this.kd_atasan = kd_atasan;
         this.nama = nama;
         this.nik = nik;
         this.masuk_kerja = masuk_kerja;
         this.jabatan = jabatan;
         this.golongan = golongan;
+        this.namaAtasan = namaAtasan;
         this.atasan = atasan;
         this.email = email;
         this.password = password;
@@ -199,5 +202,13 @@ public class AtasanModel implements Serializable {
 
     public void setTgl_masuk(String tgl_masuk) {
         this.tgl_masuk = tgl_masuk;
+    }
+
+    public String getNamaAtasan() {
+        return namaAtasan;
+    }
+
+    public void setNamaAtasan(String namaAtasan) {
+        this.namaAtasan = namaAtasan;
     }
 }

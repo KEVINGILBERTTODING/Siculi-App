@@ -101,6 +101,12 @@ public interface AtasanInterface {
             @Part MultipartBody.Part image
     );
 
+    @GET("atasan/getAllAtasanByAtasanId")
+    Call<List<AtasanModel>> getAllAtasanKaryawan(
+            @Query("user_id") String userId
+    );
+
+
 
 
 
