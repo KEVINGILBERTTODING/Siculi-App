@@ -408,7 +408,7 @@
                             android:layout_marginLeft="@dimen/_20sdp"
                             android:orientation="vertical">
                             <ImageButton
-                                android:id="@+id/btnIzinKaryawan"
+                                android:id="@+id/btnMyIzin"
                                 android:layout_width="@dimen/_40sdp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_height="@dimen/_40sdp"

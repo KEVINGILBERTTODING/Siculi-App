@@ -47,13 +47,13 @@ public interface AtasanInterface {
             @Query("date_end") String dateEn
     );
 
-    @GET("karyawan/getAllIzin")
+    @GET("atasan/getAllIzin")
     Call<List<IzinModel>> getAllIzin(
             @Query("user_id") String userId
     );
 
 
-    @GET("karyawan/filterMyIzin")
+    @GET("atasan/filterMyIzin")
     Call<List<IzinModel>> filterMyIzin(
             @Query("user_id") String userId,
             @Query("date_start") String dateStart,
