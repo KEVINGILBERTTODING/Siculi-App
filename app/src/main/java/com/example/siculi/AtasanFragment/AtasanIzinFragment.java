@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.siculi.AtasanAdapter.AtasanIzinAdapter;
 import com.example.siculi.KaryawanAdapter.KaryawanIzinAdapter;
+import com.example.siculi.Model.AtasanModel;
 import com.example.siculi.Model.IzinModel;
 import com.example.siculi.Model.KaryawanModel;
 import com.example.siculi.Model.ResponseModel;
@@ -367,7 +368,7 @@ public class AtasanIzinFragment extends Fragment {
                     map.put("atasan_id", RequestBody.create(MediaType.parse("text/plain"), atasanId));
                     map.put("keperluan", RequestBody.create(MediaType.parse("text/plain"), etKeperluan.getText().toString()));
 
-                    karyawanInterface.insertIzin(map).enqueue(new Callback<ResponseModel>() {
+                    atasanInterface.insertIzin(map).enqueue(new Callback<ResponseModel>() {
                         @Override
                         public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                             if (response.isSuccessful() && response.body().getStatus() == 200) {
@@ -458,7 +459,7 @@ public class AtasanIzinFragment extends Fragment {
                     map.put("atasan_id", RequestBody.create(MediaType.parse("text/plain"), atasanId));
                     map.put("keperluan", RequestBody.create(MediaType.parse("text/plain"), etKeperluan.getText().toString()));
 
-                    karyawanInterface.insertIzin(map).enqueue(new Callback<ResponseModel>() {
+                    atasanInterface.insertIzin(map).enqueue(new Callback<ResponseModel>() {
                         @Override
                         public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                             if (response.isSuccessful() && response.body().getStatus() == 200) {
@@ -511,9 +512,9 @@ public class AtasanIzinFragment extends Fragment {
         AlertDialog pd = alert.create();
         pd.show();
 
-        karyawanInterface.getMyProfile(userId).enqueue(new Callback<KaryawanModel>() {
+        atasanInterface.getMyProfile(userId).enqueue(new Callback<AtasanModel>() {
             @Override
-            public void onResponse(Call<KaryawanModel> call, Response<KaryawanModel> response) {
+            public void onResponse(Call<AtasanModel> call, Response<AtasanModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     pd.dismiss();
                    atasanId = response.body().getAtasan();
@@ -527,7 +528,7 @@ public class AtasanIzinFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<KaryawanModel> call, Throwable t) {
+            public void onFailure(Call<AtasanModel> call, Throwable t) {
                 pd.dismiss();
                 System.err.println(Toasty.error(getContext(), "Gagal memuat data total cuti", Toasty.LENGTH_SHORT));
 

@@ -62,7 +62,7 @@ public interface AtasanInterface {
 
 
     @Multipart
-    @POST("karyawan/insertIzin")
+    @POST("atasan/insertIzin")
     Call<ResponseModel> insertIzin(
             @PartMap Map<String, RequestBody> textData
             );
