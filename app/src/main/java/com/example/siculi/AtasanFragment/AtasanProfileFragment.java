@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -224,7 +225,7 @@ public class AtasanProfileFragment extends Fragment {
             map.put("email", RequestBody.create(MediaType.parse("text/plain"), etEmail.getText().toString()));
             map.put("password", RequestBody.create(MediaType.parse("text/plain"), etPassword.getText().toString()));
 
-            karyawanInterface.updateMyProfile(map).enqueue(new Callback<ResponseModel>() {
+            atasanInterface.updateMyProfile(map).enqueue(new Callback<ResponseModel>() {
                 @Override
                 public void onResponse(Call <ResponseModel>call, Response<ResponseModel> response) {
                     if (response.isSuccessful() && response.body().getStatus() == 200) {
@@ -245,6 +246,7 @@ public class AtasanProfileFragment extends Fragment {
                 @Override
                 public void onFailure(Call<ResponseModel> call, Throwable t) {
                     Toasty.error(getContext(), "Tidak ada koneksi internet", Toasty.LENGTH_SHORT).show();
+                    Log.e("DISINI ERROR", "onFailure: ",  t);
                     pd.dismiss();
 
                 }
@@ -264,7 +266,7 @@ public class AtasanProfileFragment extends Fragment {
             RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
             MultipartBody.Part image = MultipartBody.Part.createFormData("foto", file.getName(), requestBody);
 
-            karyawanInterface.editPhotoProfile(map, image).enqueue(new Callback<ResponseModel>() {
+            atasanInterface.editPhotoProfile(map, image).enqueue(new Callback<ResponseModel>() {
                 @Override
                 public void onResponse(Call <ResponseModel>call, Response<ResponseModel> response) {
                     if (response.isSuccessful() && response.body().getStatus() == 200) {

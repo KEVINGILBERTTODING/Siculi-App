@@ -89,13 +89,13 @@ public interface AtasanInterface {
     );
 
     @Multipart
-    @POST("karyawan/editMyProfile")
+    @POST("atasan/editMyProfile")
     Call<ResponseModel> updateMyProfile(
             @PartMap Map<String, RequestBody> textData
     );
 
     @Multipart
-    @POST("karyawan/editPhotoProfile")
+    @POST("atasan/editPhotoProfile")
     Call<ResponseModel> editPhotoProfile(
             @PartMap Map<String, RequestBody> textData,
             @Part MultipartBody.Part image
