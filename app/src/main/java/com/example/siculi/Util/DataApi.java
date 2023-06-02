@@ -42,6 +42,10 @@ public class DataApi {
     public static final String URL_DOWNLOAD_REKAP_LAPORAN_CUTI_ATASAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadRekapLaporanCutiAtasan/";
 
 
+    // URL DOWNLOAD SURAT CUTI KARYAWAN DAN ATASAN
+    public static final String URL_DOWNLOAD_HISTORY_SURAT_CUTI_ATASAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratCutiAtasan/";
+
+
 
 
 
