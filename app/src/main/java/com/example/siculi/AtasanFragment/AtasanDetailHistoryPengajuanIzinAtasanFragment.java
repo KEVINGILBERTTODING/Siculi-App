@@ -2,6 +2,7 @@ package com.example.siculi.AtasanFragment;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -100,10 +101,16 @@ public class AtasanDetailHistoryPengajuanIzinAtasanFragment extends Fragment {
 
 
     private void downloadSuratIzinCepat() {
-        String url = DataApi.URL_DOWNLOAD_SURAT_IZIN_KARYAWAN_CEPAT+ userId + "/" + idIzin;
+
+        String url = DataApi.URL_DOWNLOAD_SURAT_IZIN_ATASAN_CEPAT+ userId + "/" + idIzin;
         String title = "Surat Izin_" +getArguments().getString("nama") + ".pdf";
         String description = "Downloading PDF file";
         String fileName = "Surat izin.pdf";
+
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        intent.setData(Uri.parse(url));
+//
+//        startActivity(intent);
 
 
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
@@ -117,10 +124,15 @@ public class AtasanDetailHistoryPengajuanIzinAtasanFragment extends Fragment {
         downloadManager.enqueue(request);
     }
     private void downloadSuratIzinNormal() {
-        String url = DataApi.URL_DOWNLOAD_SURAT_IZIN_KARYAWAN_NORMAL+ userId + "/" + idIzin;
+        String url = DataApi.URL_DOWNLOAD_SURAT_IZIN_ATASAN_NORMAL+ userId + "/" + idIzin;
         String title = "Surat Izin_" +getArguments().getString("nama") + ".pdf";
         String description = "Downloading PDF file";
         String fileName = "Surat izin.pdf";
+
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        intent.setData(Uri.parse(url));
+//
+//        startActivity(intent);
 
 
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));

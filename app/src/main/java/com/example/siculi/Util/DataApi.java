@@ -25,6 +25,8 @@ public class DataApi {
     // URLL DOWNLOAD SURAT PENGAJUAN IZIN DAN CUTI KARYAWAN DAN ATASAN
     public static final String URL_DOWNLOAD_SURAT_IZIN_KARYAWAN_CEPAT = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratIzinKaryawanCepat/";
     public static final String URL_DOWNLOAD_SURAT_IZIN_KARYAWAN_NORMAL = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratIzinKaryawanNormal/";
+    public static final String URL_DOWNLOAD_SURAT_IZIN_ATASAN_NORMAL = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratIzinNormalAtasan/";
+    public static final String URL_DOWNLOAD_SURAT_IZIN_ATASAN_CEPAT = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratIzinCepatAtasan/";
 
     // URL DOWNLOAD LAPORAN REKAP IZIN KARYAWAN DAN ATASAN
     public static final String URL_DOWNLOAD_REKAP_LAPORAN_IZIN_KARYAWAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadRekapLaporanIzinKaryawan/";
