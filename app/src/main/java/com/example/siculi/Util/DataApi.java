@@ -37,6 +37,13 @@ public class DataApi {
     public static final String URL_DOWNLOAD_LAMPIRAN_SURAT_CUTI_ATASAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratLampiranCutiAtasan/";
 
 
+    // URL DOWNLOAD LAPORAN REKAP CUTI KARYAWAN DAN ATASAN
+    public static final String URL_DOWNLOAD_REKAP_LAPORAN_CUTI_KARYAWAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadRekapLaporanCutiKaryawan/";
+    public static final String URL_DOWNLOAD_REKAP_LAPORAN_CUTI_ATASAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadRekapLaporanCutiAtasan/";
+
+
+
+
 
     public static Retrofit retrofit = null;
     public static Retrofit getClient() {

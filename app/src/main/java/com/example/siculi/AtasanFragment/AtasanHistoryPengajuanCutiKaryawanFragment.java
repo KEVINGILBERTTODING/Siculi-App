@@ -136,7 +136,7 @@ public class AtasanHistoryPengajuanCutiKaryawanFragment extends Fragment {
                             tvTglSelesai.setError("Tanggal selesai tidak boleh kosong");
                             tvTglSelesai.requestFocus();
                         }else {
-                            String url = DataApi.URL_DOWNLOAD_REKAP_LAPORAN_IZIN_ATASAN  + userId + "/" + tvTglMulai.getText().toString() + "/" + tvTglSelesai.getText().toString();
+                            String url = DataApi.URL_DOWNLOAD_REKAP_LAPORAN_CUTI_KARYAWAN  + userId + "/" + tvTglMulai.getText().toString() + "/" + tvTglSelesai.getText().toString();
                             String title = "Rekap Pengajuan Izin Atasan " + tvTglMulai.getText().toString() + "-" + tvTglSelesai.getText().toString() + ".pdf";
                             String description = "Downloading PDF file";
                             String fileName = "Rekap Pengajuan Izin Atasan.pdf";
@@ -162,58 +162,57 @@ public class AtasanHistoryPengajuanCutiKaryawanFragment extends Fragment {
                 });
 
 
-                // filter data
-//                btnFilter.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        if (tvTglSelesai.getText().toString().isEmpty()) {
-//                            tvTglSelesai.setError("Tanggal tidak boleh kosong");
-//                            tvTglSelesai.requestFocus();
-//                        }else if (tvTglMulai.getText().toString().isEmpty()) {
-//                            tvTglMulai.setError("Tanggal tidak boleh kosong");
-//                            tvTglMulai.requestFocus();
-//                        }else {
-//                            rvIzin.setAdapter(null);
-//                            AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-//                            alert.setTitle("Loading").setMessage("Memuat data...").setCancelable(false);
-//                            AlertDialog pd = alert.create();
-//                            pd.show();
-//
-//                            atasanInterface.filterHistoryPengajuanIzinAtasan(
-//                                    userId,
-//                                    tvTglMulai.getText().toString(),
-//                                    tvTglSelesai.getText().toString()
-//                            ).enqueue(new Callback<List<CutiModel>>() {
-//                                @Override
-//                                public void onResponse(Call<List<CutiModel>> call, Response<List<CutiModel>> response) {
-//                                    if (response.isSuccessful() && response.body().size() > 0) {
-//                                        cutiModelList = response.body();
-//                                        atasanHistoryPengajuanCutiKaryawanAdapter = new AtasanHistoryPengajuanCutiKaryawanAdapter(getContext(), cutiModelList);
-//                                        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-//                                        rvIzin.setLayoutManager(linearLayoutManager);
-//                                        rvIzin.setAdapter(atasanHistoryPengajuanCutiKaryawanAdapter);
-//                                        dialogFilter.dismiss();
-//                                        rvIzin.setHasFixedSize(true);
-//                                        tvEmpty.setVisibility(View.GONE);
-//                                        pd.dismiss();
-//                                    }else {
-//                                        dialogFilter.dismiss();
-//                                        pd.dismiss();
-//                                        tvEmpty.setVisibility(View.VISIBLE);
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onFailure(Call<List<CutiModel>> call, Throwable t) {
-//                                    pd.dismiss();
-//                                    tvEmpty.setVisibility(View.GONE);
-//                                    Toasty.error(getContext(), "Tidak ada koneksi internet", Toasty.LENGTH_SHORT).show();
-//
-//                                }
-//                            });
-//                        }
-//                    }
-//                });
+                btnFilter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (tvTglSelesai.getText().toString().isEmpty()) {
+                            tvTglSelesai.setError("Tanggal tidak boleh kosong");
+                            tvTglSelesai.requestFocus();
+                        }else if (tvTglMulai.getText().toString().isEmpty()) {
+                            tvTglMulai.setError("Tanggal tidak boleh kosong");
+                            tvTglMulai.requestFocus();
+                        }else {
+                            rvIzin.setAdapter(null);
+                            AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                            alert.setTitle("Loading").setMessage("Memuat data...").setCancelable(false);
+                            AlertDialog pd = alert.create();
+                            pd.show();
+
+                            atasanInterface.filterAtasanHistoryPengajuanCutiKaryawan(
+                                    userId,
+                                    tvTglMulai.getText().toString(),
+                                    tvTglSelesai.getText().toString()
+                            ).enqueue(new Callback<List<CutiModel>>() {
+                                @Override
+                                public void onResponse(Call<List<CutiModel>> call, Response<List<CutiModel>> response) {
+                                    if (response.isSuccessful() && response.body().size() > 0) {
+                                        cutiModelList = response.body();
+                                        atasanHistoryPengajuanCutiKaryawanAdapter = new AtasanHistoryPengajuanCutiKaryawanAdapter(getContext(), cutiModelList);
+                                        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                                        rvIzin.setLayoutManager(linearLayoutManager);
+                                        rvIzin.setAdapter(atasanHistoryPengajuanCutiKaryawanAdapter);
+                                        dialogFilter.dismiss();
+                                        rvIzin.setHasFixedSize(true);
+                                        tvEmpty.setVisibility(View.GONE);
+                                        pd.dismiss();
+                                    }else {
+                                        dialogFilter.dismiss();
+                                        pd.dismiss();
+                                        tvEmpty.setVisibility(View.VISIBLE);
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<List<CutiModel>> call, Throwable t) {
+                                    pd.dismiss();
+                                    tvEmpty.setVisibility(View.GONE);
+                                    Toasty.error(getContext(), "Tidak ada koneksi internet", Toasty.LENGTH_SHORT).show();
+
+                                }
+                            });
+                        }
+                    }
+                });
 
                 dialogFilter.show();
 
