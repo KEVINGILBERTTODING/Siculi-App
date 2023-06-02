@@ -46,7 +46,7 @@ public class AtasanHomeFragment extends Fragment {
     KaryawanInterface karyawanInterface;
     AtasanInterface atasanInterface;
     ImageButton btnMyCuti, btnMyIzin, btnKaryawanAtasan, btnKaryawan, btnIzinKaryawan,
-            btnIzinAtasan;
+            btnIzinAtasan, btnCutiKaryawan;
     String userId, status, tanggalMasukCuti;
     TextView tvTotalCutiSetuju, tvTotalCutiDiTolak, tvTotalCutiTangguhkan;
 
@@ -65,6 +65,7 @@ public class AtasanHomeFragment extends Fragment {
        tvSisaCuti = view.findViewById(R.id.tvSisaCuti);
        tvSisaCuti = view.findViewById(R.id.tvSisaCuti);
         btnKaryawan = view.findViewById(R.id.btnKaryawan);
+        btnCutiKaryawan = view.findViewById(R.id.btnCutiKaryawan);
 
        tvTotalCutiSetuju = view.findViewById(R.id.tvCutiSetuju);
        tvTotalCutiDiTolak = view.findViewById(R.id.tvCutiTolak);
@@ -127,6 +128,12 @@ public class AtasanHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 replace(new AtasanPengajuanIzinAtasanFragment());
+            }
+        });
+        btnCutiKaryawan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replace(new AtasanPengajuanCutiKaryawanFragment());
             }
         });
 

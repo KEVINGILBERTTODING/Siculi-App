@@ -32,6 +32,9 @@ public class DataApi {
     public static final String URL_DOWNLOAD_REKAP_LAPORAN_IZIN_KARYAWAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadRekapLaporanIzinKaryawan/";
     public static final String URL_DOWNLOAD_REKAP_LAPORAN_IZIN_ATASAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadRekapLaporanIzinAtasan/";
 
+    // URL DOWNLOAD LAMPIRAN SURAT CUTI KARYAWAN DAN ATASAN
+    public static final String URL_DOWNLOAD_LAMPIRAN_SURAT_CUTI_KARYAWAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratLampiranCutiKaryawan/";
+    public static final String URL_DOWNLOAD_LAMPIRAN_SURAT_CUTI_ATASAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratLampiranCutiAtasan/";
 
 
 

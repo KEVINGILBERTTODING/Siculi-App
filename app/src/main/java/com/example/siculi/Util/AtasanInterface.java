@@ -179,6 +179,40 @@ public interface AtasanInterface {
             @Query("date_end") String dateEnd
     );
 
+    @GET("atasan/getAtasanPengajuanCutiKaryawan")
+    Call<List<CutiModel>> getAtasanPengajuanCutiKaryawan(
+            @Query("user_id") String userId
+    );
+
+
+    @GET("atasan/getAtasanHistoryPengajuanCutiKaryawan")
+    Call<List<CutiModel>> getAtasanHistoryPengajuanCutiKaryawan(
+            @Query("user_id") String userId
+    );
+
+    // filter pengajuan cuti atasan
+    @GET("atasan/filterAtasanPengajuanCutiKaryawan")
+    Call<List<CutiModel>> filterAtasanPengajuanCutiKaryawan(
+            @Query("user_id") String userid,
+            @Query("date_start") String dateStart,
+            @Query("date_end") String dateEnd
+    );
+
+
+    // filter history pengajuan cuti atasan
+    @GET("atasan/filterAtasanHistoryPengajuanCutiKaryawan")
+    Call<List<CutiModel>> filterAtasanHistoryPengajuanCutiKaryawan(
+            @Query("user_id") String userid,
+            @Query("date_start") String dateStart,
+            @Query("date_end") String dateEnd
+    );
+
+    @Multipart
+    @POST("atasan/validasiPermohonanCutiKaryawan")
+    Call<ResponseModel> validasiPermohonanCutiKaryawan(
+            @PartMap Map<String, RequestBody> textData
+    );
+
 
 
 

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvMain"
+        android:layout_width="match_parent"
+        app:contentPadding="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardUseCompatPadding="true"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/popsem"
+                    android:gravity="end"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11ssp"
+                    android:text="status"/>
+
+                <TextView
+                    android:id="@+id/tvNamaPengaju"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/popsem"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13ssp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Keren Prameswari"/>
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ivIcTime"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:tint="@color/main"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/baseline_calendar_month_24"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_toRightOf="@id/ivIcTime"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/tvTglCuti"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/popmed"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11ssp"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="02:20"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/popmed"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11ssp"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="S/d"/>
+
+                        <TextView
+                            android:id="@+id/tvTglMasuk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/popmed"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11ssp"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="12:20"/>
+
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tvJenisCuti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/popmed"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11ssp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Jenis Cuti"/>
+
+
+
+
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
