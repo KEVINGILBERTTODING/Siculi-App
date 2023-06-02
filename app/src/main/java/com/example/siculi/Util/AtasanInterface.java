@@ -190,7 +190,7 @@ public interface AtasanInterface {
             @Query("user_id") String userId
     );
 
-    // filter pengajuan cuti atasan
+    // filter pengajuan cuti karyawan
     @GET("atasan/filterAtasanPengajuanCutiKaryawan")
     Call<List<CutiModel>> filterAtasanPengajuanCutiKaryawan(
             @Query("user_id") String userid,
@@ -199,7 +199,7 @@ public interface AtasanInterface {
     );
 
 
-    // filter history pengajuan cuti atasan
+    // filter history pengajuan cuti karyawan
     @GET("atasan/filterAtasanHistoryPengajuanCutiKaryawan")
     Call<List<CutiModel>> filterAtasanHistoryPengajuanCutiKaryawan(
             @Query("user_id") String userid,
@@ -212,6 +212,26 @@ public interface AtasanInterface {
     Call<ResponseModel> validasiPermohonanCutiKaryawan(
             @PartMap Map<String, RequestBody> textData
     );
+
+    @GET("atasan/getAtasanPengajuanCutiAtasan")
+    Call<List<CutiModel>> getAtasanPengajuanCutiAtasan(
+            @Query("user_id") String userId
+    );
+
+    @GET("atasan/getAtasanHistoryPengajuanCutiAtasan")
+    Call<List<CutiModel>> getAtasanHistoryPengajuanCutiAtasan(
+            @Query("user_id") String userId
+    );
+
+
+    // filter pengajuan cuti atasan
+    @GET("atasan/filterAtasanPengajuanCutiAtasan")
+    Call<List<CutiModel>> filterAtasanPengajuanCutiAtasan(
+            @Query("user_id") String userid,
+            @Query("date_start") String dateStart,
+            @Query("date_end") String dateEnd
+    );
+
 
 
 

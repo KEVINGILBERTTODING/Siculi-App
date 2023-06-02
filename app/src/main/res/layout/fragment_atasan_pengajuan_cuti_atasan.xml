@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:padding="@dimen/_14sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".AtasanFragment.AtasanPengajuanCutiKaryawanFragment">
+    tools:context=".AtasanFragment.AtasanPengajuanCutiAtasanFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:fontFamily="@font/popsem"
             android:textSize="@dimen/_22ssp"
             android:textColor="@color/black"
-            android:text="Daftar Pengajuan\nCuti Karyawan" />
+            android:text="Daftar Pengajuan\nCuti Atasan" />
 
 
         <androidx.appcompat.widget.SearchView
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             app:iconifiedByDefault="false"
             android:id="@+id/searchBar"
-            app:queryHint="Cari nama karyawan..."
+            app:queryHint="Cari nama atasan..."
             style="@style/AppSearchView"
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@color/white"
