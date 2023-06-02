@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.siculi.AtasanFragment.AtasanDetailPengajuanCutiAtasanFragment;
 import com.example.siculi.AtasanFragment.AtasanDetailPengajuanCutiKaryawanFragment;
 import com.example.siculi.Model.CutiModel;
 import com.example.siculi.R;
@@ -22,25 +21,25 @@ import com.example.siculi.Util.DataApi;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AtasanPengajuanCutiAtasanAdapter extends RecyclerView.Adapter<AtasanPengajuanCutiAtasanAdapter.ViewHolder> {
+public class AtasanHistoryPengajuanCutiAtasanAdapter extends RecyclerView.Adapter<AtasanHistoryPengajuanCutiAtasanAdapter.ViewHolder> {
     Context context;
     List<CutiModel> cutiModelList;
     AdminInterface adminInterface;
 
-    public AtasanPengajuanCutiAtasanAdapter(Context context, List<CutiModel> cutiModelList) {
+    public AtasanHistoryPengajuanCutiAtasanAdapter(Context context, List<CutiModel> cutiModelList) {
         this.context = context;
         this.cutiModelList = cutiModelList;
     }
 
     @NonNull
     @Override
-    public AtasanPengajuanCutiAtasanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AtasanHistoryPengajuanCutiAtasanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.list_pengajuan_cuti, parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AtasanPengajuanCutiAtasanAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AtasanHistoryPengajuanCutiAtasanAdapter.ViewHolder holder, int position) {
 
 
         holder.tvNamaPengaju.setText(cutiModelList.get(holder.getAdapterPosition()).getNama());
@@ -99,13 +98,13 @@ public class AtasanPengajuanCutiAtasanAdapter extends RecyclerView.Adapter<Atasa
 
         @Override
         public void onClick(View v) {
-            Fragment fragment = new AtasanDetailPengajuanCutiAtasanFragment();
+            Fragment fragment = new AtasanDetailPengajuanCutiKaryawanFragment();
             Bundle bundle = new Bundle();
             bundle.putString("id", cutiModelList.get(getAdapterPosition()).getId());
             bundle.putString("status", cutiModelList.get(getAdapterPosition()).getStatus());
+            bundle.putString("karyawan_id", cutiModelList.get(getAdapterPosition()).getIdKaryawan());
             bundle.putString("nip", cutiModelList.get(getAdapterPosition()).getNik());
             bundle.putString("nama", cutiModelList.get(getAdapterPosition()).getNama());
-            bundle.putString("karyawan_id", cutiModelList.get(getAdapterPosition()).getIdKaryawan());
             bundle.putString("tanggal_mulai", cutiModelList.get(getAdapterPosition()).getTglCuti());
             bundle.putString("tanggal_masuk", cutiModelList.get(getAdapterPosition()).getTglMasuk());
             bundle.putString("jenis", cutiModelList.get(getAdapterPosition()).getJenisCuti());

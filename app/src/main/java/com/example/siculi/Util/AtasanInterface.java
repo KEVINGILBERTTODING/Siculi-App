@@ -233,6 +233,13 @@ public interface AtasanInterface {
     );
 
 
+    @Multipart
+    @POST("atasan/validasiPermohonanCutiAtasan")
+    Call<ResponseModel> validasiPermohonanCutiAtasan(
+            @PartMap Map<String, RequestBody> textData
+    );
+
+
 
 
 
