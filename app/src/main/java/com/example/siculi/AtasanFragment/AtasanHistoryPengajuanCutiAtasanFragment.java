@@ -134,7 +134,7 @@ public class AtasanHistoryPengajuanCutiAtasanFragment extends Fragment {
                             tvTglSelesai.setError("Tanggal selesai tidak boleh kosong");
                             tvTglSelesai.requestFocus();
                         }else {
-                            String url = DataApi.URL_DOWNLOAD_REKAP_LAPORAN_CUTI_KARYAWAN  + userId + "/" + tvTglMulai.getText().toString() + "/" + tvTglSelesai.getText().toString();
+                            String url = DataApi.URL_DOWNLOAD_REKAP_LAPORAN_CUTI_ATASAN  + userId + "/" + tvTglMulai.getText().toString() + "/" + tvTglSelesai.getText().toString();
                             String title = "Rekap Pengajuan Izin Atasan " + tvTglMulai.getText().toString() + "-" + tvTglSelesai.getText().toString() + ".pdf";
                             String description = "Downloading PDF file";
                             String fileName = "Rekap Pengajuan Izin Atasan.pdf";
@@ -176,7 +176,7 @@ public class AtasanHistoryPengajuanCutiAtasanFragment extends Fragment {
                             AlertDialog pd = alert.create();
                             pd.show();
 
-                            atasanInterface.filterAtasanHistoryPengajuanCutiKaryawan(
+                            atasanInterface.filterAtasanHistoryPengajuanCutiAtasan(
                                     userId,
                                     tvTglMulai.getText().toString(),
                                     tvTglSelesai.getText().toString()
