@@ -1,4 +1,4 @@
-package com.example.siculi.AtasanFragment;
+package com.example.siculi.KetuaFragment;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -21,13 +21,24 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.siculi.AtasanFragment.AtasanCutiFragment;
+import com.example.siculi.AtasanFragment.AtasanIzinFragment;
+import com.example.siculi.AtasanFragment.AtasanKaryawanAtasanFragment;
+import com.example.siculi.AtasanFragment.AtasanKaryawanFragment;
+import com.example.siculi.AtasanFragment.AtasanPengajuanCutiAtasanFragment;
+import com.example.siculi.AtasanFragment.AtasanPengajuanCutiKaryawanFragment;
+import com.example.siculi.AtasanFragment.AtasanPengajuanIzinAtasanFragment;
+import com.example.siculi.AtasanFragment.AtasanPengajuanIzinKaryawanFragment;
+import com.example.siculi.AtasanFragment.AtasanProfileFragment;
 import com.example.siculi.Model.AtasanModel;
 import com.example.siculi.Model.CutiModel;
+import com.example.siculi.Model.KetuaModel;
 import com.example.siculi.Model.ResponseModel;
 import com.example.siculi.R;
 import com.example.siculi.Util.AtasanInterface;
 import com.example.siculi.Util.DataApi;
 import com.example.siculi.Util.KaryawanInterface;
+import com.example.siculi.Util.KetuaInterface;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,13 +50,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AtasanHomeFragment extends Fragment {
-    TextView tvName, tvEmail, tvSisaCuti;
+public class KetuaHomeFragment extends Fragment {
+    TextView tvName, tvEmail, tvTotalCuti;
     ImageView ivProfile;
     SharedPreferences sharedPreferences;
-    KaryawanInterface karyawanInterface;
     AtasanInterface atasanInterface;
-    ImageButton btnMyCuti, btnMyIzin, btnKaryawanAtasan, btnKaryawan, btnIzinKaryawan,
+    KetuaInterface ketuaInterface;
+    ImageButton  btnKaryawanAtasan, btnKaryawan, btnIzinKaryawan,
             btnIzinAtasan, btnCutiKaryawan, btnCutiAtasan;
     String userId, status, tanggalMasukCuti;
     TextView tvTotalCutiSetuju, tvTotalCutiDiTolak, tvTotalCutiTangguhkan;
@@ -55,33 +66,30 @@ public class AtasanHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View view = inflater.inflate(R.layout.fragment_atasan_home, container, false);
+       View view = inflater.inflate(R.layout.fragment_ketua_home, container, false);
        sharedPreferences = getContext().getSharedPreferences("data_user", Context.MODE_PRIVATE);
 
        tvEmail = view.findViewById(R.id.tvEmail);
        ivProfile = view.findViewById(R.id.ivProfile);
-        btnIzinAtasan = view.findViewById(R.id.btnIzinAtasan);
+       btnIzinAtasan = view.findViewById(R.id.btnIzinAtasan);
        tvName = view.findViewById(R.id.tvName);
-       tvSisaCuti = view.findViewById(R.id.tvSisaCuti);
-       tvSisaCuti = view.findViewById(R.id.tvSisaCuti);
         btnKaryawan = view.findViewById(R.id.btnKaryawan);
         btnCutiKaryawan = view.findViewById(R.id.btnCutiKaryawan);
-
+        ketuaInterface = DataApi.getClient().create(KetuaInterface.class);
        tvTotalCutiSetuju = view.findViewById(R.id.tvCutiSetuju);
        tvTotalCutiDiTolak = view.findViewById(R.id.tvCutiTolak);
        btnKaryawanAtasan = view.findViewById(R.id.btnKaryawanAtasan);
-       btnMyIzin = view.findViewById(R.id.btnMyIzin);
-       btnMyCuti = view.findViewById(R.id.btnMyCuti);
-        btnCutiAtasan = view.findViewById(R.id.btnCutiAtasan);
+       btnCutiAtasan = view.findViewById(R.id.btnCutiAtasan);
+       tvTotalCuti = view.findViewById(R.id.tvTotalCuti);
        btnIzinKaryawan = view.findViewById(R.id.btnIzinKaryawan);
        tvTotalCutiTangguhkan = view.findViewById(R.id.tvDitangguhkan);
        userId = sharedPreferences.getString("user_id", null);
-       karyawanInterface = DataApi.getClient().create(KaryawanInterface.class);
        atasanInterface = DataApi.getClient().create(AtasanInterface.class);
 
-        getTotalAlCuti("Disetujui", tvTotalCutiSetuju);
-        getTotalAlCuti("Ditangguhkan", tvTotalCutiTangguhkan);
-        getTotalAlCuti("Ditolak", tvTotalCutiDiTolak);
+        getTotalAllCuti("Disetujui", tvTotalCutiSetuju);
+        getTotalAllCuti("Ditangguhkan", tvTotalCutiTangguhkan);
+        getTotalAllCuti("Ditolak", tvTotalCutiDiTolak);
+        getTotalAllCuti("all", tvTotalCuti);
         getMyProfile();
 
         // cek izin mengakses file external
@@ -92,20 +100,6 @@ public class AtasanHomeFragment extends Fragment {
         }
 
 
-
-        btnMyIzin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                replace(new AtasanIzinFragment());
-            }
-        });
-
-        btnMyCuti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                replace(new AtasanCutiFragment());
-            }
-        });
 
         btnKaryawanAtasan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,13 +148,13 @@ public class AtasanHomeFragment extends Fragment {
        return view;
     }
 
-    private void getTotalAlCuti(String status, TextView tvTotal) {
+    private void getTotalAllCuti(String status, TextView tvTotal) {
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
         alert.setTitle("Loading").setMessage("Memuat data...").setCancelable(false);
         AlertDialog pd = alert.create();
         pd.show();
 
-        atasanInterface.getCutiByStatus(userId, status).enqueue(new Callback<List<CutiModel>>() {
+        ketuaInterface.countAllCuti(status).enqueue(new Callback<List<CutiModel>>() {
             @Override
             public void onResponse(Call<List<CutiModel>> call, Response<List<CutiModel>> response) {
                 if (response.isSuccessful() && response.body().size() > 0) {
@@ -190,9 +184,9 @@ public class AtasanHomeFragment extends Fragment {
         AlertDialog pd = alert.create();
         pd.show();
 
-        atasanInterface.getMyProfile(userId).enqueue(new Callback<AtasanModel>() {
+        ketuaInterface.getKetuaProfile(userId).enqueue(new Callback<KetuaModel>() {
             @Override
-            public void onResponse(Call<AtasanModel> call, Response<AtasanModel> response) {
+            public void onResponse(Call<KetuaModel> call, Response<KetuaModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     pd.dismiss();
                     tvEmail.setText(response.body().getEmail());
@@ -207,8 +201,7 @@ public class AtasanHomeFragment extends Fragment {
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                             .into(ivProfile);
                     status = response.body().getStatus();
-                    tanggalMasukCuti = response.body().getTgl_masuk();
-                    tvSisaCuti.setText(response.body().getSisa_cuti());
+
 
                     // get tanggal sekarang indonesia jakarta
                     Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"));
@@ -272,7 +265,7 @@ public class AtasanHomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<AtasanModel> call, Throwable t) {
+            public void onFailure(Call<KetuaModel> call, Throwable t) {
                 pd.dismiss();
                 System.err.println(Toasty.error(getContext(), "Gagal memuat data total cuti", Toasty.LENGTH_SHORT));
 

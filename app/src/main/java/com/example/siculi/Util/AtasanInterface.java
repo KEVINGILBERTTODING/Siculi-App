@@ -249,6 +249,8 @@ public interface AtasanInterface {
             @PartMap Map<String, RequestBody> textData
     );
 
+  ;
+
 
 
 

@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.example.siculi.AtasanFragment.AtasanCutiFragment;
 import com.example.siculi.AtasanFragment.AtasanHomeFragment;
+import com.example.siculi.AtasanFragment.AtasanIzinFragment;
 import com.example.siculi.AtasanFragment.AtasanProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -30,7 +31,12 @@ public class AtasanMainActivity extends AppCompatActivity {
                 }else if (item.getItemId() == R.id.menuCuti) {
                     replace(new AtasanCutiFragment());
                     return true;
-                }else if (item.getItemId() == R.id.menuProfile) {
+                } else if (item.getItemId() == R.id.menuIzin) {
+                    replace(new AtasanIzinFragment());
+                    return true;
+                }
+
+                else if (item.getItemId() == R.id.menuProfile) {
                     replace(new AtasanProfileFragment());
                     return true;
                 }
