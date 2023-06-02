@@ -17,7 +17,7 @@ public class DataApi {
 
     // URL DOWNLOAD FILE ROLE ATASAN
 
-    // URL DOWNLOAD SURAT IZIN DAN CUTI SAYA
+    // URL DOWNLOAD SURAT IZIN DAN CUTI ATASAN
     public static final String URL_DOWNLOAD_SURAT_CUTI_ATASAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratcuti/";
     public static final String URL_DOWNLOAD_SURAT_IZIN_ATASAN = "http://" + IP_ADDRESS + "/siculi/api/atasan/downloadSuratIzin/";
 

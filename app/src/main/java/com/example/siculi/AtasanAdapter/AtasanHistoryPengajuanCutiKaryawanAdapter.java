@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.siculi.AtasanFragment.AtasanDetailPengajuanCutiKaryawanFragment;
 import com.example.siculi.AtasanFragment.AtasanDetailPengajuanIzinFragment;
+import com.example.siculi.AtasanFragment.AtasanHistoryDetailPengajuanCutiKaryawanfragment;
 import com.example.siculi.Model.CutiModel;
 import com.example.siculi.R;
 import com.example.siculi.Util.AdminInterface;
@@ -99,7 +100,7 @@ public class AtasanHistoryPengajuanCutiKaryawanAdapter extends RecyclerView.Adap
 
         @Override
         public void onClick(View v) {
-            Fragment fragment = new AtasanDetailPengajuanCutiKaryawanFragment();
+            Fragment fragment = new AtasanHistoryDetailPengajuanCutiKaryawanfragment();
             Bundle bundle = new Bundle();
             bundle.putString("id", cutiModelList.get(getAdapterPosition()).getId());
             bundle.putString("status", cutiModelList.get(getAdapterPosition()).getStatus());
