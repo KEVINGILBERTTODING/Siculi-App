@@ -107,21 +107,21 @@ public class AtasanDetailHistoryPengajuanIzinAtasanFragment extends Fragment {
         String description = "Downloading PDF file";
         String fileName = "Surat izin.pdf";
 
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        intent.setData(Uri.parse(url));
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+
+        startActivity(intent);
+
+
+//        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+//        request.setTitle(title);
+//        request.setDescription(description);
+//        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+//        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+//        request.allowScanningByMediaScanner();
 //
-//        startActivity(intent);
-
-
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-        request.setTitle(title);
-        request.setDescription(description);
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.allowScanningByMediaScanner();
-
-        DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
-        downloadManager.enqueue(request);
+//        DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+//        downloadManager.enqueue(request);
     }
     private void downloadSuratIzinNormal() {
         String url = DataApi.URL_DOWNLOAD_SURAT_IZIN_ATASAN_NORMAL+ userId + "/" + idIzin;
@@ -129,21 +129,21 @@ public class AtasanDetailHistoryPengajuanIzinAtasanFragment extends Fragment {
         String description = "Downloading PDF file";
         String fileName = "Surat izin.pdf";
 
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        intent.setData(Uri.parse(url));
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+
+        startActivity(intent);
+
+
+//        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+//        request.setTitle(title);
+//        request.setDescription(description);
+//        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+//        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+//        request.allowScanningByMediaScanner();
 //
-//        startActivity(intent);
-
-
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-        request.setTitle(title);
-        request.setDescription(description);
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.allowScanningByMediaScanner();
-
-        DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
-        downloadManager.enqueue(request);
+//        DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+//        downloadManager.enqueue(request);
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.siculi.AtasanFragment;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -82,16 +83,20 @@ public class AtasanDetailCuti extends Fragment {
                 String description = "Downloading PDF file";
                 String fileName = "Surat cuti.pdf";
 
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
 
-                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-                request.setTitle(title);
-                request.setDescription(description);
-                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                request.allowScanningByMediaScanner();
+                startActivity(intent);
 
-                DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
-                downloadManager.enqueue(request);
+//                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+//                request.setTitle(title);
+//                request.setDescription(description);
+//                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+//                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+//                request.allowScanningByMediaScanner();
+//
+//                DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+//                downloadManager.enqueue(request);
             }
         });
 

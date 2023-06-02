@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.DownloadManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -140,16 +141,21 @@ public class AtasanHistoryPengajuanCutiKaryawanFragment extends Fragment {
                             String description = "Downloading PDF file";
                             String fileName = "Rekap Pengajuan Izin Atasan.pdf";
 
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse(url));
 
-                            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-                            request.setTitle(title);
-                            request.setDescription(description);
-                            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
-                            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                            request.allowScanningByMediaScanner();
+                            startActivity(intent);
 
-                            DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
-                            downloadManager.enqueue(request);
+
+//                            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+//                            request.setTitle(title);
+//                            request.setDescription(description);
+//                            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+//                            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+//                            request.allowScanningByMediaScanner();
+//
+//                            DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+//                            downloadManager.enqueue(request);
                         }
 
                     }
