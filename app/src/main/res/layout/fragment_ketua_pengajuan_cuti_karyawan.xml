@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:padding="@dimen/_14sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".KetuaFragment.KetuaDaftarIzinAtasanFragment">
+    tools:context=".KetuaFragment.KetuaPengajuanCutiKaryawanFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:fontFamily="@font/popsem"
             android:textSize="@dimen/_22ssp"
             android:textColor="@color/black"
-            android:text="Daftar Pengajuan \nIzin Atasan" />
+            android:text="Daftar Pengajuan\nCuti Karyawan" />
 
 
         <androidx.appcompat.widget.SearchView
@@ -40,7 +40,7 @@
             android:fontFamily="@font/popmed"
             android:textSize="@dimen/_13ssp"
             android:textColor="@color/black"
-            android:text="Daftar Riwayat" />
+            android:text="Daftar Pengajuan Cuti" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvIzin"
@@ -63,17 +63,36 @@
         android:textColor="@color/black"
         android:text="Tidak ada data."/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:backgroundTint="@color/main"
-        android:id="@+id/btnFilter"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/baseline_filter_alt_24"
-        app:tint="@color/white"/>
+        android:layout_alignParentEnd="true"
+        app:fab_addButtonColorPressed="@color/main"
+        app:fab_addButtonColorNormal="@color/main">
 
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/green"
+            app:fab_colorPressed="@color/green"
+            app:fab_icon="@drawable/baseline_filter_alt_24"
+            />
 
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnRiwayat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/yellow"
+            app:fab_colorPressed="@color/yellow"
+            app:fab_icon="@drawable/baseline_access_time_filled_24"
+
+            />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 
 </RelativeLayout>

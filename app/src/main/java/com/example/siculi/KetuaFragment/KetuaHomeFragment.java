@@ -128,7 +128,7 @@ public class KetuaHomeFragment extends Fragment {
         btnCutiKaryawan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replace(new AtasanPengajuanCutiKaryawanFragment());
+                replace(new KetuaPengajuanCutiKaryawanFragment());
             }
         });
         btnCutiAtasan.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +147,7 @@ public class KetuaHomeFragment extends Fragment {
         });
        return view;
     }
+
 
     private void getTotalAllCuti(String status, TextView tvTotal) {
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
@@ -175,6 +176,8 @@ public class KetuaHomeFragment extends Fragment {
 
             }
         });
+
+
 
 
     }
