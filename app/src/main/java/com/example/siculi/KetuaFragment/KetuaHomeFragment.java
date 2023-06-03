@@ -104,7 +104,7 @@ public class KetuaHomeFragment extends Fragment {
         btnKaryawanAtasan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replace(new AtasanKaryawanAtasanFragment());
+                replace(new KetuaAtasanFragment());
             }
         });
         btnKaryawan.setOnClickListener(new View.OnClickListener() {
@@ -277,7 +277,7 @@ public class KetuaHomeFragment extends Fragment {
     }
 
     private void replace(Fragment fragment) {
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameAtasan, fragment)
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameKetua, fragment)
                 .addToBackStack(null).commit();
     }
 }
