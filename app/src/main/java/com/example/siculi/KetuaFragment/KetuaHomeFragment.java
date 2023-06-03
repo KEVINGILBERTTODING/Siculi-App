@@ -116,13 +116,13 @@ public class KetuaHomeFragment extends Fragment {
         btnIzinKaryawan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replace(new AtasanPengajuanIzinKaryawanFragment());
+                replace(new KetuaDaftarIzinKaryawanFragment());
             }
         });
         btnIzinAtasan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replace(new AtasanPengajuanIzinAtasanFragment());
+                replace(new KetuaDaftarIzinAtasanFragment());
             }
         });
         btnCutiKaryawan.setOnClickListener(new View.OnClickListener() {
