@@ -1,14 +1,9 @@
-package com.example.siculi.AtasanFragment;
+package com.example.siculi.KetuaFragment;
 
-import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,23 +14,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import com.example.siculi.KetuaAdapter.KetuaHistoryPengajuanCutiKaryawanAdapter;
-import com.example.siculi.KetuaAdapter.KetuaPengajuanCutiKaryawanAdapter;
-import com.example.siculi.Model.AtasanModel;
+import com.example.siculi.KetuaAdapter.KetuaPengajuanCutiAtasanAdapter;
 import com.example.siculi.Model.CutiModel;
 import com.example.siculi.R;
 import com.example.siculi.Util.AtasanInterface;
 import com.example.siculi.Util.DataApi;
 import com.example.siculi.Util.KaryawanInterface;
 import com.example.siculi.Util.KetuaInterface;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,19 +35,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class KetuaHistoryPengajuanCutiKaryawanFragment extends Fragment {
+public class KetuaPengajuanCutiAtasanFragment extends Fragment {
 
     RecyclerView rvIzin;
     SearchView searchView;
-
     List<CutiModel> cutiModelList;
+    KaryawanInterface karyawanInterface;
     LinearLayoutManager linearLayoutManager;
     SharedPreferences sharedPreferences;
     TextView tvEmpty;
-    FloatingActionButton fabFilter;
-
+    FloatingActionButton fabFilter, fabRiwayat;
     KetuaInterface ketuaInterface;
-    KetuaHistoryPengajuanCutiKaryawanAdapter ketuaHistoryPengajuanCutiKaryawanAdapter;
+    KetuaPengajuanCutiAtasanAdapter ketuaPengajuanCutiAtasan;
     String userId, atasanId;
     AtasanInterface atasanInterface;
 
@@ -67,7 +56,7 @@ public class KetuaHistoryPengajuanCutiKaryawanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_ketua_history_pengajuan_cuti_karyawan, container, false);
+        View view = inflater.inflate(R.layout.fragment_ketua_pengajuan_cuti_atasan, container, false);
         sharedPreferences = getContext().getSharedPreferences("data_user", Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("user_id", null);
         ketuaInterface = DataApi.getClient().create(KetuaInterface.class);
@@ -76,9 +65,11 @@ public class KetuaHistoryPengajuanCutiKaryawanFragment extends Fragment {
         searchView = view.findViewById(R.id.searchBar);
         rvIzin = view.findViewById(R.id.rvIzin);
         fabFilter = view.findViewById(R.id.btnFilter);
+        fabRiwayat = view.findViewById(R.id.btnRiwayat);
+        karyawanInterface = DataApi.getClient().create(KaryawanInterface.class);
+
         atasanInterface = DataApi.getClient().create(AtasanInterface.class);
-        getDataCutiKaryawan();
-        getMyProfile();
+        getCutiAtasan();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -97,12 +88,11 @@ public class KetuaHistoryPengajuanCutiKaryawanFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Dialog dialogFilter = new Dialog(getContext());
-                dialogFilter.setContentView(R.layout.layout_filter_download);
+                dialogFilter.setContentView(R.layout.layout_filter);
                 dialogFilter.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 TextView tvTglMulai, tvTglSelesai;
                 tvTglMulai = dialogFilter.findViewById(R.id.tvDateStart);
                 tvTglSelesai = dialogFilter.findViewById(R.id.tvDateEnd);
-                Button btnDownload = dialogFilter.findViewById(R.id.btnDownload);
 
                 tvTglSelesai.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -118,40 +108,6 @@ public class KetuaHistoryPengajuanCutiKaryawanFragment extends Fragment {
                     }
                 });
                 Button btnFilter = dialogFilter.findViewById(R.id.btnFilter);
-
-                // download rekap laporan
-                // download data
-                btnDownload.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // cek izin mengakses file external
-                        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
-                        } else if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 200);
-                        }
-
-
-                        if (tvTglMulai.getText().toString().isEmpty()) {
-                            tvTglMulai.setError("Tanggal mulai tidak boleh kosong");
-                            tvTglMulai.requestFocus();
-                        }else if (tvTglSelesai.getText().toString().isEmpty()) {
-                            tvTglSelesai.setError("Tanggal selesai tidak boleh kosong");
-                            tvTglSelesai.requestFocus();
-                        }else {
-                            String url = DataApi.URL_DOWNLOAD_REKAP_PENGAJUAN_CUTI_KARYAWAN  + tvTglMulai.getText().toString() + "/" + tvTglSelesai.getText().toString();
-
-
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                            intent.setData(Uri.parse(url));
-
-                            startActivity(intent);
-                        }
-
-                    }
-                });
-
-
                 btnFilter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -168,7 +124,7 @@ public class KetuaHistoryPengajuanCutiKaryawanFragment extends Fragment {
                             AlertDialog pd = alert.create();
                             pd.show();
 
-                            ketuaInterface.filterAllHistoryPengajuanCutiKaryawanKetua(
+                            ketuaInterface.filterAllPengajuanCutiAtasanKetua(
                                     tvTglMulai.getText().toString(),
                                     tvTglSelesai.getText().toString()
                             ).enqueue(new Callback<List<CutiModel>>() {
@@ -176,10 +132,10 @@ public class KetuaHistoryPengajuanCutiKaryawanFragment extends Fragment {
                                 public void onResponse(Call<List<CutiModel>> call, Response<List<CutiModel>> response) {
                                     if (response.isSuccessful() && response.body().size() > 0) {
                                         cutiModelList = response.body();
-                                        ketuaHistoryPengajuanCutiKaryawanAdapter = new KetuaHistoryPengajuanCutiKaryawanAdapter(getContext(), cutiModelList);
+                                        ketuaPengajuanCutiAtasan = new KetuaPengajuanCutiAtasanAdapter(getContext(), cutiModelList);
                                         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                                         rvIzin.setLayoutManager(linearLayoutManager);
-                                        rvIzin.setAdapter(ketuaHistoryPengajuanCutiKaryawanAdapter);
+                                        rvIzin.setAdapter(ketuaPengajuanCutiAtasan);
                                         dialogFilter.dismiss();
                                         rvIzin.setHasFixedSize(true);
                                         tvEmpty.setVisibility(View.GONE);
@@ -208,28 +164,36 @@ public class KetuaHistoryPengajuanCutiKaryawanFragment extends Fragment {
             }
         });
 
+        fabRiwayat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameKetua, new KetuaHistoryPengajuanCutiAtasanFragment())
+                        .addToBackStack(null).commit();
 
+            }
+        });
 
 
 
         return view;
     }
 
-    private void getDataCutiKaryawan(){
+    private void getCutiAtasan(){
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
         alert.setTitle("Loading").setMessage("Memuat data...").setCancelable(false);
         AlertDialog pd = alert.create();
         pd.show();
 
-        ketuaInterface.ggetAllHistoryPengajuanCutiKaryawanKetua().enqueue(new Callback<List<CutiModel>>() {
+        ketuaInterface.getAllPengajuanCutiAtasanKetua().enqueue(new Callback<List<CutiModel>>() {
             @Override
             public void onResponse(Call<List<CutiModel>> call, Response<List<CutiModel>> response) {
                 if (response.isSuccessful() && response.body().size() > 0) {
                     cutiModelList = response.body();
-                    ketuaHistoryPengajuanCutiKaryawanAdapter = new KetuaHistoryPengajuanCutiKaryawanAdapter(getContext(), cutiModelList);
+                    ketuaPengajuanCutiAtasan = new KetuaPengajuanCutiAtasanAdapter(getContext(), cutiModelList);
                     linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
                     rvIzin.setLayoutManager(linearLayoutManager);
-                    rvIzin.setAdapter(ketuaHistoryPengajuanCutiKaryawanAdapter );
+                    rvIzin.setAdapter(ketuaPengajuanCutiAtasan);
                     rvIzin.setHasFixedSize(true);
                     tvEmpty.setVisibility(View.GONE);
                     pd.dismiss();
@@ -257,10 +221,10 @@ public class KetuaHistoryPengajuanCutiKaryawanFragment extends Fragment {
             }
         }
 
-        ketuaHistoryPengajuanCutiKaryawanAdapter.filter(filteredList);
+        ketuaPengajuanCutiAtasan.filter(filteredList);
         if (filteredList.isEmpty()) {
         }else {
-            ketuaHistoryPengajuanCutiKaryawanAdapter.filter(filteredList);
+            ketuaPengajuanCutiAtasan.filter(filteredList);
         }
     }
 
@@ -289,60 +253,8 @@ public class KetuaHistoryPengajuanCutiKaryawanFragment extends Fragment {
 
     }
 
-    private void timePicker(TextView tvTime) {
-        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), (view, hourOfDay, minute) -> {
-            String timeFormatted, minuteFormatted;
-            if (hourOfDay < 10) {
-                timeFormatted = String.format("%02d", hourOfDay);
-            }else {
-                timeFormatted = String.valueOf(hourOfDay);
-            }
-
-            if (minute < 10) {
-                minuteFormatted = String.format("%02d", minute);
-            }else {
-                minuteFormatted = String.valueOf(minute);
-            }
-
-            tvTime.setText(timeFormatted + ":" + minuteFormatted);
-        }, 0, 0, true);
-
-        timePickerDialog.show();
-
-    }
-
-    private void getMyProfile() {
-        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-        alert.setTitle("Loading").setMessage("Memuat data...").setCancelable(false);
-        AlertDialog pd = alert.create();
-        pd.show();
-
-        atasanInterface.getMyProfile(userId).enqueue(new Callback<AtasanModel>() {
-            @Override
-            public void onResponse(Call<AtasanModel> call, Response<AtasanModel> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    pd.dismiss();
-                   atasanId = response.body().getAtasan();
 
 
-
-                }else {
-                    pd.dismiss();
-                    System.err.println(Toasty.error(getContext(), "Gagal memuat data", Toasty.LENGTH_SHORT));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<AtasanModel> call, Throwable t) {
-                pd.dismiss();
-                System.err.println(Toasty.error(getContext(), "Gagal memuat data total cuti", Toasty.LENGTH_SHORT));
-
-
-            }
-        });
-
-
-    }
 
 
 }

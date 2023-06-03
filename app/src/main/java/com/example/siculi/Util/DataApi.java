@@ -54,6 +54,9 @@ public class DataApi {
     // URL DOWNLOAD REKAP LAPORAN PENGAJUAN CUTI KARYAWAN DAN ATASAN
     public static final String URL_DOWNLOAD_REKAP_PENGAJUAN_CUTI_KARYAWAN = "http://" + IP_ADDRESS + "/siculi/api/ketua/downloadRekapLaporanPengajuanCutiKaryawan/";
     public static final String URL_DOWNLOAD_REKAP_PENGAJUAN_CUTI_ATASAN = "http://" + IP_ADDRESS + "/siculi/api/ketua/downloadRekapLaporanPengajuanCutiAtasan/";
+    public static final String URL_DOWNLOAD_SURAT_CUTI_ATASAN_KETUA = "http://" + IP_ADDRESS + "/siculi/api/ketua/downloadSuratCutiAtasanKetua/";
+
+
 
 
 

@@ -1,4 +1,4 @@
-package com.example.siculi.AtasanFragment;
+package com.example.siculi.KetuaFragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -34,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class KetuaDetailPengajuanCutiKaryawanFragment extends Fragment {
+public class KetuaDetailPengajuanCutiAtasanFragment extends Fragment {
     CardView cvStatus;
     TextView tvStatus;
     EditText etNip, etNama, etTglMulai, etTglSelesai, etJenisCuti,
@@ -52,7 +52,7 @@ public class KetuaDetailPengajuanCutiKaryawanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_atasan_detail_pengajuan_cuti_karyawan, container, false);
+        View view = inflater.inflate(R.layout.fragment_atasan_detail_pengajuan_cuti_atasan, container, false);
 
         cvStatus = view.findViewById(R.id.cvStatus);
         tvStatus = view.findViewById(R.id.tvStatus);
@@ -121,7 +121,7 @@ public class KetuaDetailPengajuanCutiKaryawanFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              validasiPermohonanCutiKaryawan();
+              validasiPermohonanCutiAtasan();
             }
         });
 
@@ -131,7 +131,7 @@ public class KetuaDetailPengajuanCutiKaryawanFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String url = DataApi.URL_DOWNLOAD_LAMPIRAN_SURAT_CUTI_KARYAWAN + idCuti;
+                String url = DataApi.URL_DOWNLOAD_LAMPIRAN_SURAT_CUTI_ATASAN + idCuti;
                 String title = "Surat Lampiran Cuti " + getArguments().getString("nama") + ".pdf";
                 String description = "Downloading PDF file";
                 String fileName = "Surat Lampiran Cuti " + getArguments().getString("nama") + ".pdf";
@@ -152,7 +152,7 @@ public class KetuaDetailPengajuanCutiKaryawanFragment extends Fragment {
         return view;
     }
 
-    private void validasiPermohonanCutiKaryawan() {
+    private void validasiPermohonanCutiAtasan() {
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
         alert.setTitle("Loading").setMessage("Menyimpan data...").setCancelable(false);
         AlertDialog pd = alert.create();
@@ -164,7 +164,7 @@ public class KetuaDetailPengajuanCutiKaryawanFragment extends Fragment {
         map.put("karyaawan_id", RequestBody.create(MediaType.parse("text/plain"), getArguments().getString("karyawan_id")));
         map.put("sisa_cuti", RequestBody.create(MediaType.parse("text/plain"), getArguments().getString("sisa_cuti")));
 
-        ketuaInterface.validasiPengajuanCutiKaryawan(map).enqueue(new Callback<ResponseModel>() {
+        ketuaInterface.validasiPengajuanCutiAtasan(map).enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 if (response.isSuccessful() && response.body().getStatus() == 200) {

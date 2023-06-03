@@ -30,13 +30,11 @@ public interface KetuaInterface {
 
     @GET("ketua/getAllPengajuanCutiKaryawanKetua")
     Call<List<CutiModel>> getAllPengajuanCutiKaryawanKetua(
-            @Query("status") String status
     );
 
     // get pengajuan cuti atasan
     @GET("ketua/getAllPengajuanCutiAtasanKetua")
     Call<List<CutiModel>> getAllPengajuanCutiAtasanKetua(
-            @Query("status") String status
     );
 
     @Multipart
@@ -45,6 +43,11 @@ public interface KetuaInterface {
             @PartMap Map<String, RequestBody> textData
             );
 
+    @Multipart
+    @POST("ketua/validasiPermohonanCutiAtasan")
+    Call<ResponseModel> validasiPengajuanCutiAtasan(
+            @PartMap Map<String, RequestBody> textData
+    );
     @GET("ketua/getAllHistoryPengajuanCutiKaryawanKetua")
     Call<List<CutiModel>> ggetAllHistoryPengajuanCutiKaryawanKetua();
 
@@ -68,6 +71,13 @@ public interface KetuaInterface {
             @Query("date_start") String dateStart,
             @Query("date_end") String dateEnd
     );
+
+    @GET("ketua/filterAllHistoryPengajuanCutiAtasanKetua")
+    Call<List<CutiModel>> filterAllHistoryPengajuanCutiAtasanKetua(
+            @Query("date_start") String dateStart,
+            @Query("date_end") String dateEnd
+    );
+
 
 
 

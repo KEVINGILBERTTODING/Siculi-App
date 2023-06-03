@@ -134,7 +134,7 @@ public class KetuaHomeFragment extends Fragment {
         btnCutiAtasan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replace(new AtasanPengajuanCutiAtasanFragment());
+                replace(new KetuaPengajuanCutiAtasanFragment());
             }
         });
 

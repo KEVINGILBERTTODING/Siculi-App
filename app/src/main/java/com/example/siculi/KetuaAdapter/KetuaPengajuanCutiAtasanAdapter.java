@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.siculi.KetuaFragment.KetuaDetailPengajuanCutiAtasanFragment;
 import com.example.siculi.KetuaFragment.KetuaDetailPengajuanCutiKaryawanFragment;
 import com.example.siculi.Model.CutiModel;
 import com.example.siculi.R;
@@ -21,25 +22,25 @@ import com.example.siculi.Util.DataApi;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KetuaPengajuanCutiKaryawanAdapter extends RecyclerView.Adapter<KetuaPengajuanCutiKaryawanAdapter.ViewHolder> {
+public class KetuaPengajuanCutiAtasanAdapter extends RecyclerView.Adapter<KetuaPengajuanCutiAtasanAdapter.ViewHolder> {
     Context context;
     List<CutiModel> cutiModelList;
     AdminInterface adminInterface;
 
-    public KetuaPengajuanCutiKaryawanAdapter(Context context, List<CutiModel> cutiModelList) {
+    public KetuaPengajuanCutiAtasanAdapter(Context context, List<CutiModel> cutiModelList) {
         this.context = context;
         this.cutiModelList = cutiModelList;
     }
 
     @NonNull
     @Override
-    public KetuaPengajuanCutiKaryawanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public KetuaPengajuanCutiAtasanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.list_pengajuan_cuti, parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull KetuaPengajuanCutiKaryawanAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull KetuaPengajuanCutiAtasanAdapter.ViewHolder holder, int position) {
 
 
         holder.tvNamaPengaju.setText(cutiModelList.get(holder.getAdapterPosition()).getNama());
@@ -98,7 +99,7 @@ public class KetuaPengajuanCutiKaryawanAdapter extends RecyclerView.Adapter<Ketu
 
         @Override
         public void onClick(View v) {
-            Fragment fragment = new KetuaDetailPengajuanCutiKaryawanFragment();
+            Fragment fragment = new KetuaDetailPengajuanCutiAtasanFragment();
             Bundle bundle = new Bundle();
             bundle.putString("id", cutiModelList.get(getAdapterPosition()).getId());
             bundle.putString("status", cutiModelList.get(getAdapterPosition()).getStatus());
