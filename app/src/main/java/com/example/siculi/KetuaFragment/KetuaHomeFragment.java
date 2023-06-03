@@ -110,7 +110,7 @@ public class KetuaHomeFragment extends Fragment {
         btnKaryawan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replace(new AtasanKaryawanFragment());
+                replace(new KetuaKaryawanFragment());
             }
         });
         btnIzinKaryawan.setOnClickListener(new View.OnClickListener() {

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".KetuaFragment.KetuaDetailKaryawanFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/header1"
+        android:layout_height="@dimen/_120sdp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_14sdp"
+        android:layout_marginRight="@dimen/_14sdp"
+        app:cardCornerRadius="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_50sdp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="@dimen/_10sdp"
+            android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/ivProfile"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@color/main"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:layout_toRightOf="@id/ivProfile">
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Anggita"
+                    android:fontFamily="@font/popsem"
+                    android:textSize="@dimen/_13ssp"
+                    android:textColor="@color/main"/>
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Anggita@gmail.com"
+                    android:fontFamily="@font/popmed"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:cardBackgroundColor="@color/main"
+                    app:contentPadding="@dimen/_10sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sisa Cuti"
+                            android:fontFamily="@font/popmed"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10ssp"/>
+
+                        <TextView
+                            android:id="@+id/tvSisaCuti"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="12"
+                            android:fontFamily="@font/popsem"
+                            android:textSize="@dimen/_15ssp"
+                            android:textColor="@color/white"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_14sdp"
+        android:layout_below="@id/cv1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data Karyawan"
+            android:fontFamily="@font/popsem"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black2"/>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="NIP" />
+
+                <EditText
+                    android:id="@+id/etNip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:enabled="false"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black2"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="NIP"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="Masuk Kerja" />
+
+                <EditText
+                    android:id="@+id/etMasukKerja"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:enabled="false"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black2"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="NIP"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="Telepon" />
+
+                <EditText
+                    android:id="@+id/etTelepon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:enabled="false"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black2"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="NIP"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="Jabatan" />
+
+                <EditText
+                    android:id="@+id/etJabatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:enabled="false"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black2"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="NIP"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="Nama Atasan" />
+
+                <EditText
+                    android:id="@+id/etNamaAtasan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:enabled="false"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black2"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="NIP"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="Unit Kerja" />
+
+                <EditText
+                    android:id="@+id/etUnitKerja"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:enabled="false"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black2"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="NIP"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="Status" />
+
+                <EditText
+                    android:id="@+id/etStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:enabled="false"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black2"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="NIP"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black"
+                    android:text="Alamat" />
+
+                <EditText
+                    android:id="@+id/etAlamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_edittext"
+                    android:padding="@dimen/_10sdp"
+                    android:enabled="false"
+                    android:lines="4"
+                    android:gravity="start"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/black2"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:hint="NIP"/>
+
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnKembali"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/popsem"
+                    android:textColor="@color/black2"
+                    app:backgroundTint="@color/light_gray4"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Kembali"/>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>
