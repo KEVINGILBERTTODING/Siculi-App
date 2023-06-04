@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.siculi.KetuaFragment.KetuaDaftarIzinKaryawanFragment;
 import com.example.siculi.KetuaFragment.KetuaHomeFragment;
+import com.example.siculi.KetuaFragment.KetuaPengajuanCutiKaryawanFragment;
+import com.example.siculi.KetuaFragment.KetuaProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -26,7 +29,16 @@ public class KetuaMainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.menuHome) {
                     replace(new KetuaHomeFragment());
                     return true;
-                }
+                }else  if (item.getItemId() == R.id.menuCuti) {
+                    replace(new KetuaPengajuanCutiKaryawanFragment());
+                    return true;
+                }else  if (item.getItemId() == R.id.menuIzin) {
+                    replace(new KetuaDaftarIzinKaryawanFragment());
+                    return true;
+                }else  if (item.getItemId() == R.id.menuProfile) {
+                replace(new KetuaProfileFragment());
+                return true;
+            }
                 return false;
             }
 

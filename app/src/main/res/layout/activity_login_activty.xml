@@ -35,6 +35,14 @@
             android:textColor="@color/main"/>
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Masukkan email dan password anda"
+            android:fontFamily="@font/popsem"
+            android:textSize="@dimen/_11ssp"
+            android:textColor="@color/black2"/>
+
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -98,6 +106,38 @@
             app:cornerRadius="@dimen/_15sdp"/>
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SICULI"
+            android:fontFamily="@font/popsem"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:textSize="@dimen/_10ssp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pengadilan Negeri Semarang"
+            android:fontFamily="@font/popmed"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:textSize="@dimen/_10ssp"/>
+
+    </LinearLayout>
+
+
 
 
 
