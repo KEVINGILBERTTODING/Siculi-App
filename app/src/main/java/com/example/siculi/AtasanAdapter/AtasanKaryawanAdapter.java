@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.siculi.AdminFragment.DetailKaryawanFragment;
+import com.example.siculi.AtasanFragment.AtasanDetailKaryawanFragment;
 import com.example.siculi.Model.KaryawanModel;
 import com.example.siculi.R;
 
@@ -82,12 +83,12 @@ public class AtasanKaryawanAdapter extends RecyclerView.Adapter<AtasanKaryawanAd
 
         @Override
         public void onClick(View v) {
-            Fragment fragment = new DetailKaryawanFragment();
+            Fragment fragment = new AtasanDetailKaryawanFragment();
             Bundle bundle = new Bundle();
             bundle.putString("karyawan_id", karyawanModelList.get(getAdapterPosition()).getId());
             fragment.setArguments(bundle);
             ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frameAdmin, fragment).addToBackStack(null)
+                    .replace(R.id.frameAtasan, fragment).addToBackStack(null)
                     .commit();
 
         }
