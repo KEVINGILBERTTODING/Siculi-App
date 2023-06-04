@@ -142,7 +142,7 @@ public class KetuaHomeFragment extends Fragment {
         ivProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replace(new AtasanProfileFragment());
+                replace(new KetuaProfileFragment());
             }
         });
        return view;

@@ -28,6 +28,7 @@ public class KetuaHistoryDetailPengajuanCutiAtasanfragment extends Fragment {
     SharedPreferences sharedPreferences;
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
