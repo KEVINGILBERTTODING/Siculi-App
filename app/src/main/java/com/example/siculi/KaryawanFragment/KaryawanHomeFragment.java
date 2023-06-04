@@ -115,7 +115,7 @@ public class KaryawanHomeFragment extends Fragment {
         ivProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replace(new AdminProfileFragment());
+                replace(new KaryawanProfileFragment());
             }
         });
        return view;
