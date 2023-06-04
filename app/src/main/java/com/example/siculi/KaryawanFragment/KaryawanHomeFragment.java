@@ -92,11 +92,6 @@ public class KaryawanHomeFragment extends Fragment {
 
 
 
-
-
-
-
-
         btnIzinKaryawan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
