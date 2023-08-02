@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -40,13 +41,14 @@ public class AtasanDetailPengajuanCutiKaryawanFragment extends Fragment {
     CardView cvStatus;
     TextView tvStatus;
     EditText etNip, etNama, etTglMulai, etTglSelesai, etJenisCuti,
-    etKeperluan;
+    etKeperluan, etAlasan;
     Button btnKembali, btnDownload, btnSubmit;
     AtasanInterface atasanInterface;
     Spinner spAksi;
     String [] opsiAksi = {"Disetujui", "Ditolak", "Ditangguhkan"};
     String idCuti, userId, status;
     SharedPreferences sharedPreferences;
+    private LinearLayout lrAlasan;
 
 
     @Override
@@ -60,8 +62,10 @@ public class AtasanDetailPengajuanCutiKaryawanFragment extends Fragment {
         etNip = view.findViewById(R.id.etNip);
         etNama = view.findViewById(R.id.etNama);
         spAksi = view.findViewById(R.id.spAksi);
+        etAlasan = view.findViewById(R.id.etAlasan);
         etTglMulai = view.findViewById(R.id.etTglMulai);
         etTglSelesai = view.findViewById(R.id.etTglSelesai);
+        lrAlasan = view.findViewById(R.id.lrAlasan);
         etJenisCuti = view.findViewById(R.id.etJenisCuti);
         atasanInterface = DataApi.getClient().create(AtasanInterface.class);
         etKeperluan = view.findViewById(R.id.etKeperluan);
@@ -109,6 +113,11 @@ public class AtasanDetailPengajuanCutiKaryawanFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 status = opsiAksi[position];
+                if (!status.equals("Disetujui")) {
+                    lrAlasan.setVisibility(View.VISIBLE);
+                }else {
+                    lrAlasan.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -131,25 +140,11 @@ public class AtasanDetailPengajuanCutiKaryawanFragment extends Fragment {
             public void onClick(View v) {
 
                 String url = DataApi.URL_DOWNLOAD_LAMPIRAN_SURAT_CUTI_KARYAWAN + idCuti;
-                String title = "Surat Lampiran Cuti " + getArguments().getString("nama") + ".pdf";
-                String description = "Downloading PDF file";
-                String fileName = "Surat Lampiran Cuti " + getArguments().getString("nama") + ".pdf";
-
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
 
                 startActivity(intent);
 
-
-//                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-//                request.setTitle(title);
-//                request.setDescription(description);
-//                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
-//                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-//                request.allowScanningByMediaScanner();
-//
-//                DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
-//                downloadManager.enqueue(request);
             }
         });
 
@@ -174,6 +169,7 @@ public class AtasanDetailPengajuanCutiKaryawanFragment extends Fragment {
         map.put("cuti_id", RequestBody.create(MediaType.parse("text/plain"), getArguments().getString("id")));
         map.put("karyaawan_id", RequestBody.create(MediaType.parse("text/plain"), getArguments().getString("karyawan_id")));
         map.put("tgl_masuk", RequestBody.create(MediaType.parse("text/plain"), getArguments().getString("tanggal_masuk")));
+        map.put("alasan", RequestBody.create(MediaType.parse("text/plain"), etAlasan.getText().toString()));
 
         atasanInterface.validasiPermohonanCutiKaryawan(map).enqueue(new Callback<ResponseModel>() {
             @Override

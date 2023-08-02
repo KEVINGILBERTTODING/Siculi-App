@@ -28,6 +28,8 @@ public class CutiModel implements Serializable {
 
     @SerializedName("alamat")
     String alamat;
+    @SerializedName("alasan")
+    private String alasan;
 
     @SerializedName("status")
     String status;
@@ -53,7 +55,7 @@ public class CutiModel implements Serializable {
     @SerializedName("nama_atasan")
     String namaAtasan;
 
-    public CutiModel(String id, String namaAtasan, String nama, String nik, String idKaryawan, String atasan, String tglCuti, String jenisCuti, String jumlahCuti, String keperluan, String alamat, String status, String tglMasuk, String surat, String tglUpload, String sisaCuti, String keteranganSisa) {
+    public CutiModel(String id, String namaAtasan, String alasan, String nama, String nik, String idKaryawan, String atasan, String tglCuti, String jenisCuti, String jumlahCuti, String keperluan, String alamat, String status, String tglMasuk, String surat, String tglUpload, String sisaCuti, String keteranganSisa) {
         this.id = id;
         this.idKaryawan = idKaryawan;
         this.atasan = atasan;
@@ -69,6 +71,7 @@ public class CutiModel implements Serializable {
         this.sisaCuti = sisaCuti;
         this.keteranganSisa = keteranganSisa;
         this.nama = nama;
+        this.alasan = alasan;
         this.nik = nik;
         this.namaAtasan = namaAtasan;
     }
@@ -205,7 +208,17 @@ public class CutiModel implements Serializable {
         return namaAtasan;
     }
 
+    public String getAlasan() {
+        return alasan;
+    }
+
+    public void setAlasan(String alasan) {
+        this.alasan = alasan;
+    }
+
     public void setNamaAtasan(String namaAtasan) {
         this.namaAtasan = namaAtasan;
+
+
     }
 }

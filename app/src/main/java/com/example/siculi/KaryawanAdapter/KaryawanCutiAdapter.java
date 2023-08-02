@@ -106,6 +106,7 @@ public class KaryawanCutiAdapter extends RecyclerView.Adapter<KaryawanCutiAdapte
             bundle.putString("tanggal_masuk", cutiModelList.get(getAdapterPosition()).getTglMasuk());
             bundle.putString("jenis", cutiModelList.get(getAdapterPosition()).getJenisCuti());
             bundle.putString("keperluan", cutiModelList.get(getAdapterPosition()).getKeperluan());
+            bundle.putString("alasan", cutiModelList.get(getAdapterPosition()).getAlasan());
             fragment.setArguments(bundle);
             ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frameKaryawan, fragment).addToBackStack(null)

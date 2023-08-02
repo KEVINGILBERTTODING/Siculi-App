@@ -1,5 +1,6 @@
 package com.example.siculi.AtasanFragment;
 
+import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
@@ -79,24 +82,11 @@ public class AtasanDetailCuti extends Fragment {
             public void onClick(View v) {
 
                 String url = DataApi.URL_DOWNLOAD_SURAT_CUTI_ATASAN + userId + "/" + idCuti;
-                String title = "Surat Cuti.pdf";
-                String description = "Downloading PDF file";
-                String fileName = "Surat cuti.pdf";
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
 
                 startActivity(intent);
-
-//                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-//                request.setTitle(title);
-//                request.setDescription(description);
-//                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
-//                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-//                request.allowScanningByMediaScanner();
-//
-//                DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
-//                downloadManager.enqueue(request);
             }
         });
 
@@ -108,5 +98,27 @@ public class AtasanDetailCuti extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (getArguments().getString("alasan") != null || !getArguments().getString("alasan").isEmpty()) {
+            showAlert();
+        }
+    }
+
+    private void showAlert() {
+        Dialog dialogAlert = new Dialog(getContext());
+        dialogAlert.setContentView(R.layout.layout_alert_ditolak);
+        dialogAlert.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        final TextView tvMessage = dialogAlert.findViewById(R.id.tvMessage);
+        final Button btnOke = dialogAlert.findViewById(R.id.btnOke);
+
+        tvMessage.setText(getArguments().getString("alasan"));
+        dialogAlert.show();
+        btnOke.setOnClickListener(View -> {
+            dialogAlert.dismiss();
+        });
     }
 }
